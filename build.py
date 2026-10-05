@@ -111,7 +111,7 @@ DOC_HEAD = """<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#14161a">
+<meta name="theme-color" content="#0a111d">
 """
 
 
@@ -119,9 +119,20 @@ def esc(s):
     return html.escape(str(s), quote=True)
 
 
+SOCIAL_ICONS = {"Instagram": "instagram-logo", "Facebook": "facebook-logo", "LinkedIn": "linkedin-logo",
+                "X": "x-logo", "Threads": "threads-logo", "WhatsApp": "whatsapp-logo"}
+
+
+def icon(name, cls="ic"):
+    """An icon from the Phosphor sprite (assets/img/icons.svg). Always
+    decorative: the text beside it carries the meaning."""
+    return ('<svg class="%s" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#i-%s"></use></svg>'
+            % (cls, name))
+
+
 def social_list(cls="social"):
-    items = "".join('<li><a href="%s" rel="noopener" target="_blank">%s<span class="sr-only"> (opens in a new tab)</span></a></li>'
-                    % (esc(u), esc(n)) for n, u in SOCIAL)
+    items = "".join('<li><a href="%s" rel="noopener" target="_blank">%s%s<span class="sr-only"> (opens in a new tab)</span></a></li>'
+                    % (esc(u), icon(SOCIAL_ICONS[n]), esc(n)) for n, u in SOCIAL)
     return '<ul class="%s">%s</ul>' % (cls, items)
 
 
@@ -133,14 +144,14 @@ def header(active):
     return """<a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="/" aria-label="GVN Estate Invest home"><img src="/assets/img/logo-white.webp" alt="GVN Estate Invest" width="480" height="102"></a>
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <a class="brand" href="/" aria-label="GVN Estate Invest home"><img src="/assets/img/logo-gold.webp" alt="GVN Estate Invest" width="560" height="119"></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">%s%s<span>Menu</span></button>
     <nav id="site-nav" class="nav" aria-label="Main">
       %s
       <a class="btn btn--gold" href="/book-a-strategy-call">Book a strategy call</a>
     </nav>
   </div>
-</header>""" % "\n      ".join(links)
+</header>""" % (icon("list", "ic i-open"), icon("x", "ic i-close"), "\n      ".join(links))
 
 
 def footer():
@@ -148,22 +159,23 @@ def footer():
     year = datetime.date.today().year
     return """<footer class="site-footer">
   <div class="wrap">
+    <div class="footer-cta">
+      <p>We Spot. You Earn. <span>Effortlessly.</span></p>
+      <a class="btn btn--gold" href="/book-a-strategy-call">Book a strategy call%(arrow)s</a>
+    </div>
     <div class="footer-grid">
       <div class="footer-brand">
-        <img src="/assets/img/logo-white.webp" alt="GVN Estate Invest" width="480" height="102" loading="lazy">
+        <img src="/assets/img/logo-gold.webp" alt="GVN Estate Invest" width="560" height="119" loading="lazy">
         <p class="footer-motto">%(motto)s</p>
-        <p>%(slogan)s</p>
       </div>
       <div>
         <h2>Contact</h2>
-        <address>
-          <p>Postal address:<br>%(street)s, %(town)s,<br>%(postcode)s</p>
-        </address>
-        <ul>
-          <li><a href="mailto:%(email)s?subject=PROPERTY%%20INVESTMENT%%20Query">%(email)s</a></li>
-          <li><a href="%(phone_href)s">Tel: %(phone_display)s</a></li>
-          <li><a href="%(whatsapp)s" rel="noopener" target="_blank">WhatsApp<span class="sr-only"> (opens in a new tab)</span></a></li>
-          <li><a href="/askaquestion">Ask a question</a></li>
+        <ul class="footer-contact">
+          <li>%(i_pin)s<address>Postal address:<br>%(street)s, %(town)s,<br>%(postcode)s</address></li>
+          <li>%(i_mail)s<a href="mailto:%(email)s?subject=PROPERTY%%20INVESTMENT%%20Query">%(email)s</a></li>
+          <li>%(i_phone)s<a href="%(phone_href)s">Tel: %(phone_display)s</a></li>
+          <li>%(i_wa)s<a href="%(whatsapp)s" rel="noopener" target="_blank">WhatsApp<span class="sr-only"> (opens in a new tab)</span></a></li>
+          <li>%(i_chat)s<a href="/askaquestion">Ask a question</a></li>
         </ul>
       </div>
       <div>
@@ -189,20 +201,23 @@ def footer():
           <li>Anti-Money Laundering</li>
           <li><a href="%(console)s" rel="noopener" target="_blank">C.P.V.C<span class="sr-only"> investor console (opens in a new tab)</span></a></li>
         </ul>
-        <h2 style="margin-top:22px">Follow us on</h2>
+        <h2 style="margin-top:28px">Follow us on</h2>
         %(social)s
       </div>
     </div>
     <div class="footer-legal">
       <div class="trading">
         <img src="/assets/img/gvn-reality-trading-logo.webp" alt="GVN Reality Trading" width="300" height="194" loading="lazy">
-        <p style="margin:0">All trades are carried out by<br><strong style="color:#e9e5dc">%(legal_upper)s</strong></p>
+        <p style="margin:0">All trades are carried out by<br><strong>%(legal_upper)s</strong></p>
       </div>
       <p style="margin:0">&copy; %(year)s %(legal)s &middot; Company No. %(company_no)s &middot; ICO registration %(ico)s</p>
     </div>
   </div>
 </footer>
-<script src="/assets/js/site.js" defer></script>""" % dict(b, social=social_list(), year=year, legal_upper=b["legal"].upper())
+<script src="/assets/js/site.js" defer></script>""" % dict(b, social=social_list(), year=year, legal_upper=b["legal"].upper(),
+                                                          arrow=icon("arrow-right"), i_pin=icon("map-pin"),
+                                                          i_mail=icon("envelope-simple"), i_phone=icon("phone"),
+                                                          i_wa=icon("whatsapp-logo"), i_chat=icon("chat-circle-text"))
 
 
 def org_jsonld():
@@ -255,13 +270,14 @@ def page_html(meta, body):
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.json">
-<link rel="preload" href="/assets/fonts/cormorant-garamond.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/assets/fonts/source-sans-3.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/hanken-grotesk.woff2" as="font" type="font/woff2" crossorigin>
+%(preload_img)s
 <link rel="stylesheet" href="/assets/css/site.css">
 %(orgld)s
 %(extra_ld)s""" % dict(title=esc(title), desc=esc(desc), canonical=canonical, robots=robots,
                        ogtype=meta.get("og_type", "website"), og_image=og_image, orgld=org_jsonld(),
-                       extra_ld=extra_ld)
+                       extra_ld=extra_ld, preload_img=meta.get("preload_img", ""))
     return "%s%s\n</head>\n<body>\n%s\n<main id=\"main\">\n%s\n</main>\n%s\n</body>\n</html>\n" % (
         DOC_HEAD, head, header(meta.get("nav", "")), body.strip(), footer())
 
@@ -274,6 +290,7 @@ def expand_tokens(body, meta):
             sys.exit("unknown form %s in %s" % (key, meta["path"]))
         return render_form(key)
     body = re.sub(r"\{\{FORM:([a-z0-9_]+)\}\}", form_token, body)
+    body = re.sub(r"\{\{I:([a-z-]+)\}\}", lambda m: icon(m.group(1)), body)
     reps = {
         "{{SOCIAL}}": social_list("social social--light"),
         "{{EMAIL}}": BIZ["email"],
@@ -427,22 +444,21 @@ def build_blog():
   <h1>%(title)s</h1>
   <p class="meta"><span>By %(author)s</span><time datetime="%(iso)s">%(date)s</time><span>%(rt)s</span></p>
 </div></header>
-<div class="section"><div class="wrap"><div class="prose" style="margin:0 auto">
+<div class="section section--ivory"><div class="wrap"><div class="prose" style="margin:0 auto">
 %(body)s
 %(tags)s
 </div></div></div>
 </article>
-<section class="section section--alt"><div class="wrap">
-  <div class="cta-band">
-    <div><h2>Want this handled for you?</h2><p>Hands-free property investment in Staffordshire, from sourcing to lettings.</p></div>
-    <div class="btn-row"><a class="btn btn--gold" href="/book-a-strategy-call">Book a strategy call</a><a class="btn btn--ghost" href="/askaquestion">Ask a question</a></div>
+<section class="section section--tight"><div class="wrap">
+  <div class="cta-band cta-band--photo" style="--cta-img:url('/assets/img/street-chimneys.webp')">
+    <div><h2>Want this <em>handled</em> for you?</h2><p>Hands-free property investment in Staffordshire, from sourcing to lettings.</p></div>
+    <div class="btn-row"><a class="btn btn--gold" href="/book-a-strategy-call">Book a strategy call%(arrow)s</a><a class="btn btn--ghost" href="/askaquestion">Ask a question</a></div>
   </div>
 </div></section>
-<section class="section"><div class="wrap">
-  <h2>Recent posts</h2>
-  <p><a href="/provenance-pulse">See all articles</a></p>
+<section class="section section--deep"><div class="wrap">
+  <div class="head-row"><h2>Recent posts</h2><a class="text-link" href="/provenance-pulse">See all articles%(arrow)s</a></div>
   <div class="post-grid">%(others)s</div>
-</div></section>""" % dict(cats=cats or "The Provenance Pulse", title=esc(p["title"]), author=esc(p["author"]),
+</div></section>""" % dict(arrow=icon("arrow-right"),cats=cats or "The Provenance Pulse", title=esc(p["title"]), author=esc(p["author"]),
                            iso=p["dt"].date().isoformat(), date=nice_date(p["dt"]), rt=esc(p["readtime"]),
                            cover=p["cover"], w=p["cover_w"], h=p["cover_h"], body=tidy_post(p["body"]),
                            tags=tags, others="".join(post_card(q, "h3") for q in others))
@@ -493,7 +509,7 @@ def build_sitemap(entries):
 
 MANIFEST = {
     "name": "GVN Estate Invest", "short_name": "GVN", "start_url": "/", "display": "standalone",
-    "background_color": "#14161a", "theme_color": "#14161a",
+    "background_color": "#0a111d", "theme_color": "#0a111d",
     "icons": [{"src": "/icon-192.png", "sizes": "192x192", "type": "image/png"},
               {"src": "/icon-512.png", "sizes": "512x512", "type": "image/png"}],
 }

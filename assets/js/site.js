@@ -11,17 +11,53 @@ var FORM_ENDPOINT = "https://bkgjoztepcdranhbaurx.supabase.co/functions/v1/site-
   /* ---- 1. Menu ---- */
   var toggle = document.querySelector(".nav-toggle");
   var nav = document.getElementById("site-nav");
+  var header = document.querySelector(".site-header");
   if (toggle && nav) {
     toggle.addEventListener("click", function () {
       var open = nav.classList.toggle("is-open");
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      if (header) { header.classList.toggle("is-open", open); }
     });
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && nav.classList.contains("is-open")) {
         nav.classList.remove("is-open");
         toggle.setAttribute("aria-expanded", "false");
+        if (header) { header.classList.remove("is-open"); }
         toggle.focus();
       }
+    });
+  }
+
+  /* ---- 1b. Header turns solid once the page scrolls past the top ---- */
+  if (header && "IntersectionObserver" in window) {
+    var sentinel = document.createElement("div");
+    sentinel.setAttribute("aria-hidden", "true");
+    sentinel.style.cssText = "position:absolute;top:0;left:0;width:1px;height:40px;pointer-events:none";
+    document.body.insertBefore(sentinel, document.body.firstChild);
+    new IntersectionObserver(function (entries) {
+      header.classList.toggle("is-solid", !entries[0].isIntersecting);
+    }).observe(sentinel);
+  }
+
+  /* ---- 1c. Sections ease in as they reach the viewport.
+     Only when motion is allowed; without JS nothing is ever hidden. ---- */
+  var still = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!still && "IntersectionObserver" in window) {
+    var targets = document.querySelectorAll(
+      "main .section .head, main .section .head-row, main .section .reveal-me, " +
+      "main .section .grid > *, main .section .post-grid > *, main .section .process > li, " +
+      "main .section .mosaic-tiles > *, main .section .steps > li, main .section .values > li, main .section .cta-band");
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add("is-in"); io.unobserve(en.target); }
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    Array.prototype.forEach.call(targets, function (el) {
+      var parent = el.parentNode;
+      var index = Array.prototype.indexOf.call(parent.children, el);
+      el.style.setProperty("--i", Math.min(index, 6));
+      el.classList.add("reveal");
+      io.observe(el);
     });
   }
 

@@ -6,24 +6,24 @@
  "description": "Download the free Staffordshire Investor Guide from GVN Estate Invest: who we are, a market overview and your next step towards hands-free property investing."
 }
 -->
-<section class="hero">
+<section class="hero hero--page">
   <div class="wrap hero-grid">
     <div>
       <p class="eyebrow">Free download &middot; 2026 Investor Guide</p>
       <h1>Discover the secrets to hands-free property investing in <em>Staffordshire</em></h1>
       <p class="lede">Download your FREE 2026 Investor Guide and earn passive income without the headaches.</p>
-      <div class="btn-row"><a class="btn btn--gold" href="#guide-form">Download now</a></div>
+      <div class="btn-row"><a class="btn btn--gold" href="#guide-form">Download now{{I:download-simple}}</a></div>
     </div>
-    <img src="/assets/img/investor-guide-cover.webp" alt="Cover of the Staffordshire Investment Guide" width="720" height="720" fetchpriority="high" style="border-radius:14px;max-width:min(420px,100%);justify-self:center">
+    <img src="/assets/img/investor-guide-cover.webp" alt="Cover of the Staffordshire Investment Guide" width="720" height="720" fetchpriority="high" style="border-radius:14px;max-width:min(420px,100%);justify-self:center;transform:rotate(2deg)">
   </div>
 </section>
 
 <section class="section">
   <div class="wrap">
     <div class="grid grid-3">
-      <div class="card"><h3>We find the deals</h3><p>We identify high-yield properties in growth areas across Staffordshire so you don&rsquo;t have to.</p></div>
-      <div class="card"><h3>We handle the work</h3><p>Tenant placement, maintenance, and legal compliance &ndash; handled by our expert team.</p></div>
-      <div class="card"><h3>A plan that fits you</h3><p>Plans for first-timers or seasoned investors. Focus on cash flow, growth, or both.</p></div>
+      <div class="card"><span class="card-ic">{{I:magnifying-glass}}</span><h3>We find the deals</h3><p>We identify high-yield properties in growth areas across Staffordshire so you don&rsquo;t have to.</p></div>
+      <div class="card"><span class="card-ic">{{I:key}}</span><h3>We handle the work</h3><p>Tenant placement, maintenance, and legal compliance &ndash; handled by our expert team.</p></div>
+      <div class="card"><span class="card-ic">{{I:compass}}</span><h3>A plan that fits you</h3><p>Plans for first-timers or seasoned investors. Focus on cash flow, growth, or both.</p></div>
     </div>
   </div>
 </section>
@@ -39,11 +39,11 @@
         <li><h3>Next step of action</h3><p>How to move from reading to investing.</p></li>
       </ol>
     </div>
-    <img src="/assets/img/investor-guide-spread.webp" alt="Pages from the Staffordshire Investment Guide: All you need in one place" width="1200" height="800" loading="lazy" style="border-radius:14px">
+    <div class="framed"><img src="/assets/img/investor-guide-spread.webp" alt="Pages from the Staffordshire Investment Guide: All you need in one place" width="1200" height="800" loading="lazy" style="border-radius:14px;box-shadow:var(--shadow-light)"></div>
   </div>
 </section>
 
-<section class="section" id="guide-form">
+<section class="section section--ivory" id="guide-form">
   <div class="wrap" style="max-width:min(760px,100%)">
     {{FORM:investor_guide}}
   </div>

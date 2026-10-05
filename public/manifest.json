@@ -3,8 +3,8 @@
   "short_name": "GVN",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#14161a",
-  "theme_color": "#14161a",
+  "background_color": "#0a111d",
+  "theme_color": "#0a111d",
   "icons": [
     {
       "src": "/icon-192.png",

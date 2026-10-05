@@ -9,23 +9,23 @@
 <section class="hero hero--page">
   <div class="wrap">
     <p class="eyebrow">Contact us</p>
-    <h1>Let&rsquo;s build your property portfolio together</h1>
+    <h1>Let&rsquo;s build your property portfolio <em>together</em></h1>
   </div>
 </section>
 <section class="section">
-  <div class="wrap split" style="align-items:start">
-    <div>
+  <div class="wrap form-layout">
+    <aside>
       <ul class="contact-list">
-        <li><span class="k">Phone</span><a href="{{PHONE_HREF}}">{{PHONE_INTL}}</a></li>
-        <li><span class="k">Email</span><a href="mailto:{{EMAIL}}?subject=PROPERTY%20INVESTMENT%20Query">{{EMAIL}}</a></li>
-        <li><span class="k">WhatsApp</span><a href="{{WHATSAPP}}" rel="noopener" target="_blank">Message us on WhatsApp<span class="sr-only"> (opens in a new tab)</span></a></li>
-        <li><span class="k">Call hours</span><span class="v">{{HOURS}}</span></li>
-        <li><span class="k">Postal address</span><span class="v">{{ADDRESS}}</span></li>
+        <li>{{I:phone}}<span class="k">Phone</span><a href="{{PHONE_HREF}}">{{PHONE_INTL}}</a></li>
+        <li>{{I:envelope-simple}}<span class="k">Email</span><a href="mailto:{{EMAIL}}?subject=PROPERTY%20INVESTMENT%20Query">{{EMAIL}}</a></li>
+        <li>{{I:whatsapp-logo}}<span class="k">WhatsApp</span><a href="{{WHATSAPP}}" rel="noopener" target="_blank">Message us on WhatsApp<span class="sr-only"> (opens in a new tab)</span></a></li>
+        <li>{{I:clock}}<span class="k">Call hours</span><span class="v">{{HOURS}}</span></li>
+        <li>{{I:map-pin}}<span class="k">Postal address</span><span class="v">{{ADDRESS}}</span></li>
       </ul>
       <h2 style="font-size:1.5rem;margin-top:1.6em">Follow us</h2>
       {{SOCIAL}}
       <p style="margin-top:24px">Prefer to talk it through? <a href="/book-a-strategy-call">Book a free strategy call</a>.</p>
-    </div>
+    </aside>
     {{FORM:contact}}
   </div>
 </section>
