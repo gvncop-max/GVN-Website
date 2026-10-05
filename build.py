@@ -474,13 +474,12 @@ def build_blog():
 
 def tidy_post(body):
     """Wrap tables so they scroll sideways on a phone instead of the page.
-    Wix wrote post subheadings as h3 under the page h1; with no h2 in the
-    body they move up a level so the outline has no gap."""
+    Wix wrote post subheadings as h3 (and h4) under the page h1; with no h2
+    in the body they move up one level so the outline has no gap."""
     if "<h2" not in body:
-        body = re.sub(r"<(/?)h4", r"<h5", body)
-        body = re.sub(r"<(/?)h3", r"<h2", body)
-        body = re.sub(r"<(/?)h5", r"<h3", body)
-    return re.sub(r"(<table>.*?</table>)", r'<div class="table-wrap">\1</div>', body, flags=re.S)
+        shift = {"3": "2", "4": "3", "5": "4", "6": "5"}
+        body = re.sub(r"<(/?)h([3-6])(?=[ >])", lambda m: "<" + m.group(1) + "h" + shift[m.group(2)], body)
+    return re.sub(r"(<table>.*?</table>)", lambda m: '<div class="table-wrap">' + m.group(1) + "</div>", body, flags=re.S)
 
 
 # ---------------------------------------------------------------- misc output
