@@ -43,7 +43,7 @@ BIZ = {
     "company_no": "16127907",
     "ico": "ZB923509",
     "ico_url": "https://ico.org.uk/ESDWebPages/Entry/ZB923509",
-    "email": "v.grey@gvnestateinvest.com",
+    "email": "info@gvnestateinvest.com",
     "phone_display": "01782 938 111",
     "phone_intl": "+44 1782 938 111",
     "phone_href": "tel:+441782938111",
@@ -76,7 +76,7 @@ AREAS = [
 NAV = [
     ("services", "/services", "Services"),
     ("about", "/about-us", "About"),
-    ("deals", "/offmarketdeals", "Deals"),
+    ("sell", "/sellmyhome", "Sell"),
     ("pulse", "/provenance-pulse", "P-Pulse"),
     ("faq", "/#faq", "FAQ"),
     ("contact", "/contact", "Contact"),
@@ -87,7 +87,8 @@ NAV = [
 REDIRECTS = {
     "/home": "/",
     "/properties/semi-detached-house-fenton-": "/sellmyhome",  # excluded by Valentine
-    "/properties-list": "/offmarketdeals",
+    "/properties-list": "/sellmyhome",
+    "/offmarketdeals": "/sellmyhome",  # page removed by Valentine, 5 Oct 2026
     "/start": "/investnow",
     "/popup-suauy": "/book-a-strategy-call",
     "/popup-cf17t": "/sellmyhome",
@@ -172,7 +173,6 @@ def footer():
           <li><a href="/">Home</a></li>
           <li><a href="/services">Services</a></li>
           <li><a href="/about-us">About</a></li>
-          <li><a href="/offmarketdeals">Deals</a></li>
           <li><a href="/investnow">Investor guide</a></li>
           <li><a href="/sellmyhome">Sell my home</a></li>
           <li><a href="/provenance-pulse">P-Pulse</a></li>
