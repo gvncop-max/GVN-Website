@@ -109,7 +109,7 @@ var FORM_ENDPOINT = "https://bkgjoztepcdranhbaurx.supabase.co/functions/v1/site-
         finish(form, status);
       }).catch(function () {
         show(status, "err", form.getAttribute("data-error") ||
-          "Sorry, that didn't go through. Please try again, or email v.grey@gvnestateinvest.com or call 01782 938 111.");
+          "Sorry, that didn't go through. Please try again, or email info@gvnestateinvest.com or call 01782 938 111.");
       }).then(function () {
         if (button) { button.disabled = false; button.textContent = buttonText; }
       });
