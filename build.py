@@ -422,7 +422,7 @@ def build_blog():
         path = "/provenance-pulse/categories/" + slug
         write(path, page_html({"path": path, "nav": "pulse",
                                "title": "%s | The Provenance Pulse | GVN Estate Invest" % name,
-                               "description": "%s articles from The Provenance Pulse, the GVN Estate Invest blog: %s." % (name, intro.lower())}, body))
+                               "description": short("%s articles from The Provenance Pulse, the GVN Estate Invest blog: %s." % (name, intro.lower()), 158)}, body))
 
     for i, p in enumerate(POSTS):
         cats = " &middot; ".join('<a href="/provenance-pulse/categories/%s">%s</a>' % (c, esc(CAT_NAMES.get(c, n)))
@@ -465,14 +465,21 @@ def build_blog():
         path = "/post/" + p["slug"]
         write(path, page_html({
             "path": path, "nav": "pulse", "og_type": "article", "og_image": p["cover"].replace(".webp", ".webp"),
-            "title": "%s | GVN Estate Invest" % p["title"],
+            # Google shows about 60 characters; a long headline keeps its words, not the suffix.
+            "title": p["title"] if len(p["title"]) > 42 else "%s | GVN Estate Invest" % p["title"],
             "description": short(p["description"], 158),
             "jsonld_extra": '<script type="application/ld+json">%s</script>' % json.dumps(ld, ensure_ascii=False),
         }, body))
 
 
 def tidy_post(body):
-    """Wrap tables so they scroll sideways on a phone instead of the page."""
+    """Wrap tables so they scroll sideways on a phone instead of the page.
+    Wix wrote post subheadings as h3 under the page h1; with no h2 in the
+    body they move up a level so the outline has no gap."""
+    if "<h2" not in body:
+        body = re.sub(r"<(/?)h4", r"<h5", body)
+        body = re.sub(r"<(/?)h3", r"<h2", body)
+        body = re.sub(r"<(/?)h5", r"<h3", body)
     return re.sub(r"(<table>.*?</table>)", r'<div class="table-wrap">\1</div>', body, flags=re.S)
 
 

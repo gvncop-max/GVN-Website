@@ -626,6 +626,15 @@ legend { font-family: var(--serif); font-size: clamp(1.25rem, 2vw, 1.45rem); lin
 .file-input::file-selector-button:hover { background: var(--navy-700); }
 .hp { position: absolute !important; left: -10000px !important; width: 1px; height: 1px; overflow: hidden; }
 .form-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 10px; }
+/* Stepped forms (strategy call). Only once site.js has taken over; without it every step shows. */
+.form-progress { margin: 0 0 22px; }
+.form-progress-text { margin: 0 0 8px; font: 600 .8rem/1.4 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--gold-deep); }
+.form-progress-bar { height: 4px; border-radius: 999px; background: rgba(18, 26, 40, .1); overflow: hidden; }
+.form-progress-bar span { display: block; height: 100%; background: linear-gradient(90deg, var(--gold-deep), var(--gold)); border-radius: inherit; transition: width .35s ease; }
+.is-stepped .form-step { display: none; }
+.is-stepped .form-step.is-current { display: block; }
+.form-actions [hidden] { display: none !important; }
+@media (prefers-reduced-motion: reduce) { .form-progress-bar span { transition: none; } }
 .form-card .btn--dark {
   color: var(--navy-950); border-color: rgba(255, 240, 200, .55);
   background-color: #d6b46f;

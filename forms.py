@@ -40,12 +40,17 @@ FORMS = {
         "submit": "Request Strategy Session",
         "success": "Thank you. Your strategy call request has been received. We will contact you to confirm a time.",
         "redirect": "/optinform/gv2mkhfkhkkhdkhjcd10ku",
+        # Valentine, 5 Oct 2026: long forms put people off, so the strategy
+        # call forms go one short step at a time. Same questions, same labels.
+        "steps": [("Your details", [0]), ("About you", [1]), ("When suits you", [2, 3])],
         "fieldsets": [
             {"legend": "Strategy Session: Please Provide The Following Details.", "fields": [
                 {"label": "First name", "type": "text", "required": True, "auto": "given-name", "placeholder": "First name"},
                 {"label": "Last name", "type": "text", "required": True, "auto": "family-name", "placeholder": "Last name"},
                 {"label": "Phone", "type": "tel", "required": True, "auto": "tel", "placeholder": "Enter your phone number"},
                 {"label": "Email", "type": "email", "required": True, "auto": "email", "placeholder": "Enter your email"},
+            ]},
+            {"legend": "Let's Get To Know You", "fields": [
                 {"label": "what best describes you", "show": "What best describes you?", "type": "select", "required": True,
                  "placeholder": "What best describes you ?",
                  "options": ["Busy Professional", "First-Time Investor", "Retiree", "Seasoned Investor", "I Have Capital To Deploy Now"]},
@@ -71,6 +76,7 @@ FORMS = {
         "submit": "Request Strategy Session",
         "success": "Thank you. Your request has been received. We will contact you to confirm a time.",
         "redirect": "/optinform/gv2mkhfkhkkhdkhjcd10ku",
+        "steps": [("Your details", [0]), ("About you", [1]), ("When suits you", [2, 3])],
         "fieldsets": [
             {"legend": "Please Provide The Following Details", "fields": [
                 {"label": "First name", "type": "text", "required": True, "auto": "given-name", "placeholder": "First name"},
@@ -246,6 +252,15 @@ def render_form(key):
             parts.append('<fieldset><legend>%s</legend>%s%s</fieldset>' % (_e(fs["legend"]), note, grid))
         else:
             parts.append('<div style="margin-bottom:22px">%s</div>' % grid)
+    # A stepped form wraps its fieldsets in steps. Without JavaScript every
+    # step shows and the form works as one page; site.js shows one at a time.
+    if spec.get("steps"):
+        total = len(spec["steps"])
+        parts = ['<div class="form-step" data-step="%d" data-step-title="%s">%s</div>' % (
+                     i + 1, _e(title), "".join(parts[j] for j in idx))
+                 for i, (title, idx) in enumerate(spec["steps"])]
+        parts.insert(0, '<div class="form-progress" hidden><p class="form-progress-text" aria-live="polite">Step 1 of %d</p>'
+                        '<div class="form-progress-bar"><span style="width:%d%%"></span></div></div>' % (total, round(100 / total)))
     intro = '<p>%s</p>' % _e(spec["intro"]) if spec.get("intro") else ""
     note = '<p class="form-note">%s</p>' % _e(spec["note"]) if spec.get("note") else ""
     redirect = ' data-redirect="%s"' % spec["redirect"] if spec.get("redirect") else ""
@@ -255,7 +270,7 @@ def render_form(key):
   <p class="form-note" style="margin:0 0 20px">Fields marked <span class="req">*</span> are required.</p>
   %(parts)s
   <div class="hp" aria-hidden="true"><label for="%(hpid)s">Leave this field empty</label><input type="text" id="%(hpid)s" name="website" tabindex="-1" autocomplete="off"></div>
-  <div class="form-actions"><button class="btn btn--dark" type="submit">%(submit)s</button></div>
+  <div class="form-actions"><button class="btn btn--ghost form-back" type="button" hidden>Back</button><button class="btn btn--dark form-next" type="button" hidden>Next</button><button class="btn btn--dark" type="submit">%(submit)s</button></div>
   %(note)s
   <div class="form-status" role="status" aria-live="polite"></div>
 </form>""" % dict(key=key, success=_e(spec["success"]), redirect=redirect, hid="%s-title" % key.replace("_", "-"),

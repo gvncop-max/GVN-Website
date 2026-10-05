@@ -71,6 +71,7 @@ var FORM_ENDPOINT = "https://bkgjoztepcdranhbaurx.supabase.co/functions/v1/site-
     var buttonText = button ? button.textContent : "";
 
     form.setAttribute("novalidate", "novalidate");
+    var stepper = setupSteps(form, status);
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
@@ -78,6 +79,8 @@ var FORM_ENDPOINT = "https://bkgjoztepcdranhbaurx.supabase.co/functions/v1/site-
 
       var firstBad = validate(form);
       if (firstBad) {
+        // On a stepped form, go back to the step that holds the problem.
+        if (stepper) { stepper.showStepOf(firstBad); }
         show(status, "err", "Please check the highlighted fields and try again.");
         firstBad.focus();
         return;
@@ -116,6 +119,67 @@ var FORM_ENDPOINT = "https://bkgjoztepcdranhbaurx.supabase.co/functions/v1/site-
     });
   }
 
+  /* Stepped forms (the strategy call): one short step at a time, because
+     a long form puts people off. Every field stays in the form, so what is
+     sent is exactly what the one-page form sent. Without this script all
+     steps simply show. */
+  function setupSteps(form, status) {
+    var steps = form.querySelectorAll(".form-step");
+    if (steps.length < 2) { return null; }
+    var progress = form.querySelector(".form-progress");
+    var text = form.querySelector(".form-progress-text");
+    var bar = form.querySelector(".form-progress-bar span");
+    var back = form.querySelector(".form-back");
+    var next = form.querySelector(".form-next");
+    var submit = form.querySelector("button[type=submit]");
+    var current = 0;
+
+    form.classList.add("is-stepped");
+    progress.hidden = false;
+
+    function go(i, focus) {
+      current = Math.max(0, Math.min(steps.length - 1, i));
+      Array.prototype.forEach.call(steps, function (s, n) { s.classList.toggle("is-current", n === current); });
+      var last = current === steps.length - 1;
+      back.hidden = current === 0;
+      next.hidden = last;
+      submit.hidden = !last;
+      text.textContent = "Step " + (current + 1) + " of " + steps.length + ": " + steps[current].getAttribute("data-step-title");
+      bar.style.width = Math.round((current + 1) / steps.length * 100) + "%";
+      if (focus) {
+        var first = steps[current].querySelector("input:not([type=hidden]), select, textarea");
+        if (first) { first.focus({ preventScroll: true }); }
+        var top = form.getBoundingClientRect().top + window.pageYOffset - 110;
+        if (window.pageYOffset > top) { window.scrollTo(0, top); }
+      }
+    }
+
+    next.addEventListener("click", function () {
+      clearErrors(form);
+      var bad = validate(steps[current]);
+      if (bad) {
+        show(status, "err", "Please check the highlighted fields to continue.");
+        bad.focus();
+        return;
+      }
+      show(status, "", "");
+      go(current + 1, true);
+    });
+    back.addEventListener("click", function () {
+      clearErrors(form);
+      show(status, "", "");
+      go(current - 1, true);
+    });
+    form.addEventListener("reset", function () { setTimeout(function () { go(0, false); }, 0); });
+
+    go(0, false);
+    return {
+      showStepOf: function (el) {
+        Array.prototype.forEach.call(steps, function (s, n) { if (s.contains(el)) { go(n, false); } });
+      }
+    };
+  }
+
   function finish(form, status) {
     show(status, "ok", form.getAttribute("data-success") || "Thank you. We'll be in touch soon.");
     var go = form.getAttribute("data-redirect");
@@ -125,7 +189,7 @@ var FORM_ENDPOINT = "https://bkgjoztepcdranhbaurx.supabase.co/functions/v1/site-
 
   function show(el, kind, text) {
     if (!el) { return; }
-    el.className = "form-status is-" + kind;
+    el.className = "form-status" + (kind ? " is-" + kind : "");
     el.textContent = text;
   }
 
