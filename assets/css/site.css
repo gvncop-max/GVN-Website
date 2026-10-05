@@ -64,6 +64,10 @@
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 16px); }
 body {
   margin: 0;
+  /* Inherited by every Bodoni use (headings, fact numbers, nav, card numbers);
+     Hanken has no opsz axis, so it ignores this. See h1-h4 below. */
+  font-optical-sizing: none;
+  font-variation-settings: "opsz" 24;
   background: var(--cream);
   color: var(--text);
   font-family: var(--sans);
@@ -81,7 +85,12 @@ a:hover { color: var(--ink); }
 :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 4px; }
 h1, h2, h3, h4 {
   font-family: var(--serif);
-  font-optical-sizing: auto;
+  /* Bodoni Moda's display cut (opsz 96, which "auto" picks at heading
+     sizes) has hairline strokes and loose spacing that read as broken
+     kerning on screen. A fixed text-weight cut keeps the high contrast
+     but sets tight and sturdy. */
+  font-optical-sizing: none;
+  font-variation-settings: "opsz" 24;
   font-weight: 500;
   line-height: 1.1;
   color: var(--ink);
