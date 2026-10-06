@@ -145,7 +145,7 @@ var FORM_ENDPOINT = "https://bkgjoztepcdranhbaurx.supabase.co/functions/v1/site-
       next.hidden = last;
       submit.hidden = !last;
       text.textContent = "Step " + (current + 1) + " of " + steps.length + ": " + steps[current].getAttribute("data-step-title");
-      bar.style.width = Math.round((current + 1) / steps.length * 100) + "%";
+      bar.style.transform = "scaleX(" + ((current + 1) / steps.length).toFixed(4) + ")";
       if (focus) {
         var first = steps[current].querySelector("input:not([type=hidden]), select, textarea");
         if (first) { first.focus({ preventScroll: true }); }

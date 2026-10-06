@@ -260,7 +260,7 @@ def render_form(key):
                      i + 1, _e(title), "".join(parts[j] for j in idx))
                  for i, (title, idx) in enumerate(spec["steps"])]
         parts.insert(0, '<div class="form-progress" hidden><p class="form-progress-text" aria-live="polite">Step 1 of %d</p>'
-                        '<div class="form-progress-bar"><span style="width:%d%%"></span></div></div>' % (total, round(100 / total)))
+                        '<div class="form-progress-bar"><span style="transform:scaleX(%.4f)"></span></div></div>' % (total, 1 / total))
     intro = '<p>%s</p>' % _e(spec["intro"]) if spec.get("intro") else ""
     note = '<p class="form-note">%s</p>' % _e(spec["note"]) if spec.get("note") else ""
     redirect = ' data-redirect="%s"' % spec["redirect"] if spec.get("redirect") else ""
