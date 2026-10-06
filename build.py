@@ -57,6 +57,37 @@ BIZ = {
     "console": "https://console.gvnestateinvest.com/",
     "founder_site": "https://www.valentinegrey.me",
 }
+# The credibility ribbon. Each badge states something true and checkable, and
+# links to the proof. TRUST_SWITCHES turns one on only when it is true:
+# showing a scheme you have not joined is a false claim of membership (a
+# banned practice under UK consumer law, and against the scheme's own logo
+# rules), so the Ombudsman badge is built but OFF until Valentine registers.
+TRUST_SWITCHES = {
+    "ombudsman": False,          # set True once registered with The Property Ombudsman
+    "ombudsman_no": "",          # and put the TPO membership number here
+}
+TRUSTPILOT_URL = "https://uk.trustpilot.com/review/gvnestateinvest.com"
+
+
+def trust_ribbon():
+    items = [
+        ("shield-check", "ICO registered", "Data protection, ref. %s" % BIZ["ico"], BIZ["ico_url"]),
+        ("buildings", "Registered company", "England &amp; Wales, no. %s" % BIZ["company_no"],
+         "https://find-and-update.company-information.service.gov.uk/company/%s" % BIZ["company_no"]),
+    ]
+    if TRUST_SWITCHES["ombudsman"]:
+        items.append(("scales", "The Property Ombudsman",
+                      "Member" + (", no. " + esc(TRUST_SWITCHES["ombudsman_no"]) if TRUST_SWITCHES["ombudsman_no"] else ""),
+                      "https://www.tpos.co.uk/"))
+    items.append(("star", "Trustpilot", "Read or leave a review", TRUSTPILOT_URL))
+    cells = "".join(
+        '<li><a href="%s" rel="noopener" target="_blank">%s<span><b>%s</b><small>%s</small></span>'
+        '<span class="sr-only"> (opens in a new tab)</span></a></li>' % (url, icon(ic), title, sub)
+        for ic, title, sub, url in items)
+    return ('<section class="trust" aria-labelledby="trust-h"><div class="wrap">'
+            '<h2 id="trust-h" class="trust-h">Credibility</h2><ul class="trust-list">%s</ul></div></section>' % cells)
+
+
 SOCIAL = [
     ("Instagram", "https://www.instagram.com/gvn_estate_invest"),
     ("Facebook", "https://www.facebook.com/profile.php?id=61567800793761"),
@@ -307,6 +338,7 @@ def expand_tokens(body, meta):
         "{{AREAS}}": '<ul class="chips">%s</ul>' % "".join(
             "<li>%s<span>%s</span></li>" % (esc(a), esc(c)) for a, c in AREAS),
         "{{LATEST_POSTS}}": latest_posts_html(3),
+        "{{TRUST}}": trust_ribbon(),
     }
     for k, v in reps.items():
         body = body.replace(k, v)

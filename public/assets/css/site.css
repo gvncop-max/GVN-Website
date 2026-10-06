@@ -770,3 +770,14 @@ legend { font-family: var(--serif); font-size: clamp(1.25rem, 2vw, 1.45rem); lin
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; transition-delay: 0s !important; }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* ---- credibility ribbon ------------------------------------------------ */
+.trust { background: var(--navy-950, #0a111d); padding: 34px 0; border-top: 1px solid rgba(198, 161, 91, .18); border-bottom: 1px solid rgba(198, 161, 91, .18); }
+.trust-h { font: 700 .76rem/1 var(--sans); letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin: 0 0 18px; }
+.trust-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+.trust-list a { display: flex; align-items: center; gap: 14px; padding: 16px 18px; border: 1px solid rgba(255, 255, 255, .1); border-radius: var(--r, 14px);
+  background: rgba(255, 255, 255, .03); color: #fff; text-decoration: none; transition: border-color .2s, background .2s; min-height: 44px; }
+.trust-list a:hover { border-color: rgba(198, 161, 91, .55); background: rgba(198, 161, 91, .06); }
+.trust-list .ic { width: 30px; height: 30px; flex: none; color: var(--gold); }
+.trust-list b { display: block; font: 600 1rem/1.25 var(--sans); color: #fff; }
+.trust-list small { display: block; font-size: .82rem; color: rgba(255, 255, 255, .7); margin-top: 2px; }
