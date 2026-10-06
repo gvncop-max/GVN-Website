@@ -270,9 +270,55 @@ def org_jsonld():
         "areaServed": [a for a, _ in AREAS],
         "founder": {"@type": "Person", "name": "Valentine Grey", "url": b["founder_site"]},
         "identifier": {"@type": "PropertyValue", "propertyID": "Companies House company number", "value": b["company_no"]},
-        "sameAs": [u for n, u in SOCIAL if n != "WhatsApp"],
+        "sameAs": [u for n, u in SOCIAL if n != "WhatsApp"] + [TRUSTPILOT_URL],
+        # Call hours as on the contact page; Saturday is by appointment only.
+        "openingHoursSpecification": [{"@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "09:00", "closes": "18:00"}],
     }
     return '<script type="application/ld+json">%s</script>' % json.dumps(data, ensure_ascii=False)
+
+
+# The services, in schema.org terms, for /services. Wording from the site's own
+# package descriptions; no prices, because the site states none for packages.
+SERVICES_LD = [
+    ("Elite Investor Package", "/elite-investor-blueprint-handsfree-service",
+     "Hands-free property investment for first-time investors: company (SPV) set-up, banking, HMRC and compliance, then sourcing, refurbishment, lettings, income and optional refinance."),
+    ("Achiever Investor Package", "/achiever-investor-blueprint-handsfree-service",
+     "Hands-free property investment: sourcing, refurbishment to legal standards, vetted lettings, income and optional refinance."),
+    ("Bold Investor Package", "/bold-investor-blueprint-handsfree-service",
+     "Property sourcing and vetted lettings management."),
+    ("Sell your house fast", "/sellmyhome",
+     "A cash offer for your Staffordshire house, or a matched buyer, completing on your timeline."),
+]
+
+
+def page_ld(meta):
+    """Structured data that depends on the page: the WebSite on the home page
+    (so Google can show the site's name), breadcrumbs elsewhere, and the
+    services on /services."""
+    path = meta["path"]
+    org = {"@id": SITE + "/#organization"}
+    out = []
+    if path == "/":
+        out.append({"@context": "https://schema.org", "@type": "WebSite", "@id": SITE + "/#website",
+                    "name": BIZ["name"], "alternateName": "GVN", "url": SITE + "/", "publisher": org,
+                    "inLanguage": "en-GB"})
+    elif not meta.get("noindex"):
+        crumbs = [("Home", SITE + "/")]
+        if path.startswith("/post/") or path.startswith("/provenance-pulse/"):
+            crumbs.append(("The Provenance Pulse", SITE + "/provenance-pulse"))
+        name = meta.get("crumb") or meta["title"].split(" | ")[0]
+        if path != "/provenance-pulse":
+            crumbs.append((name, SITE + path))
+        out.append({"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": i + 1, "name": n, "item": u} for i, (n, u) in enumerate(crumbs)]})
+    if path == "/services":
+        out.append({"@context": "https://schema.org", "@type": "OfferCatalog", "name": "GVN Estate Invest services",
+                    "itemListElement": [{"@type": "Offer", "itemOffered": {
+                        "@type": "Service", "name": n, "description": d, "url": SITE + u,
+                        "provider": org, "areaServed": "Staffordshire, England"}} for n, u, d in SERVICES_LD]})
+    return "".join('<script type="application/ld+json">%s</script>' % json.dumps(o, ensure_ascii=False) for o in out)
 
 
 def page_html(meta, body):
@@ -285,7 +331,7 @@ def page_html(meta, body):
     desc = meta["description"]
     og_image = SITE + meta.get("og_image", "/assets/img/og-card.jpg")
     robots = '<meta name="robots" content="noindex, follow">\n' if meta.get("noindex") else ""
-    extra_ld = meta.get("jsonld_extra", "")
+    extra_ld = meta.get("jsonld_extra", "") + page_ld(meta)
     head = """<title>%(title)s</title>
 <meta name="description" content="%(desc)s">
 <link rel="canonical" href="%(canonical)s">
