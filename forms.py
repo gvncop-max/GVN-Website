@@ -32,6 +32,7 @@ AVAILABILITY = {
 
 FORMS = {
     "booking": {
+        "email": "invest@gvnestateinvest.com",
         "title": "Book a strategy call",
         "page": "/book-a-strategy-call",
         "origin": "Wix 'Strategy Call Form' (id b579bd21…), shown in the STRATEGY CALL REQUEST pop-up (popup-suauy) behind the "
@@ -70,6 +71,7 @@ FORMS = {
     },
 
     "strategy_call_2": {
+        "email": "invest@gvnestateinvest.com",
         "title": "Request a strategy call",
         "page": "/optinform",
         "origin": "Wix 'Strategy Call Form 2' (id c533cefe…) on /optinform; also the booking form of the Wix Bookings service 'STRATEGY CALL'.",
@@ -104,6 +106,7 @@ FORMS = {
     },
 
     "investor_guide": {
+        "email": "invest@gvnestateinvest.com",
         "title": "Where should we send your FREE guide?",
         "page": "/investnow",
         "origin": "Wix 'INVESTOR GUIDE DOWNLOAD REQUEST' (id f744f57f…) on /investnow.",
@@ -122,6 +125,7 @@ FORMS = {
     },
 
     "vendor_lead": {
+        "email": "propertysales@gvnestateinvest.com",
         "title": "Your Property's Free Appraisal and Cash Offer",
         "intro": "Fill out this quick form. All information is confidential.",
         "page": "/sellmyhome",
@@ -264,7 +268,11 @@ def render_form(key):
     intro = '<p>%s</p>' % _e(spec["intro"]) if spec.get("intro") else ""
     note = '<p class="form-note">%s</p>' % _e(spec["note"]) if spec.get("note") else ""
     redirect = ' data-redirect="%s"' % spec["redirect"] if spec.get("redirect") else ""
-    return """<form class="form-card" data-form="%(key)s" data-success="%(success)s"%(redirect)s action="#" method="post" aria-labelledby="%(hid)s">
+    # The inbox this form belongs to: named under the form, and in the error
+    # message if sending fails (investors: invest@, sellers: propertysales@).
+    inbox = spec.get("email", "info@gvnestateinvest.com")
+    error = ' data-error="Sorry, that didn&#39;t go through. Please try again, or email %s or call 01782 938 111."' % inbox
+    return """<form class="form-card" data-form="%(key)s" data-success="%(success)s"%(redirect)s%(error)s action="#" method="post" aria-labelledby="%(hid)s">
   <h2 id="%(hid)s">%(title)s</h2>
   %(intro)s
   <p class="form-note" style="margin:0 0 20px">Fields marked <span class="req">*</span> are required.</p>
@@ -273,8 +281,9 @@ def render_form(key):
   <div class="form-actions"><button class="btn btn--ghost form-back" type="button" hidden>Back</button><button class="btn btn--dark form-next" type="button" hidden>Next</button><button class="btn btn--dark" type="submit">%(submit)s</button></div>
   %(note)s
   <div class="form-status" role="status" aria-live="polite"></div>
+  <p class="form-note form-inbox">Prefer email? Write to <a href="mailto:%(inbox)s">%(inbox)s</a></p>
 </form>""" % dict(key=key, success=_e(spec["success"]), redirect=redirect, hid="%s-title" % key.replace("_", "-"),
-                  title=_e(spec["title"]), intro=intro, parts="\n  ".join(parts), hpid="%s-website" % key.replace("_", "-"),
+                  title=_e(spec["title"]), intro=intro, parts="\n  ".join(parts), hpid="%s-website" % key.replace("_", "-"), error=error, inbox=inbox,
                   submit=_e(spec["submit"]), note=note)
 
 

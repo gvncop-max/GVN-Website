@@ -43,7 +43,9 @@ BIZ = {
     "company_no": "16127907",
     "ico": "ZB923509",
     "ico_url": "https://ico.org.uk/ESDWebPages/Entry/ZB923509",
-    "email": "info@gvnestateinvest.com",
+    "email": "info@gvnestateinvest.com",          # general enquiries
+    "email_invest": "invest@gvnestateinvest.com",  # investor leads (Valentine, 6 Oct 2026)
+    "email_sales": "propertysales@gvnestateinvest.com",  # vendor leads
     "phone_display": "01782 938 111",
     "phone_intl": "+44 1782 938 111",
     "phone_href": "tel:+441782938111",
@@ -271,6 +273,11 @@ def org_jsonld():
         "founder": {"@type": "Person", "name": "Valentine Grey", "url": b["founder_site"]},
         "identifier": {"@type": "PropertyValue", "propertyID": "Companies House company number", "value": b["company_no"]},
         "sameAs": [u for n, u in SOCIAL if n != "WhatsApp"] + [TRUSTPILOT_URL],
+        "contactPoint": [
+            {"@type": "ContactPoint", "contactType": "customer service", "email": b["email"], "telephone": b["phone_intl"], "areaServed": "GB", "availableLanguage": "en-GB"},
+            {"@type": "ContactPoint", "contactType": "investor enquiries", "email": b["email_invest"], "areaServed": "GB", "availableLanguage": "en-GB"},
+            {"@type": "ContactPoint", "contactType": "property sales", "email": b["email_sales"], "areaServed": "GB", "availableLanguage": "en-GB"},
+        ],
         # Call hours as on the contact page; Saturday is by appointment only.
         "openingHoursSpecification": [{"@type": "OpeningHoursSpecification",
             "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
@@ -371,6 +378,8 @@ def expand_tokens(body, meta):
     reps = {
         "{{SOCIAL}}": social_list("social social--light"),
         "{{EMAIL}}": BIZ["email"],
+        "{{EMAIL_INVEST}}": BIZ["email_invest"],
+        "{{EMAIL_SALES}}": BIZ["email_sales"],
         "{{PHONE}}": BIZ["phone_display"],
         "{{PHONE_INTL}}": BIZ["phone_intl"],
         "{{PHONE_HREF}}": BIZ["phone_href"],
