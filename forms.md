@@ -87,8 +87,8 @@ Every form posts JSON with `fetch` to https://bkgjoztepcdranhbaurx.supabase.co/f
 - **Page:** `/sellmyhome`
 - **Came from:** Wix 'Sell my Home Form' (id fcd3d024…) on /sellmyhome. Success text from the Wix pop-up 'property sale thanks' (popup-cf17t).
 - **Submit button:** Submit
-- **Success message:** Thanks! We'll get in touch soon.
-- **After success:** stays on the page
+- **Success message:** Thank you. Taking you to the next step now…
+- **After success:** goes to `/sellmyhome/thank-you`
 
 | Sent as (exact label) | Shown as | Input | Required | Options |
 |---|---|---|---|---|

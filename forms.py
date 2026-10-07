@@ -131,8 +131,8 @@ FORMS = {
         "page": "/sellmyhome",
         "origin": "Wix 'Sell my Home Form' (id fcd3d024…) on /sellmyhome. Success text from the Wix pop-up 'property sale thanks' (popup-cf17t).",
         "submit": "Submit",
-        "success": "Thanks! We'll get in touch soon.",
-        "redirect": None,
+        "success": "Thank you. Taking you to the next step now…",
+        "redirect": "/sellmyhome/thank-you",
         "note": "\U0001F512 We never share your details. Privacy Guaranteed.",
         "fieldsets": [
             {"legend": None, "fields": [
