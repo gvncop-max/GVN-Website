@@ -26,7 +26,7 @@ Every form posts JSON with `fetch` to https://bkgjoztepcdranhbaurx.supabase.co/f
 - **Page:** `/book-a-strategy-call`
 - **Came from:** Wix 'Strategy Call Form' (id b579bd21…), shown in the STRATEGY CALL REQUEST pop-up (popup-suauy) behind the 'Let's Discuss How This Works', 'Request Your Free Strategy Call' and 'Book Your Free Consultation' buttons; also the booking form of the Wix Bookings service 'Strategy Session' (/book-online, /booking-calendar, /booking-form, /service-page).
 - **Submit button:** Request Strategy Session
-- **Success message:** Thank you. Your strategy call request has been received. We will contact you to confirm a time.
+- **Success message:** Thank you. Your strategy call request has been received. Taking you to our calendar to pick a time…
 - **After success:** goes to `/optinform/gv2mkhfkhkkhdkhjcd10ku`
 
 | Sent as (exact label) | Shown as | Input | Required | Options |
@@ -49,7 +49,7 @@ Every form posts JSON with `fetch` to https://bkgjoztepcdranhbaurx.supabase.co/f
 - **Page:** `/optinform`
 - **Came from:** Wix 'Strategy Call Form 2' (id c533cefe…) on /optinform; also the booking form of the Wix Bookings service 'STRATEGY CALL'.
 - **Submit button:** Request Strategy Session
-- **Success message:** Thank you. Your request has been received. We will contact you to confirm a time.
+- **Success message:** Thank you. Your request has been received. Taking you to our calendar to pick a time…
 - **After success:** goes to `/optinform/gv2mkhfkhkkhdkhjcd10ku`
 
 | Sent as (exact label) | Shown as | Input | Required | Options |

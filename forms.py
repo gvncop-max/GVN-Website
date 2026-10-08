@@ -21,7 +21,7 @@ TIMES = ["Morning (9 AM – 12 PM)", "Afternoon (12 PM – 3 PM)", "Late afterno
 
 AVAILABILITY = {
     "legend": "When are You Available to Discuss",
-    "note": "A free 30-minute strategy call by phone. Our call hours are Monday–Friday, 9 AM – 6 PM, and Saturday by appointment. Tell us what suits you and we will confirm a time.",
+    "note": "A free 30-minute strategy call by phone. Our call hours are Monday–Friday, 9 AM – 6 PM, and Saturday by appointment. Tell us what generally suits you; on the next page you can book an exact time in our calendar.",
     "fields": [
         {"label": "Preferred days", "type": "checkboxes", "options": DAYS, "required": False, "new": True},
         {"label": "Preferred time of day", "type": "select", "options": TIMES, "required": True, "placeholder": "Choose a time of day", "new": True},
@@ -39,7 +39,7 @@ FORMS = {
                   "'Let's Discuss How This Works', 'Request Your Free Strategy Call' and 'Book Your Free Consultation' buttons; "
                   "also the booking form of the Wix Bookings service 'Strategy Session' (/book-online, /booking-calendar, /booking-form, /service-page).",
         "submit": "Request Strategy Session",
-        "success": "Thank you. Your strategy call request has been received. We will contact you to confirm a time.",
+        "success": "Thank you. Your strategy call request has been received. Taking you to our calendar to pick a time…",
         "redirect": "/optinform/gv2mkhfkhkkhdkhjcd10ku",
         # Valentine, 5 Oct 2026: long forms put people off, so the strategy
         # call forms go one short step at a time. Same questions, same labels.
@@ -76,7 +76,7 @@ FORMS = {
         "page": "/optinform",
         "origin": "Wix 'Strategy Call Form 2' (id c533cefe…) on /optinform; also the booking form of the Wix Bookings service 'STRATEGY CALL'.",
         "submit": "Request Strategy Session",
-        "success": "Thank you. Your request has been received. We will contact you to confirm a time.",
+        "success": "Thank you. Your request has been received. Taking you to our calendar to pick a time…",
         "redirect": "/optinform/gv2mkhfkhkkhdkhjcd10ku",
         "steps": [("Your details", [0]), ("About you", [1]), ("When suits you", [2, 3])],
         "fieldsets": [
