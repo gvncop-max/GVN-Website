@@ -103,10 +103,13 @@ var FORM_ENDPOINT = "https://bkgjoztepcdranhbaurx.supabase.co/functions/v1/site-
       if (button) { button.disabled = true; button.textContent = "Sending…"; }
       show(status, "busy", "Sending…");
 
-      fetch(FORM_ENDPOINT, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
+      uploadPhotos(form, payload.form, status).then(function (photos) {
+        if (photos.length) { payload.fields["Attachments Files"] = JSON.stringify(photos); }
+        return fetch(FORM_ENDPOINT, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
       }).then(function (res) {
         if (!res.ok) { throw new Error("HTTP " + res.status); }
         finish(form, status);
@@ -117,6 +120,77 @@ var FORM_ENDPOINT = "https://bkgjoztepcdranhbaurx.supabase.co/functions/v1/site-
         if (button) { button.disabled = false; button.textContent = buttonText; }
       });
     });
+  }
+
+  /* Photos (sell form): each file goes straight to the private photo store
+     through a one-time signed URL from the form endpoint, then the form says
+     which files it sent. A photo that fails is skipped, never the enquiry:
+     the file names still travel in "File upload" as before. */
+  var PHOTO_TYPES = /^image\/(jpeg|png|webp|gif|heic|heif|avif)$/;
+  var PHOTO_MAX = 15 * 1024 * 1024;
+
+  function uploadPhotos(form, key, status) {
+    var input = form.querySelector("input[type=file]");
+    if (!input || !input.files || !input.files.length || !window.fetch) { return Promise.resolve([]); }
+    var files = Array.prototype.filter.call(input.files, function (f) {
+      return PHOTO_TYPES.test(f.type);
+    }).slice(0, parseInt(input.getAttribute("data-max") || "10", 10));
+    if (!files.length) { return Promise.resolve([]); }
+
+    return Promise.all(files.map(shrink)).then(function (blobs) {
+      blobs = blobs.filter(function (b) { return b.size <= PHOTO_MAX; });
+      if (!blobs.length) { return []; }
+      return fetch(FORM_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ form: key, upload: blobs.map(function (b) { return { type: b.type, size: b.size }; }) })
+      }).then(function (res) {
+        if (!res.ok) { throw new Error("HTTP " + res.status); }
+        return res.json();
+      }).then(function (data) {
+        var done = [];
+        var n = 0;
+        // One at a time: a phone on a weak signal does better with one
+        // upload than with ten fighting each other.
+        return blobs.reduce(function (chain, b, i) {
+          return chain.then(function () {
+            show(status, "busy", "Uploading photo " + (i + 1) + " of " + blobs.length + "…");
+            var slot = data.uploads[i];
+            return fetch(slot.url, { method: "PUT", headers: { "Content-Type": b.type }, body: b })
+              .then(function (res) {
+                if (res.ok) { n++; done.push({ path: slot.path, name: b.photoName, type: b.type }); }
+              }, function () {});
+          });
+        }, Promise.resolve()).then(function () {
+          show(status, "busy", n ? "Sending…" : "Photos could not be uploaded. Sending your details…");
+          return done;
+        });
+      });
+    }).catch(function () { return []; });
+  }
+
+  /* A phone photo is often 4-8MB. Resized to 2400px on the long side it is a
+     fraction of that and still more than enough to judge a property. Any
+     file the browser cannot draw (HEIC outside Safari, say) goes as it is. */
+  function shrink(file) {
+    var keep = function () { file.photoName = file.name; return file; };
+    if (file.size < 1500000 || !/^image\/(jpeg|png|webp)$/.test(file.type) || !window.createImageBitmap) {
+      return Promise.resolve(keep());
+    }
+    return createImageBitmap(file).then(function (img) {
+      var scale = Math.min(1, 2400 / Math.max(img.width, img.height));
+      var c = document.createElement("canvas");
+      c.width = Math.round(img.width * scale);
+      c.height = Math.round(img.height * scale);
+      c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+      return new Promise(function (ok) {
+        c.toBlob(function (b) {
+          if (!b || b.size >= file.size) { ok(keep()); return; }
+          b.photoName = file.name;
+          ok(b);
+        }, "image/jpeg", 0.85);
+      });
+    }).catch(keep);
   }
 
   /* Stepped forms (the strategy call): one short step at a time, because

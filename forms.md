@@ -18,7 +18,7 @@ Every form posts JSON with `fetch` to https://bkgjoztepcdranhbaurx.supabase.co/f
 
 - The old intake normalises a key by lower-casing and removing spaces, `_` and `-`. Under that rule `what best describes you` becomes `whatbestdescribesyou` (matches the existing SEGMENTS lookup), but `which best describes you ?` becomes `whichbestdescribesyou?`, `How Soon Are You Looking To Buy` becomes `howsoonareyoulookingtobuy` and `How soon are you looking to buy / invest` becomes `howsoonareyoulookingtobuy/invest`. The new endpoint should map these explicitly rather than rely on the old `pick()` list.
 - The Wix appointment picker ("When are You Available to Discuss", a 30-minute phone call) cannot be rebuilt on a static site. It is replaced by three new fields: `Preferred days`, `Preferred time of day`, `Preferred date`. A real calendar is a later decision.
-- File upload (`vendor_lead`): the browser only sends the **file names** in `File upload`, because the body is JSON. Uploading the photos themselves needs the endpoint to support it (for example a signed Supabase Storage upload URL, or switching this one form to multipart/form-data). The input allows images only, up to 10.
+- File upload (`vendor_lead`), since 8 Oct 2026: the browser resizes large photos to 2400px, asks `site-form` for signed upload URLs (`{form, upload:[{type,size}]}`), PUTs each photo into the private `ops-media` bucket under `site-upload/`, then submits the form with `Attachments Files` = `[{path,name,type}]`. `site-form` keeps only paths it issues that really exist, and `intake` puts them on the property's photos. The file names still go in `File upload`. A failed photo upload never stops the enquiry. Images only, up to 10, 15MB each.
 - The two strategy-call forms and the booking form redirect to `/optinform/gv2mkhfkhkkhdkhjcd10ku`, which (copied from the old site) says the investor guide has been emailed. That is only true if the endpoint emails it. The vendor form's success message also says "check your email for confirmation". Either send those emails or change the wording.
 
 ## `booking` - Book a strategy call
@@ -103,7 +103,7 @@ Every form posts JSON with `fetch` to https://bkgjoztepcdranhbaurx.supabase.co/f
 | `Address` | Address | text | yes | - - part of the Wix 'Multi-line address' field |
 | `City` | City | text | yes | - - part of the Wix 'Multi-line address' field |
 | `Zip / Postal code` | Postcode | text | yes | - - part of the Wix 'Multi-line address' field |
-| `File upload` | Upload Photos of Property | file | no | - - images only, max 10; only file names are sent |
+| `File upload` | Upload Photos of Property | file | no | - - images only, max 10; uploaded to the CRM, names also sent |
 
 The Wix form also had a hidden field `Quick Description` (textarea, "Give a Detailed Description e.g., outstanding mortgage, legal issues"). It was switched off on Wix, so it is not on the new form.
 
