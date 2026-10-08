@@ -19,8 +19,8 @@ Key: **page** = real page in `public/`, **redirect** = small page that forwards 
 | `/investnow/gv1mkhfkhkkhdkhjcd10ku` | page (guide thank-you + PDF download), noindex | `src/pages/investnow-thank-you.html` |
 | `/optinform` | page + `strategy_call_2` form, not in sitemap (as on Wix) | `src/pages/optinform.html` |
 | `/optinform/gv2mkhfkhkkhdkhjcd10ku` | page (strategy-call thank-you + PDF download), noindex | `src/pages/optinform-thank-you.html` |
-| `/offmarketdeals` | page | `src/pages/offmarketdeals.html` |
-| `/properties-list` (Wix internal name of the Deals page) | redirect to `/offmarketdeals` | REDIRECTS |
+| `/offmarketdeals` | removed by Valentine (5 Oct 2026): redirect to `/sellmyhome` | REDIRECTS |
+| `/properties-list` (Wix internal name of the Deals page) | redirect to `/sellmyhome` | REDIRECTS |
 | `/properties/semi-detached-house-fenton-` | **excluded by Valentine, redirected to `/sellmyhome`** | REDIRECTS |
 | `/sellmyhome` | page + `vendor_lead` form | `src/pages/sellmyhome.html` |
 | `/askaquestion` | page + `question` form | `src/pages/askaquestion.html` |
@@ -83,7 +83,7 @@ Heading, "Complaints and Questions", full paragraph, "Let's Know What You Need H
 ### Contact `/contact`
 "Contact Us / Let's Build Your Property Portfolio Together", phone, email (subject PROPERTY INVESTMENT Query), Instagram, Facebook, X, LinkedIn, Threads, WhatsApp, Call Hours. Added postal address and a contact form (new).
 
-### Off-market deals `/offmarketdeals`
+### Off-market deals `/offmarketdeals` (page removed 5 Oct 2026; kept here as a record of what it held)
 Old page: heading "OFF MARKET - Property Listings", filters (bedrooms, bathrooms, status) and one card "Completed - GBP 120,000 - Mid Terraced house fenton - 2 bed - 87sqft" linking to `/properties/semi-detached-house-fenton-`. The listing is **excluded by Valentine** (card and detail page); the page now says no listings are published and offers a strategy call and the guide. The card's "Completed" status is flagged.
 
 ### Footer (every old page)
@@ -106,3 +106,9 @@ All 12 posts migrated from the rendered Wix article: full text, headings, lists,
 - Wix Bookings calendar: replaced by a request form (`booking`); a real calendar is a later decision.
 - Hidden Wix Bookings template services ("Personal Solution Planning", "Expert Guidance Package" GBP 500, "Custom Project" GBP 1,000, "30 min meeting"): all hidden on Wix, not migrated.
 - Blog search, property filters, the shop/cart, Wix member signup ("Custom Signup" page was already an error page).
+
+
+## Later changes
+- 5 Oct 2026: /offmarketdeals removed (redirects to /sellmyhome); v.grey@ replaced with info@.
+- 7 Oct 2026: /sellmyhome/thank-you added (noindex).
+- 8 Oct 2026: Renters' Rights post: wrong timeline picture (Egyptian informal settlements) and three unverifiable quotes removed, plus a leftover drafting note; Companies House post: three unattributed quotes removed.
