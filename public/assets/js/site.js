@@ -61,6 +61,66 @@ var FORM_ENDPOINT = "https://bkgjoztepcdranhbaurx.supabase.co/functions/v1/site-
     });
   }
 
+  /* ---- 1d. Strategy-call booking (Cal.com, connected to Valentine's Google
+     Calendar). The form the visitor has just sent left their name, email and
+     phone in sessionStorage, so the calendar opens already filled in and they
+     only pick a time. Kept in this tab only, and cleared once read. ---- */
+  var calBox = document.getElementById("cal-booking");
+  if (calBox) {
+    var who = {};
+    try {
+      who = JSON.parse(sessionStorage.getItem("gvn-booking") || "{}") || {};
+      sessionStorage.removeItem("gvn-booking");
+    } catch (e) { who = {}; }
+    var config = { layout: "month_view" };
+    if (who.name) { config.name = who.name; }
+    if (who.email) { config.email = who.email; }
+    if (who.phone) { config.attendeePhoneNumber = who.phone; }
+    (function (C, A, L) {
+      var p = function (a, ar) { a.q.push(ar); };
+      var d = C.document;
+      C.Cal = C.Cal || function () {
+        var cal = C.Cal, ar = arguments;
+        if (!cal.loaded) {
+          cal.ns = {}; cal.q = cal.q || [];
+          d.head.appendChild(d.createElement("script")).src = A;
+          cal.loaded = true;
+        }
+        if (ar[0] === L) {
+          var api = function () { p(api, arguments); };
+          var namespace = ar[1];
+          api.q = api.q || [];
+          if (typeof namespace === "string") {
+            cal.ns[namespace] = cal.ns[namespace] || api;
+            p(cal.ns[namespace], ar);
+            p(cal, ["initNamespace", namespace]);
+          } else { p(cal, ar); }
+          return;
+        }
+        p(cal, ar);
+      };
+    })(window, "https://app.cal.com/embed/embed.js", "init");
+    window.Cal("init", "strategy", { origin: "https://cal.com" });
+    window.Cal.ns.strategy("inline", {
+      elementOrSelector: "#cal-booking",
+      calLink: calBox.getAttribute("data-cal-link"),
+      config: config
+    });
+    window.Cal.ns.strategy("ui", { hideEventTypeDetails: false, layout: "month_view" });
+  }
+
+  function rememberForBooking(form) {
+    if (!form.querySelector("[data-label='Email']") || !/optinform\/gv2/.test(form.getAttribute("data-redirect") || "")) { return; }
+    var val = function (label) {
+      var el = form.querySelector("[data-label='" + label + "']");
+      return el ? (el.value || "").trim() : "";
+    };
+    var name = [val("First name"), val("Last name")].filter(Boolean).join(" ") || val("Full name");
+    try {
+      sessionStorage.setItem("gvn-booking", JSON.stringify({ name: name, email: val("Email"), phone: val("Phone") }));
+    } catch (e) { /* private mode: the calendar simply opens empty */ }
+  }
+
   /* ---- 2. Forms ---- */
   var forms = document.querySelectorAll("form[data-form]");
   Array.prototype.forEach.call(forms, setupForm);
@@ -257,6 +317,7 @@ var FORM_ENDPOINT = "https://bkgjoztepcdranhbaurx.supabase.co/functions/v1/site-
   function finish(form, status) {
     show(status, "ok", form.getAttribute("data-success") || "Thank you. We'll be in touch soon.");
     var go = form.getAttribute("data-redirect");
+    rememberForBooking(form);
     form.reset();
     if (go) { setTimeout(function () { location.assign(go); }, 1200); }
   }

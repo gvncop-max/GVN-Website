@@ -782,8 +782,6 @@ legend { font-family: var(--serif); font-size: clamp(1.25rem, 2vw, 1.45rem); lin
 .trust-list b { display: block; font: 600 1rem/1.25 var(--sans); color: #fff; }
 .trust-list small { display: block; font-size: .82rem; color: rgba(255, 255, 255, .7); margin-top: 2px; }
 
-/* Strategy-call booking: Valentine's Google Calendar appointment page, embedded. */
-.booking-frame { margin-top: 24px; background: #fff; border-radius: var(--r); overflow: hidden; box-shadow: var(--shadow-light); }
-.booking-frame iframe { display: block; width: 100%; height: 760px; border: 0; }
-@media (max-width: 700px) { .booking-frame iframe { height: 900px; } }
+/* Strategy-call booking: Valentine's Cal.com event, embedded inline (it sizes itself). */
+.booking-frame { margin-top: 24px; min-height: 560px; background: #fff; border-radius: var(--r); overflow: auto; box-shadow: var(--shadow-light); }
 .booking-alt { margin-top: 14px; font-size: .95rem; }

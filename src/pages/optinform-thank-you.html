@@ -11,7 +11,7 @@
   <div class="wrap">
     <p class="eyebrow">Thank you</p>
     <h1>Your request was received successfully</h1>
-    <p class="lede">One last step: pick a time for your free 30-minute strategy call below. It goes straight into our calendar, and you will get a calendar invitation by email.</p>
+    <p class="lede">One last step: pick a time for your free 30-minute strategy call below. Your details are already filled in, so just choose a time. You will get a confirmation by email.</p>
     <div class="btn-row"><a class="btn btn--gold" href="#book">Choose a time{{I:arrow-right}}</a><a class="btn btn--ghost" href="{{GUIDE_PDF}}" download>Download the investor guide (PDF, 11 MB){{I:download-simple}}</a></div>
   </div>
 </section>
@@ -20,7 +20,7 @@
   <div class="wrap">
     <p class="eyebrow">Book your call</p>
     <h2>Choose a time that suits <em>you</em></h2>
-    <div class="booking-frame"><iframe src="{{BOOKING_EMBED}}" title="Book your free 30-minute strategy call" loading="lazy"></iframe></div>
+    <div class="booking-frame" id="cal-booking" data-cal-link="{{CAL_LINK}}"></div>
     <p class="booking-alt">Calendar not showing? <a href="{{BOOKING_URL}}" target="_blank" rel="noopener">Open the booking page in a new tab</a>, or we will contact you to arrange a time.</p>
   </div>
 </section>
@@ -30,7 +30,7 @@
     <p class="eyebrow">What&rsquo;s next&hellip;</p>
     <h2 class="sr-only">What happens next</h2>
     <div class="grid grid-3">
-      <div class="card"><span class="card-ic">{{I:envelope-simple}}</span><h3>Check your inbox</h3><p>We have emailed you a confirmation, with a link to the investor guide. If it isn&rsquo;t there in a few minutes, check your junk or promotions folder.</p><p>Once you book a time above, Google Calendar sends you an invitation for it.</p></div>
+      <div class="card"><span class="card-ic">{{I:envelope-simple}}</span><h3>Check your inbox</h3><p>We have emailed you a confirmation, with a link to the investor guide. If it isn&rsquo;t there in a few minutes, check your junk or promotions folder.</p><p>Once you book a time above, you will get an email confirming it, with a calendar invitation.</p></div>
       <div class="card"><span class="card-ic">{{I:phone-call}}</span><h3>Your complimentary call</h3><p>Booked a time? We will call you then. Not booked yet? We will contact you to arrange one.</p><p>During your call, we will discuss how we can help you achieve your property investment goals and advise on the actionable next step!</p></div>
       <div class="card"><span class="card-ic">{{I:file-text}}</span><h3>Get valuable content every week &ndash; free</h3><p>Connect with GVN Estate Invest and founder Valentine Grey on social media to stay up to date with the latest property investment tips, updates and news.</p><p>Check out our news page: <a href="/provenance-pulse">P-Pulse</a></p></div>
     </div>

@@ -69,12 +69,12 @@ TRUST_SWITCHES = {
     "ombudsman_no": "",          # and put the TPO membership number here
 }
 TRUSTPILOT_URL = "https://uk.trustpilot.com/review/gvnestateinvest.com"
-# Valentine's Google Calendar appointment schedule "Free 30-minute strategy call"
-# (8 Oct 2026). A booking lands straight in his Google Calendar. BOOKING_EMBED is
-# the same page in Google's embeddable form (?gv=true), used in an iframe.
-BOOKING_URL = "https://calendar.app.google/pUW1sVTso3YxPrqR7"
-BOOKING_EMBED = ("https://calendar.google.com/calendar/appointments/schedules/"
-                 "AcZssZ2uLd6wrPzjgRlbLRMmuPL1M_W7_BtcZCK1cjyiJn0xONS2a0OSe5s-KtROvTZDF3m_Nr-1mUIM?gv=true")
+# Strategy calls are booked on Valentine's Cal.com event (9 Oct 2026), which is
+# connected to his Google Calendar: it offers only his free times and writes
+# each booking into it. Cal.com replaced Google's own booking page because
+# that page cannot be pre-filled, so leads were typing their details twice.
+CAL_LINK = "gvn-estate-invest/free-30-minute-strategy-call"
+BOOKING_URL = "https://cal.com/" + CAL_LINK
 
 
 def trust_ribbon():
@@ -417,7 +417,7 @@ def expand_tokens(body, meta):
         "{{COMPANY_NO}}": BIZ["company_no"],
         "{{GUIDE_PDF}}": "/assets/files/staffordshire-investor-guide.pdf",
         "{{BOOKING_URL}}": BOOKING_URL,
-        "{{BOOKING_EMBED}}": BOOKING_EMBED,
+        "{{CAL_LINK}}": CAL_LINK,
         "{{AREAS}}": '<ul class="chips">%s</ul>' % "".join(
             "<li>%s<span>%s</span></li>" % (esc(a), esc(c)) for a, c in AREAS),
         "{{LATEST_POSTS}}": latest_posts_html(3),
