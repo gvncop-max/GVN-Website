@@ -140,7 +140,7 @@ FORMS = {
                 {"label": "Email", "type": "email", "required": True, "auto": "email", "placeholder": "Enter your Email"},
                 {"label": "Phone", "type": "tel", "required": True, "auto": "tel", "placeholder": "Enter your phone number"},
                 {"label": "Property Type", "type": "select", "required": True, "placeholder": "Choose one Property Type",
-                 "options": ["Flat", "Mid Terraced", "End Terraced", "Semi Terraced", "Maisonette", "Detached"]},
+                 "options": ["Flat", "Mid Terraced", "End Terraced", "Semi-detached", "Maisonette", "Detached"]},
                 {"label": "No. of Bedrooms", "type": "select", "required": True, "placeholder": "No. of Bedrooms",
                  "options": ["1", "2", "3", "4", "5+"]},
                 {"label": "Current Condition", "type": "select", "required": True, "placeholder": "Current Condition",

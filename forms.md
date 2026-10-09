@@ -95,7 +95,7 @@ Every form posts JSON with `fetch` to https://bkgjoztepcdranhbaurx.supabase.co/f
 | `Full name` | Full name | text | yes | - |
 | `Email` | Email | email | yes | - |
 | `Phone` | Phone | tel | yes | - |
-| `Property Type` | Property Type | select | yes | `Flat`; `Mid Terraced`; `End Terraced`; `Semi Terraced`; `Maisonette`; `Detached` |
+| `Property Type` | Property Type | select | yes | `Flat`; `Mid Terraced`; `End Terraced`; `Semi-detached`; `Maisonette`; `Detached` |
 | `No. of Bedrooms` | No. of Bedrooms | select | yes | `1`; `2`; `3`; `4`; `5+` |
 | `Current Condition` | Current Condition | select | yes | `Excellent (no work needed)`; `Good (minor repairs)`; `Needs Major Renovation` |
 | `Reason for Selling` | Reason for Selling | select | yes | `Divorce`; `Debt`; `Scaling Back`; `Relocation`; `Up Size`; `Probate`; `Tenant Issues`; `Other` - Wix option 'Depth' corrected to 'Debt' (obvious typo; the CRM does not classify this field). |
