@@ -72,7 +72,7 @@ var FORM_ENDPOINT = "https://bkgjoztepcdranhbaurx.supabase.co/functions/v1/site-
       who = JSON.parse(sessionStorage.getItem("gvn-booking") || "{}") || {};
       sessionStorage.removeItem("gvn-booking");
     } catch (e) { who = {}; }
-    var config = { layout: "month_view" };
+    var config = { layout: "month_view", theme: "light" };
     if (who.name) { config.name = who.name; }
     if (who.email) { config.email = who.email; }
     if (who.phone) { config.attendeePhoneNumber = who.phone; }
@@ -106,7 +106,9 @@ var FORM_ENDPOINT = "https://bkgjoztepcdranhbaurx.supabase.co/functions/v1/site-
       calLink: calBox.getAttribute("data-cal-link"),
       config: config
     });
-    window.Cal.ns.strategy("ui", { hideEventTypeDetails: false, layout: "month_view" });
+    // Light, in the site's navy, so the calendar sits on the cream page as part of it.
+    window.Cal.ns.strategy("ui", { theme: "light", hideEventTypeDetails: false, layout: "month_view",
+      cssVarsPerTheme: { light: { "cal-brand": "#0B1220" } } });
   }
 
   function rememberForBooking(form) {
