@@ -293,7 +293,9 @@ def org_jsonld():
 
 
 # The services, in schema.org terms, for /services. Wording from the site's own
-# package descriptions; no prices, because the site states none for packages.
+# package descriptions. Only the Achiever price is published (home FAQ, his
+# words 8 Oct 2026: GBP 7,500 per investment property); Elite and Bold have none.
+SERVICE_PRICES = {"Achiever Investor Package": "7500"}
 SERVICES_LD = [
     ("Elite Investor Package", "/elite-investor-blueprint-handsfree-service",
      "Hands-free property investment for first-time investors: company (SPV) set-up, banking, HMRC and compliance, then sourcing, refurbishment, lettings, income and optional refinance."),
@@ -304,6 +306,20 @@ SERVICES_LD = [
     ("Sell your house fast", "/sellmyhome",
      "A cash offer for your Staffordshire house, or a matched buyer, completing on your timeline."),
 ]
+
+
+def faq_ld(body):
+    """FAQPage built from the page's own <details class="faq"> items, so the
+    schema can never say something the visible FAQ does not."""
+    items = []
+    for q, a in re.findall(r'<details class="faq"><summary>(.*?)</summary><div class="answer">(.*?)</div></details>', body, re.S):
+        text = lambda h: re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", h))).strip()
+        items.append({"@type": "Question", "name": text(q),
+                      "acceptedAnswer": {"@type": "Answer", "text": text(a)}})
+    if not items:
+        return ""
+    return '<script type="application/ld+json">%s</script>' % json.dumps(
+        {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": items}, ensure_ascii=False)
 
 
 def page_ld(meta):
@@ -328,9 +344,13 @@ def page_ld(meta):
             {"@type": "ListItem", "position": i + 1, "name": n, "item": u} for i, (n, u) in enumerate(crumbs)]})
     if path == "/services":
         out.append({"@context": "https://schema.org", "@type": "OfferCatalog", "name": "GVN Estate Invest services",
-                    "itemListElement": [{"@type": "Offer", "itemOffered": {
+                    "itemListElement": [dict({"@type": "Offer", "itemOffered": {
                         "@type": "Service", "name": n, "description": d, "url": SITE + u,
-                        "provider": org, "areaServed": "Staffordshire, England"}} for n, u, d in SERVICES_LD]})
+                        "provider": org, "areaServed": "Staffordshire, England"}},
+                        **({"priceSpecification": {"@type": "UnitPriceSpecification",
+                            "price": SERVICE_PRICES[n], "priceCurrency": "GBP",
+                            "unitText": "per investment property"}} if n in SERVICE_PRICES else {}))
+                        for n, u, d in SERVICES_LD]})
     return "".join('<script type="application/ld+json">%s</script>' % json.dumps(o, ensure_ascii=False) for o in out)
 
 
@@ -344,7 +364,7 @@ def page_html(meta, body):
     desc = meta["description"]
     og_image = SITE + meta.get("og_image", "/assets/img/og-card.jpg")
     robots = '<meta name="robots" content="noindex, follow">\n' if meta.get("noindex") else ""
-    extra_ld = meta.get("jsonld_extra", "") + page_ld(meta)
+    extra_ld = meta.get("jsonld_extra", "") + page_ld(meta) + faq_ld(body)
     head = """<title>%(title)s</title>
 <meta name="description" content="%(desc)s">
 <link rel="canonical" href="%(canonical)s">
