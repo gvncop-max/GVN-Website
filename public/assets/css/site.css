@@ -782,6 +782,8 @@ legend { font-family: var(--serif); font-size: clamp(1.25rem, 2vw, 1.45rem); lin
 .trust-list b { display: block; font: 600 1rem/1.25 var(--sans); color: #fff; }
 .trust-list small { display: block; font-size: .82rem; color: rgba(255, 255, 255, .7); margin-top: 2px; }
 
-/* Strategy-call booking: Valentine's Cal.com event, embedded inline (it sizes itself). */
-.booking-frame { margin-top: 24px; min-height: 560px; background: #fff; border-radius: var(--r); overflow: auto; box-shadow: var(--shadow-light); }
+/* Strategy-call booking: Valentine's Cal.com event, embedded inline (it sizes itself).
+   No box of our own: the calendar is its own white card, and wrapping it in a
+   white panel hid the card's top edge so it looked cut off (Valentine, 9 Oct). */
+.booking-frame { margin-top: 24px; min-height: 560px; }
 .booking-alt { margin-top: 14px; font-size: .95rem; }
