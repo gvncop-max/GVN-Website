@@ -294,7 +294,8 @@ def org_jsonld():
 
 # The services, in schema.org terms, for /services. Wording from the site's own
 # package descriptions. Prices from knowledge/GVN ESTATE INVEST/KNOWLEDGE BASE
-# 001.md (his words, 10 Oct 2026), also shown in the home FAQ.
+# 001.md (his words, 10 Oct 2026), each per investment property; also shown
+# in the home FAQ.
 SERVICE_PRICES = {"Elite Investor Package": "9500",
                   "Achiever Investor Package": "7500",
                   "Bold Investor Package": "6000"}
