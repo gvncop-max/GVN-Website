@@ -293,9 +293,11 @@ def org_jsonld():
 
 
 # The services, in schema.org terms, for /services. Wording from the site's own
-# package descriptions. Only the Achiever price is published (home FAQ, his
-# words 8 Oct 2026: GBP 7,500 per investment property); Elite and Bold have none.
-SERVICE_PRICES = {"Achiever Investor Package": "7500"}
+# package descriptions. Prices from knowledge/GVN ESTATE INVEST/KNOWLEDGE BASE
+# 001.md (his words, 10 Oct 2026), also shown in the home FAQ.
+SERVICE_PRICES = {"Elite Investor Package": "9500",
+                  "Achiever Investor Package": "7500",
+                  "Bold Investor Package": "6000"}
 SERVICES_LD = [
     ("Elite Investor Package", "/elite-investor-blueprint-handsfree-service",
      "Hands-free property investment for first-time investors: company (SPV) set-up, banking, HMRC and compliance, then sourcing, refurbishment, lettings, income and optional refinance."),
