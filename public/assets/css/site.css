@@ -787,3 +787,17 @@ legend { font-family: var(--serif); font-size: clamp(1.25rem, 2vw, 1.45rem); lin
    white panel hid the card's top edge so it looked cut off (Valentine, 9 Oct). */
 .booking-frame { margin-top: 24px; min-height: 560px; }
 .booking-alt { margin-top: 14px; font-size: .95rem; }
+
+/* Print (and the privacy policy PDF, which is printed from its page):
+   the document only, no menu, hero photo, footer or download box. */
+@media print {
+  @page { size: A4; margin: 16mm 16mm 18mm; }
+  html, body { background: #fff !important; color: #121a28 !important; }
+  .site-header, .site-footer, .notice, .cta-band, .wa-float, .skip { display: none !important; }
+  .hero, .hero--page { background: none !important; min-height: 0 !important; padding: 0 0 6mm !important; color: #121a28 !important; }
+  .hero::before, .hero::after { display: none !important; }
+  .hero h1, .hero .lede, .hero .eyebrow { color: #121a28 !important; }
+  .section { padding: 0 !important; background: none !important; }
+  * { opacity: 1 !important; transform: none !important; animation: none !important; transition: none !important; }
+  a { color: #121a28 !important; }
+}

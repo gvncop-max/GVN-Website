@@ -12,7 +12,7 @@ Website:   https://www.gvnestateinvest.com
 Email:     info@gvnestateinvest.com
 Hours:     Monday to Friday 9am to 6pm, Saturday by appointment
 Category:  Property investment / Real estate investment
-Address:   WAIT - see below
+Address:   Highfield House, Congleton Road, Stoke-on-Trent, ST7 3SY
 ```
 
 Short description (true, no claims to prove):
@@ -21,17 +21,11 @@ Short description (true, no claims to prove):
 > property investment (sourcing, refurbishment, lettings and refinance) and a
 > fast, no-fee way to sell your house. Company no. 16127907, ICO registered.
 
-## The address: wait for the virtual address
+## The address
 
-You are buying a virtual address. Every directory that asks for an address
-must get the **new** one, otherwise each listing has to be edited again later
-and, until then, Google sees two addresses for one business. So:
-
-- **Now:** do Group A (no address needed) and the social profiles.
-- **Once the virtual address is live:** put it on the website and Google
-  Business Profile first (I change the website), then do Group B.
-
-Tick "hide my address / service-area business" wherever a directory offers it.
+Your address is now **Highfield House, Congleton Road, Stoke-on-Trent, ST7 3SY**
+(15 Oct 2026). Use it exactly like that everywhere. Update your Google Business
+Profile to it first, then work through Groups A and B.
 
 ## Group A: do now (no address needed)
 
@@ -44,7 +38,7 @@ Tick "hide my address / service-area business" wherever a directory offers it.
 | Trustpilot | uk.trustpilot.com/review/gvnestateinvest.com | Already exists; claim it and invite reviews |
 | Bark | bark.com | Lead marketplace; free profile with website |
 
-## Group B: after the virtual address
+## Group B: directories that need the address
 
 | Where | Sign-up | Note |
 |---|---|---|
