@@ -409,4 +409,148 @@ var FORM_ENDPOINT = "https://bkgjoztepcdranhbaurx.supabase.co/functions/v1/site-
       p.parentNode.removeChild(p);
     });
   }
+
+  /* ---- Your agreement (/agreement/?t=...) ----
+     The client's own page for the agreement we emailed: read it, accept it, or
+     cancel it. Everything goes through the client-agreement function with the
+     link's token; nothing is decided here. Text is set with textContent, never
+     innerHTML, because the names come from the database. */
+  var agrBox = document.getElementById("agreement");
+  if (agrBox) setupAgreement(agrBox);
+
+  function setupAgreement(box) {
+    var AGR = "https://bkgjoztepcdranhbaurx.supabase.co/functions/v1/client-agreement";
+    var params = new URLSearchParams(location.search);
+    var token = params.get("t") || "";
+    function h(tag, cls, text) {
+      var n = document.createElement(tag);
+      if (cls) n.className = cls;
+      if (text != null) n.textContent = text;
+      return n;
+    }
+    function clear() { while (box.firstChild) box.removeChild(box.firstChild); }
+    function money(n) { return "\u00a3" + Number(n || 0).toLocaleString("en-GB"); }
+    function call(action, extra) {
+      var body = { action: action, token: token };
+      for (var k in extra) body[k] = extra[k];
+      return fetch(AGR, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
+        .then(function (r) { return r.json().then(function (j) { if (!r.ok && !j.error) j.error = "Something went wrong."; return j; }); })
+        .catch(function () { return { error: "We could not reach our server. Please check your connection and try again." }; });
+    }
+    function fail(msg) {
+      clear();
+      var c = h("div", "agr-card");
+      c.appendChild(h("h2", null, "We could not open this agreement"));
+      c.appendChild(h("p", null, msg || "This link is not valid. Please use the link in our most recent email, or contact us."));
+      box.appendChild(c);
+    }
+    function bank(v) {
+      var b = h("div", "agr-bank");
+      b.appendChild(h("p", "agr-bank-t", "Pay the Reservation Fee of " + money(v.reservation) + " by bank transfer"));
+      [["Account name", v.bank.name], ["Sort code", v.bank.sort], ["Account number", v.bank.account], ["Reference", v.bank.reference]]
+        .forEach(function (r) {
+          var row = h("div", "agr-bank-r");
+          row.appendChild(h("span", null, r[0]));
+          row.appendChild(h("b", null, r[1]));
+          b.appendChild(row);
+        });
+      b.appendChild(h("p", "agr-note", "Use your first name, or your company name if you are buying through one, as the reference."));
+      return b;
+    }
+    function render(v) {
+      clear();
+      var c = h("div", "agr-card");
+      c.appendChild(h("p", "eyebrow", "Agreement " + v.reference));
+      c.appendChild(h("h2", null, v.packageName));
+      var facts = h("dl", "agr-facts");
+      [["Total fee", money(v.total)], ["Reservation Fee", money(v.reservation)],
+       ["Balance", money(v.balance) + ", due " + v.balanceWhen], ["Sent", v.sentOn]].forEach(function (r) {
+        facts.appendChild(h("dt", null, r[0])); facts.appendChild(h("dd", null, r[1]));
+      });
+      c.appendChild(facts);
+      if (v.pdf) {
+        var a = h("a", "btn btn--ghost", "Download your agreement (PDF)");
+        a.href = v.pdf; a.target = "_blank"; a.rel = "noopener";
+        c.appendChild(a);
+      }
+      box.appendChild(c);
+
+      if (v.status === "cancelled") {
+        var x = h("div", "agr-card agr-done");
+        x.appendChild(h("h2", null, "This agreement was cancelled"));
+        x.appendChild(h("p", null, "Cancelled " + v.cancelledAt + ". We have emailed you to confirm it."));
+        box.appendChild(x);
+        return;
+      }
+
+      var act = h("div", "agr-card");
+      if (v.acceptedAt) {
+        act.appendChild(h("h2", null, "You accepted this agreement"));
+        act.appendChild(h("p", null, "Accepted " + v.acceptedAt + ". We have emailed you to confirm it."));
+        if (!v.paid) act.appendChild(bank(v));
+      } else if (v.canAccept) {
+        act.appendChild(h("h2", null, "Accept your agreement"));
+        act.appendChild(h("p", null, "Please read the agreement first. No signature is needed: pressing I accept records your acceptance, with the date and time."));
+        var lab = h("label", "agr-check");
+        var cb = document.createElement("input"); cb.type = "checkbox";
+        lab.appendChild(cb);
+        lab.appendChild(document.createTextNode(" I have read the agreement and I accept its terms."));
+        act.appendChild(lab);
+        var go = h("button", "btn btn--gold", "I accept");
+        go.type = "button"; go.disabled = true;
+        cb.addEventListener("change", function () { go.disabled = !cb.checked; });
+        var msg = h("p", "agr-note");
+        go.addEventListener("click", function () {
+          go.disabled = true; go.textContent = "Recording…";
+          call("accept").then(function (r) {
+            if (r.ok) { load(); } else { go.disabled = false; go.textContent = "I accept"; msg.textContent = r.error; }
+          });
+        });
+        act.appendChild(go);
+        act.appendChild(msg);
+        if (!v.paid) {
+          act.appendChild(h("p", "agr-note", "Once you have accepted, pay the Reservation Fee by bank transfer. The details will appear here and in our email."));
+        }
+      } else if (v.paid) {
+        act.appendChild(h("h2", null, "Your agreement is in place"));
+        act.appendChild(h("p", null, "We have received your Reservation Fee. Your agreement is in force."));
+      }
+      if (act.childNodes.length) box.appendChild(act);
+
+      if (v.canCancel) {
+        var cc = h("div", "agr-cancel");
+        var open = h("button", "agr-link", "Cancel this agreement");
+        open.type = "button";
+        var panel = h("div", "agr-cancel-p");
+        panel.hidden = true;
+        panel.appendChild(h("p", null, v.cancelUntil
+          ? "If you are buying as an individual, you can cancel within 14 days, until " + v.cancelUntil + ". After that, clause 7 of the agreement applies."
+          : "If you are buying as an individual, you can cancel within 14 days of our confirmation email."));
+        var why = document.createElement("textarea");
+        why.rows = 3; why.placeholder = "Your reason (optional)"; why.maxLength = 1000;
+        why.setAttribute("aria-label", "Your reason (optional)");
+        panel.appendChild(why);
+        var yes = h("button", "btn btn--dark", "Confirm cancellation");
+        yes.type = "button";
+        var cmsg = h("p", "agr-note");
+        yes.addEventListener("click", function () {
+          yes.disabled = true; yes.textContent = "Cancelling…";
+          call("cancel", { reason: why.value.trim() }).then(function (r) {
+            if (r.ok) { load(); } else { yes.disabled = false; yes.textContent = "Confirm cancellation"; cmsg.textContent = r.error; }
+          });
+        });
+        panel.appendChild(yes);
+        panel.appendChild(cmsg);
+        open.addEventListener("click", function () { panel.hidden = !panel.hidden; });
+        cc.appendChild(open);
+        cc.appendChild(panel);
+        box.appendChild(cc);
+      }
+    }
+    function load() {
+      call("view").then(function (v) { if (v && v.ok) render(v); else fail(v && v.error); });
+    }
+    if (!/^[0-9a-f-]{36}$/i.test(token)) { fail(); return; }
+    load();
+  }
 })();

@@ -788,6 +788,29 @@ legend { font-family: var(--serif); font-size: clamp(1.25rem, 2vw, 1.45rem); lin
 .booking-frame { margin-top: 24px; min-height: 560px; }
 .booking-alt { margin-top: 14px; font-size: .95rem; }
 
+/* Your agreement page (/agreement/). */
+.agr { display: grid; gap: 18px; }
+.agr-card { background: var(--ivory, #fbf8f2); border: 1px solid var(--cream-2); border-radius: 14px; padding: 24px; }
+.agr-card h2 { font-size: clamp(1.25rem, 2.4vw, 1.6rem); margin: 0 0 .5em; }
+.agr-card .eyebrow { margin-bottom: .4em; }
+.agr-facts { display: grid; grid-template-columns: max-content 1fr; gap: 6px 18px; margin: 0 0 18px; }
+.agr-facts dt { color: var(--gold-deep); font-weight: 600; }
+.agr-facts dd { margin: 0; }
+.agr-check { display: flex; gap: 10px; align-items: flex-start; margin: 14px 0 16px; cursor: pointer; }
+.agr-check input { margin-top: 4px; width: 18px; height: 18px; accent-color: var(--gold-deep); }
+.agr-note { color: #5c6475; font-size: .92rem; margin: 10px 0 0; }
+.agr-help { margin-top: 22px; color: #5c6475; font-size: .95rem; }
+.agr-bank { background: var(--navy-900); color: var(--cream); border-radius: 12px; padding: 18px 20px; margin-top: 16px; }
+.agr-bank .agr-note { color: var(--cream-2); }
+.agr-bank-t { color: var(--gold-hi); font-weight: 600; margin: 0 0 10px; }
+.agr-bank-r { display: flex; justify-content: space-between; gap: 12px; padding: 6px 0; border-bottom: 1px solid rgba(198, 161, 91, .2); }
+.agr-bank-r span { color: var(--cream-2); }
+.agr-cancel { padding: 0 4px; }
+.agr-link { background: none; border: 0; padding: 0; color: var(--gold-deep); text-decoration: underline; text-underline-offset: 4px; cursor: pointer; font: inherit; }
+.agr-cancel-p { margin-top: 12px; }
+.agr-cancel-p textarea { width: 100%; margin: 10px 0 12px; padding: 10px 12px; border: 1px solid var(--cream-2); border-radius: 10px; font: inherit; background: #fff; }
+.agr-done { border-color: var(--gold-line); }
+
 /* Print (and the privacy policy PDF, which is printed from its page):
    the document only, no menu, hero photo, footer or download box. */
 @media print {
