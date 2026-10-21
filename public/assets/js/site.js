@@ -1,9 +1,11 @@
 /* GVN Estate Invest — the only script on the site.
    1. Mobile menu toggle.
    2. Every <form data-form="..."> posts JSON to FORM_ENDPOINT.
+   3. /letter: the code from a GVN letter goes to LETTER_ENDPOINT.
 
    Change the endpoint here and nowhere else. */
 var FORM_ENDPOINT = "https://bkgjoztepcdranhbaurx.supabase.co/functions/v1/site-form";
+var LETTER_ENDPOINT = "https://bkgjoztepcdranhbaurx.supabase.co/functions/v1/lead-engine-response";
 
 (function () {
   "use strict";
@@ -552,5 +554,65 @@ var FORM_ENDPOINT = "https://bkgjoztepcdranhbaurx.supabase.co/functions/v1/site-
     }
     if (!/^[0-9a-f-]{36}$/i.test(token)) { fail(); return; }
     load();
+  }
+
+  /* ------------------------------------------------ 3. a reply to a letter
+     The QR code opens /letter?c=CODE&s=q; the printed link is /letter, where
+     the code is typed. The code is sent once, then taken out of the address
+     bar so it isn't bookmarked or shared. "Stop the letters" sends opt_out,
+     which puts the address on GVN's do-not-contact list. */
+  var letter = document.querySelector("[data-letter]");
+  if (letter) {
+    var lform = letter.querySelector("[data-letter-form]");
+    var lknown = letter.querySelector("[data-letter-known]");
+    var lstatus = lform.querySelector(".form-status");
+    var kstatus = letter.querySelector("[data-letter-status]");
+    var stop = letter.querySelector("[data-letter-stop]");
+    var code = "";
+    var send = function (c, via) {
+      return fetch(LETTER_ENDPOINT, {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code: c, via: via })
+      }).then(function (r) { return r.json(); }).catch(function () { return { ok: false }; });
+    };
+    var say = function (el, cls, text) { el.className = "form-status " + cls; el.textContent = text; };
+    var tryCode = function (c, via) {
+      c = String(c || "").toUpperCase().replace(/[^A-Z0-9]/g, "");
+      if (c.length !== 6) { lform.hidden = false; say(lstatus, "is-err", "The code is six letters and numbers. Please check it and try again."); return; }
+      say(lstatus, "is-busy", "Checking…");
+      send(c, via).then(function (r) {
+        if (r && r.ok && r.known) {
+          code = c; lform.hidden = true; lknown.hidden = false;
+          var hd = lknown.querySelector("h2"); if (hd) { hd.setAttribute("tabindex", "-1"); hd.focus(); }
+        } else if (r && r.ok) {
+          lform.hidden = false;
+          say(lstatus, "is-err", "We couldn't find that code. Please check it, or call or email us and we'll help.");
+        } else {
+          lform.hidden = false;
+          say(lstatus, "is-err", "Sorry, something went wrong. Please try again, or call or email us.");
+        }
+      });
+    };
+    lform.addEventListener("submit", function (e) { e.preventDefault(); tryCode(lform.code.value, "link"); });
+    stop.addEventListener("click", function () {
+      stop.disabled = true; say(kstatus, "is-busy", "Saving…");
+      send(code, "opt_out").then(function (r) {
+        if (r && r.ok && r.known) {
+          say(kstatus, "is-ok", "Done. This address is on our do-not-contact list, and you won't receive any more letters from us.");
+          stop.textContent = "Letters stopped";
+        } else {
+          stop.disabled = false;
+          say(kstatus, "is-err", "Sorry, that didn't save. Please try again, or call or email us and we'll stop the letters.");
+        }
+      });
+    });
+    var q = new URLSearchParams(location.search);
+    var given = q.get("c");
+    if (given) {
+      try { history.replaceState(null, "", location.pathname); } catch (err) { /* keep the address as it is */ }
+      tryCode(given, q.get("s") === "q" ? "qr" : "link");
+    } else {
+      lform.hidden = false;
+    }
   }
 })();

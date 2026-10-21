@@ -1,0 +1,53 @@
+<!--
+{
+ "path": "/letter",
+ "nav": "sell",
+ "noindex": true,
+ "sitemap": false,
+ "title": "Your Letter From Us | GVN Estate Invest",
+ "description": "You received a letter from GVN Estate Invest. Tell us if you'd like to talk, or ask us not to write again."
+}
+-->
+<section class="hero hero--page">
+  <div class="wrap">
+    <p class="eyebrow">Your letter from us</p>
+    <h1>Thank you for getting in touch</h1>
+    <p class="lede">Every letter we send has its own short code, printed under the QR code. It tells us which letter you are replying to, so you don&rsquo;t have to explain.</p>
+  </div>
+</section>
+
+<section class="section" data-letter>
+  <div class="wrap" style="max-width:760px">
+    <noscript><div class="notice"><p>To reply, call us on <a href="{{PHONE_HREF}}">{{PHONE}}</a> or email <a href="mailto:{{EMAIL_SALES}}">{{EMAIL_SALES}}</a> and quote the code on your letter. To stop our letters, just say so and we will.</p></div></noscript>
+
+    <form class="notice" data-letter-form hidden>
+      <div class="field">
+        <label for="letter-code">The code on your letter</label>
+        <input type="text" id="letter-code" name="code" inputmode="text" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="8" placeholder="For example K7M3PX" aria-describedby="letter-code-hint">
+        <p class="hint" id="letter-code-hint">Six letters and numbers, under the QR code at the bottom of the letter.</p>
+      </div>
+      <div class="form-actions"><button class="btn btn--dark" type="submit">Continue{{I:arrow-right}}</button></div>
+      <div class="form-status" role="status" aria-live="polite"></div>
+    </form>
+
+    <div data-letter-known hidden>
+      <div class="grid grid-2">
+        <div class="card">
+          <span class="card-ic">{{I:house-line}}</span>
+          <h2 style="font-size:1.35rem">Talk to us about the property</h2>
+          <p>Tell us a little about it and we&rsquo;ll come back to you. There is no obligation and no fee. Or call <a href="{{PHONE_HREF}}">{{PHONE}}</a>, {{HOURS}}.</p>
+          <div class="btn-row" style="margin-top:16px"><a class="btn btn--dark" href="/sellmyhome">Get your free appraisal{{I:arrow-right}}</a></div>
+        </div>
+        <div class="card">
+          <span class="card-ic">{{I:envelope-simple}}</span>
+          <h2 style="font-size:1.35rem">Please don&rsquo;t write to me again</h2>
+          <p>We&rsquo;ll add the address to our do-not-contact list straight away, and you won&rsquo;t receive another letter from us.</p>
+          <div class="btn-row" style="margin-top:16px"><button class="btn btn--ghost" type="button" data-letter-stop>Stop the letters</button></div>
+        </div>
+      </div>
+      <div class="form-status" role="status" aria-live="polite" data-letter-status></div>
+    </div>
+
+    <p class="form-note" style="margin-top:28px">When you use a code we record only that it was used and when. How we found your address, and your rights, are explained in our <a href="/privacyandcookiepolicy">privacy policy</a>. You can also reach us at <a href="mailto:{{EMAIL_SALES}}">{{EMAIL_SALES}}</a>.</p>
+  </div>
+</section>

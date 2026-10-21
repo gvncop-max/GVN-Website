@@ -169,9 +169,12 @@ def check_page(f):
 
     # forms
     for form in re.findall(r"<form\b[^>]*>.*?</form>", markup, flags=re.S):
-        if "data-form=" not in form:
+        # The /letter code box looks a code up (lead-engine-response); it is not
+        # a site-form submission, so it has no data-form, honeypot or data-label.
+        lookup = "data-letter-form" in form
+        if "data-form=" not in form and not lookup:
             fail(page, "form without data-form")
-        if 'name="website"' not in form:
+        if 'name="website"' not in form and not lookup:
             fail(page, "form without honeypot")
         for ctl in re.findall(r"<(?:input|select|textarea)\b[^>]*>", form):
             if 'name="website"' in ctl:
@@ -184,7 +187,7 @@ def check_page(f):
                 continue  # inside a fieldset whose legend labels it, and wrapped in its own label
             if ('for="%s"' % m.group(1)) not in form and not re.search(r'<label class="check"><input[^>]*id="%s"' % re.escape(m.group(1)), form):
                 fail(page, "control %s has no label" % m.group(1))
-            if "data-label=" not in ctl:
+            if "data-label=" not in ctl and not lookup:
                 fail(page, "control %s has no data-label" % m.group(1))
     if "<form" in markup and "/assets/js/site.js" not in h:
         fail(page, "form page without site.js")
