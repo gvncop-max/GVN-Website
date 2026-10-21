@@ -68,7 +68,8 @@
     </form>
 
     <div data-letter-known hidden>
-      <div class="grid grid-2">
+      <!-- Not ".grid": the site fades grid items in on scroll, and "Stop the letters" must never wait for an animation. -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px">
         <div class="card">
           <span class="card-ic"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#i-house-line"></use></svg></span>
           <h2 style="font-size:1.35rem">Talk to us about the property</h2>
