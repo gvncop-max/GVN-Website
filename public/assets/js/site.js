@@ -163,6 +163,11 @@ var LETTER_ENDPOINT = "https://bkgjoztepcdranhbaurx.supabase.co/functions/v1/lea
         fields: collect(form),
         page: location.pathname
       };
+      // The campaign a flyer, letter or advert link carries (?c=FLY24), so the
+      // lead arrives in the CRM with it (GVN App migration 046). Only the
+      // code is sent, never the rest of the address, and nothing is stored.
+      var code = campaignCode();
+      if (code) { payload.fields["Campaign code"] = code; }
 
       if (button) { button.disabled = true; button.textContent = "Sending…"; }
       show(status, "busy", "Sending…");
@@ -335,6 +340,14 @@ var LETTER_ENDPOINT = "https://bkgjoztepcdranhbaurx.supabase.co/functions/v1/lea
   /* Each control carries data-label: the exact question wording from the
      old Wix form. That wording is the key the CRM reads, so it must not be
      "tidied". Checkbox groups with the same data-label are joined. */
+  // ?c=CODE, or utm_campaign=CODE, from this page's own address; the same
+  // rule the CRM uses for a code (2 to 24 letters, numbers, - or _).
+  function campaignCode() {
+    var q = new URLSearchParams(location.search);
+    var v = (q.get("c") || q.get("utm_campaign") || "").trim();
+    return /^[A-Za-z0-9][A-Za-z0-9_-]{1,23}$/.test(v) ? v : "";
+  }
+
   function collect(form) {
     var out = {};
     var controls = form.querySelectorAll("[data-label]");
