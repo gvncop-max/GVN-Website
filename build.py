@@ -219,7 +219,7 @@ def footer():
       <div>
         <h2>Contact</h2>
         <ul class="footer-contact">
-          <li>%(i_pin)s<address>Registered Address:<br>%(legal)s,<br>%(street)s, %(town)s,<br>%(postcode)s</address></li>
+          <li>%(i_pin)s<address>Registered Address:<br>%(legal)s,<br>%(street)s,<br>%(town)s, %(postcode)s</address></li>
           <li>%(i_mail)s<a href="mailto:%(email)s?subject=PROPERTY%%20INVESTMENT%%20Query">%(email)s</a></li>
           <li>%(i_phone)s<a href="%(phone_href)s">Tel: %(phone_display)s</a></li>
           <li>%(i_wa)s<a href="%(whatsapp)s" rel="noopener" target="_blank">WhatsApp<span class="sr-only"> (opens in a new tab)</span></a></li>
@@ -564,7 +564,9 @@ def build_blog():
             "headline": p["title"], "description": p["description"],
             "datePublished": p["date"], "dateModified": p.get("modified") or p["date"],
             "image": SITE + p["cover"], "mainEntityOfPage": SITE + "/post/" + p["slug"],
-            "author": {"@type": "Organization" if p["author"] == "GVN Estate Invest" else "Person", "name": p["author"]},
+            # A company-written post points at the one Organization node, so
+            # Google sees a single entity with its legal name, not a second one.
+            "author": {"@id": SITE + "/#organization"} if p["author"] == BIZ["name"] else {"@type": "Person", "name": p["author"]},
             "publisher": {"@id": SITE + "/#organization"},
         }
         body = """<article>
