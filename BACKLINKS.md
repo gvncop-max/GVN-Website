@@ -7,6 +7,7 @@ way, character for character. Google compares them.
 
 ```
 Name:      GVN Estate Invest
+Legal name: GVN Reality Trading Ltd (GVN Estate Invest is its trading name)
 Phone:     01782 938 111
 Website:   https://www.gvnestateinvest.com
 Email:     info@gvnestateinvest.com
@@ -19,12 +20,16 @@ Short description (true, no claims to prove):
 
 > GVN Estate Invest is a Staffordshire property company offering hands-free
 > property investment (sourcing, refurbishment, lettings and refinance) and a
-> fast, no-fee way to sell your house. Company no. 16127907, ICO registered.
+> fast, no-fee way to sell your house. GVN Estate Invest is a trading name of
+> GVN Reality Trading Ltd, company no. 16127907. ICO registered.
 
 ## The address
 
 Your address is now **Highfield House, Congleton Road, Stoke-on-Trent, ST7 3SY**
-(15 Oct 2026). Use it exactly like that everywhere. Update your Google Business
+(15 Oct 2026), the registered office of GVN Reality Trading Ltd at Companies House.
+Use it exactly like that everywhere. On the website it reads "Registered Address:
+GVN Reality Trading Ltd, Highfield House, ..." (29 Oct 2026). Where a directory has
+its own company-name box, put GVN Reality Trading Ltd there, not in the street line. Update your Google Business
 Profile to it first, then work through Groups A and B.
 
 ## Group A: do now (no address needed)

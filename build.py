@@ -60,6 +60,13 @@ BIZ = {
     "console": "https://console.gvnestateinvest.com/",
     "founder_site": "https://www.valentinegrey.me",
 }
+# GVN Estate Invest is a trading name, not a company. Google mixed it up with
+# the separate GVN ESTATE INVEST LTD (Valentine, 29 Oct 2026), so every address
+# starts with the legal name and the site says the trading-name link in words.
+# Highfield House is the registered office at Companies House (checked 29 Oct).
+BIZ["companies_house"] = "https://find-and-update.company-information.service.gov.uk/company/%s" % BIZ["company_no"]
+BIZ["trading_as"] = "%s is a trading name of %s, a company registered in England and Wales, no. %s." % (
+    BIZ["name"], BIZ["legal"], BIZ["company_no"])
 # The credibility ribbon. Each badge states something true and checkable, and
 # links to the proof. TRUST_SWITCHES turns one on only when it is true:
 # showing a scheme you have not joined is a false claim of membership (a
@@ -212,7 +219,7 @@ def footer():
       <div>
         <h2>Contact</h2>
         <ul class="footer-contact">
-          <li>%(i_pin)s<address>Postal address:<br>%(street)s, %(town)s,<br>%(postcode)s</address></li>
+          <li>%(i_pin)s<address>Registered Address:<br>%(legal)s,<br>%(street)s, %(town)s,<br>%(postcode)s</address></li>
           <li>%(i_mail)s<a href="mailto:%(email)s?subject=PROPERTY%%20INVESTMENT%%20Query">%(email)s</a></li>
           <li>%(i_phone)s<a href="%(phone_href)s">Tel: %(phone_display)s</a></li>
           <li>%(i_wa)s<a href="%(whatsapp)s" rel="noopener" target="_blank">WhatsApp<span class="sr-only"> (opens in a new tab)</span></a></li>
@@ -250,7 +257,7 @@ def footer():
         <img src="/assets/img/gvn-reality-trading-logo.webp" alt="GVN Reality Trading" width="300" height="194" loading="lazy">
         <p style="margin:0">All trades are carried out by<br><strong>%(legal_upper)s</strong></p>
       </div>
-      <p style="margin:0">&copy; %(year)s %(legal)s &middot; Company No. %(company_no)s &middot; ICO registration %(ico)s</p>
+      <p style="margin:0">%(trading_as)s<br>&copy; %(year)s %(legal)s &middot; Company No. %(company_no)s &middot; ICO registration %(ico)s</p>
     </div>
   </div>
 </footer>
@@ -268,18 +275,21 @@ def org_jsonld():
         "@id": SITE + "/#organization",
         "name": b["name"],
         "legalName": b["legal"],
+        "description": b["trading_as"],
         "url": SITE + "/",
         "logo": SITE + "/assets/img/logo-golden.png",
         "image": SITE + "/assets/img/og-card.jpg",
         "email": b["email"],
         "telephone": b["phone_intl"],
         "slogan": b["slogan"],
-        "address": {"@type": "PostalAddress", "streetAddress": b["street"], "addressLocality": b["town"],
+        "address": {"@type": "PostalAddress", "name": b["legal"],
+                    "streetAddress": b["street"], "addressLocality": b["town"],
                     "addressRegion": b["region"], "postalCode": b["postcode"], "addressCountry": "GB"},
         "areaServed": [a for a, _ in AREAS],
         "founder": {"@type": "Person", "name": "Valentine Grey", "url": b["founder_site"]},
-        "identifier": {"@type": "PropertyValue", "propertyID": "Companies House company number", "value": b["company_no"]},
-        "sameAs": [u for n, u in SOCIAL if n != "WhatsApp"] + [TRUSTPILOT_URL],
+        "identifier": {"@type": "PropertyValue", "propertyID": "Companies House company number", "value": b["company_no"],
+                       "url": b["companies_house"]},
+        "sameAs": [u for n, u in SOCIAL if n != "WhatsApp"] + [TRUSTPILOT_URL, b["companies_house"]],
         "contactPoint": [
             {"@type": "ContactPoint", "contactType": "customer service", "email": b["email"], "telephone": b["phone_intl"], "areaServed": "GB", "availableLanguage": "en-GB"},
             {"@type": "ContactPoint", "contactType": "investor enquiries", "email": b["email_invest"], "areaServed": "GB", "availableLanguage": "en-GB"},
@@ -417,7 +427,7 @@ def expand_tokens(body, meta):
         "{{HOURS}}": BIZ["hours"],
         "{{MOTTO}}": BIZ["motto"],
         "{{SLOGAN}}": BIZ["slogan"],
-        "{{ADDRESS}}": "%s, %s, %s" % (BIZ["street"], BIZ["town"], BIZ["postcode"]),
+        "{{ADDRESS}}": "%s, %s, %s, %s" % (BIZ["legal"], BIZ["street"], BIZ["town"], BIZ["postcode"]),
         "{{COMPANY_NO}}": BIZ["company_no"],
         "{{GUIDE_PDF}}": "/assets/files/staffordshire-investor-guide.pdf",
         "{{BOOKING_URL}}": BOOKING_URL,
