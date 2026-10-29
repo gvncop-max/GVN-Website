@@ -1,6 +1,7 @@
 /* GVN Estate Invest — the only script on the site.
    1. Mobile menu toggle.
-   2. Every <form data-form="..."> posts JSON to FORM_ENDPOINT.
+   2. Every <form data-form="..."> posts JSON to FORM_ENDPOINT, with a
+      Cloudflare Turnstile token (removed from the page once it answers).
    3. /letter: the code from a GVN letter goes to LETTER_ENDPOINT.
 
    Change the endpoint here and nowhere else. */
@@ -174,19 +175,109 @@ var LETTER_ENDPOINT = "https://bkgjoztepcdranhbaurx.supabase.co/functions/v1/lea
 
       uploadPhotos(form, payload.form, status).then(function (photos) {
         if (photos.length) { payload.fields["Attachments Files"] = JSON.stringify(photos); }
+        // The security token is asked for last: it lives five minutes, and
+        // photos on a slow phone can take longer than that. It goes beside
+        // "fields", never in it, so it is not filed with the answers.
+        return captchaToken(form);
+      }).then(function (token) {
+        if (token) { payload.turnstile = token; }
         return fetch(FORM_ENDPOINT, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload)
         });
       }).then(function (res) {
-        if (!res.ok) { throw new Error("HTTP " + res.status); }
-        finish(form, status);
-      }).catch(function () {
-        show(status, "err", form.getAttribute("data-error") ||
+        if (res.ok) { finish(form, status); return; }
+        return res.json().catch(function () { return {}; }).then(function (j) {
+          var err = new Error("HTTP " + res.status);
+          err.say = refusal(form, res.status, j);
+          throw err;
+        });
+      }).catch(function (err) {
+        show(status, "err", (err && err.say) || form.getAttribute("data-error") ||
           "Sorry, that didn't go through. Please try again, or email info@gvnestateinvest.com or call 01782 938 111.");
       }).then(function () {
         if (button) { button.disabled = false; button.textContent = buttonText; }
+      });
+    });
+  }
+
+  /* What to say when the endpoint refuses, by its reason (site-form sends a
+     code with each). Anything else falls back to the form's own error. */
+  function refusal(form, status, j) {
+    var link = form.querySelector(".form-inbox a");
+    var inbox = link ? link.textContent : "info@gvnestateinvest.com";
+    var code = j && j.code;
+    if (status === 429 && code === "sender_limit") {
+      return "You've already sent us 5 forms today, so we can't take another just now. We have your details and will be in touch. If it's urgent, email " + inbox + " or call 01782 938 111.";
+    }
+    if (status === 429) {
+      return "We're receiving a lot of forms right now. Please try again in a few minutes, or email " + inbox + " or call 01782 938 111.";
+    }
+    if (code === "captcha") {
+      return "The security check didn't finish. Please try again. If it keeps happening, email " + inbox + " or call 01782 938 111.";
+    }
+    return "";
+  }
+
+  /* Security check: Cloudflare Turnstile, the same widget as the GVN apps'
+     sign-in. A token works once, so a fresh one is made for each send.
+     "interaction-only": most visitors never see it; a tick box appears under
+     the buttons only when Cloudflare wants a person to click. Once it has
+     answered the box is removed (Valentine's rule: a Turnstile box never stays
+     on screen after it answers). If it cannot load (blocked, offline), the form
+     still goes without a token: the endpoint decides, and says so if it needs
+     one. Never hangs the form: no answer in a minute and it goes without. */
+  var TURNSTILE_SITEKEY = "0x4AAAAAAFZiBvt5CIdrN0Em";
+  var tsLoading = null;
+
+  function tsReady() {
+    if (window.turnstile) { return Promise.resolve(true); }
+    if (!tsLoading) {
+      tsLoading = new Promise(function (ok) {
+        var s = document.createElement("script");
+        s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+        s.async = true;
+        s.onload = function () { ok(!!window.turnstile); };
+        s.onerror = function () { tsLoading = null; ok(false); };
+        document.head.appendChild(s);
+      });
+    }
+    return tsLoading;
+  }
+
+  function captchaToken(form) {
+    return tsReady().then(function (ready) {
+      if (!ready) { return ""; }
+      var box = form.querySelector(".form-captcha");
+      if (!box) {
+        box = document.createElement("div");
+        box.className = "form-captcha";
+        var actions = form.querySelector(".form-actions");
+        if (actions) { actions.parentNode.insertBefore(box, actions.nextSibling); } else { form.appendChild(box); }
+      }
+      return new Promise(function (ok) {
+        var id = null;
+        var done = false;
+        var answer = function (t) {
+          if (done) { return; }
+          done = true;
+          ok(t || "");
+          // A moment first, so a tick the visitor clicked is seen; then gone.
+          setTimeout(function () {
+            if (id !== null) { try { window.turnstile.remove(id); } catch (e) { /* already gone */ } }
+            box.innerHTML = "";
+          }, 1000);
+        };
+        setTimeout(function () { answer(""); }, 60000);
+        try {
+          id = window.turnstile.render(box, {
+            sitekey: TURNSTILE_SITEKEY, appearance: "interaction-only", theme: "light",
+            callback: function (t) { answer(t); },
+            "error-callback": function () { answer(""); },
+            "expired-callback": function () { answer(""); }
+          });
+        } catch (e) { answer(""); }
       });
     });
   }

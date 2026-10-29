@@ -295,9 +295,13 @@ def write_forms_md(path):
            "Every form posts JSON with `fetch` to " + ENDPOINT_NOTE + ":",
            "",
            "```json",
-           '{ "form": "<form key>", "fields": { "<exact label>": "<value>", ... }, "page": "/path/the/form/was/on" }',
+           '{ "form": "<form key>", "fields": { "<exact label>": "<value>", ... }, "page": "/path/the/form/was/on", "turnstile": "<token>" }',
            "```",
            "",
+           "- `turnstile` (29 Oct 2026): a Cloudflare Turnstile token, made fresh for each send with the same widget (site key) as "
+           "the GVN apps' sign-in, `interaction-only`, and removed from the page once it answers. `site-form` verifies it when its "
+           "`TURNSTILE_SECRET` secret is set. Refusals carry a `code`: `captcha` (403/503) and `sender_limit` (429: more than 5 "
+           "forms in 24 hours from one email or one IP); the form shows a message for each.",
            "- The field names in `fields` are the exact question wording from the old Wix forms (column **Sent as**). "
            "Where the visitor sees tidier wording, that is in **Shown as**.",
            "- Every form also has a hidden honeypot input named `website`. A person never sees it; if it has a value the "
