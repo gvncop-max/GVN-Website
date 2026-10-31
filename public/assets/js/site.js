@@ -214,6 +214,9 @@ var LETTER_ENDPOINT = "https://bkgjoztepcdranhbaurx.supabase.co/functions/v1/lea
     if (status === 429) {
       return "We're receiving a lot of forms right now. Please try again in a few minutes, or email " + inbox + " or call 01782 938 111.";
     }
+    if (code === "email") {
+      return "That email address doesn't look right. Please check it and send again, or email " + inbox + " or call 01782 938 111.";
+    }
     if (code === "captcha") {
       return "The security check didn't finish. Please try again. If it keeps happening, email " + inbox + " or call 01782 938 111.";
     }
@@ -290,6 +293,7 @@ var LETTER_ENDPOINT = "https://bkgjoztepcdranhbaurx.supabase.co/functions/v1/lea
   var PHOTO_MAX = 15 * 1024 * 1024;
 
   function uploadPhotos(form, key, status) {
+    form.photoNote = "";
     var input = form.querySelector("input[type=file]");
     if (!input || !input.files || !input.files.length || !window.fetch) { return Promise.resolve([]); }
     var files = Array.prototype.filter.call(input.files, function (f) {
@@ -305,8 +309,18 @@ var LETTER_ENDPOINT = "https://bkgjoztepcdranhbaurx.supabase.co/functions/v1/lea
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ form: key, upload: blobs.map(function (b) { return { type: b.type, size: b.size }; }) })
       }).then(function (res) {
-        if (!res.ok) { throw new Error("HTTP " + res.status); }
-        return res.json();
+        if (res.ok) { return res.json(); }
+        // Too many photo uploads from this connection in the last hour
+        // (site-form, 3 a hour): the enquiry still goes, without them, and
+        // the thank-you says so, so the seller knows to send them another way.
+        return res.json().catch(function () { return {}; }).then(function (j) {
+          if (res.status === 429 && j && j.code === "upload_limit") {
+            var link = form.querySelector(".form-inbox a");
+            form.photoNote = "Your photos could not be added this time (too many uploads from here in the last hour). Please email them to " +
+              (link ? link.textContent : "info@gvnestateinvest.com") + ".";
+          }
+          throw new Error("HTTP " + res.status);
+        });
       }).then(function (data) {
         var done = [];
         var n = 0;
@@ -415,11 +429,14 @@ var LETTER_ENDPOINT = "https://bkgjoztepcdranhbaurx.supabase.co/functions/v1/lea
   }
 
   function finish(form, status) {
-    show(status, "ok", form.getAttribute("data-success") || "Thank you. We'll be in touch soon.");
+    var note = form.photoNote || "";
+    form.photoNote = "";
+    show(status, "ok", (form.getAttribute("data-success") || "Thank you. We'll be in touch soon.") + (note ? " " + note : ""));
     var go = form.getAttribute("data-redirect");
     rememberForBooking(form);
     form.reset();
-    if (go) { setTimeout(function () { location.assign(go); }, 1200); }
+    // Long enough to read the photo note before the thank-you page.
+    if (go) { setTimeout(function () { location.assign(go); }, note ? 9000 : 1200); }
   }
 
   function show(el, kind, text) {
