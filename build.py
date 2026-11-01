@@ -267,6 +267,13 @@ def footer():
                                                           i_wa=icon("whatsapp-logo"), i_chat=icon("chat-circle-text"))
 
 
+# Valentine as a schema.org Person. The @id is the one valentinegrey.me uses,
+# so Google can join the founder, the blog author and his own site into one
+# entity.
+FOUNDER_LD = {"@type": "Person", "@id": BIZ["founder_site"] + "/#valentine-grey", "name": "Valentine Grey",
+              "url": BIZ["founder_site"], "jobTitle": "Founder", "worksFor": {"@id": SITE + "/#organization"}}
+
+
 def org_jsonld():
     b = BIZ
     data = {
@@ -286,7 +293,7 @@ def org_jsonld():
                     "streetAddress": b["street"], "addressLocality": b["town"],
                     "addressRegion": b["region"], "postalCode": b["postcode"], "addressCountry": "GB"},
         "areaServed": [a for a, _ in AREAS],
-        "founder": {"@type": "Person", "name": "Valentine Grey", "url": b["founder_site"]},
+        "founder": FOUNDER_LD,
         "identifier": {"@type": "PropertyValue", "propertyID": "Companies House company number", "value": b["company_no"],
                        "url": b["companies_house"]},
         "sameAs": [u for n, u in SOCIAL if n != "WhatsApp"] + [TRUSTPILOT_URL, b["companies_house"]],
@@ -390,7 +397,7 @@ def page_html(meta, body):
 <meta property="og:image" content="%(og_image)s">
 <meta property="og:locale" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/favicon.ico" sizes="any">
+%(og_extra)s<link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.json">
@@ -401,7 +408,7 @@ def page_html(meta, body):
 %(orgld)s
 %(extra_ld)s""" % dict(title=esc(title), desc=esc(desc), canonical=canonical, robots=robots,
                        ogtype=meta.get("og_type", "website"), og_image=og_image, orgld=org_jsonld(),
-                       extra_ld=extra_ld, preload_img=meta.get("preload_img", ""))
+                       extra_ld=extra_ld, preload_img=meta.get("preload_img", ""), og_extra=meta.get("og_extra", ""))
     return "%s%s\n</head>\n<body>\n%s\n<main id=\"main\">\n%s\n</main>\n%s\n</body>\n</html>\n" % (
         DOC_HEAD, head, header(meta.get("nav", "")), body.strip(), footer())
 
@@ -538,8 +545,14 @@ def build_blog():
     body = hero % ("The Provenance Pulse", intro) + """
 <section class="section"><div class="wrap">%s<div class="post-grid">%s</div></div></section>""" % (
         cat_nav(None), "".join(post_card(p) for p in POSTS))
+    blog_ld = {"@context": "https://schema.org", "@type": "Blog", "@id": SITE + "/provenance-pulse#blog",
+               "name": "The Provenance Pulse", "url": SITE + "/provenance-pulse", "inLanguage": "en-GB",
+               "publisher": {"@id": SITE + "/#organization"},
+               "blogPost": [{"@type": "BlogPosting", "headline": p["title"], "url": SITE + "/post/" + p["slug"],
+                             "datePublished": p["date"]} for p in POSTS]}
     write("/provenance-pulse", page_html({
         "path": "/provenance-pulse", "nav": "pulse",
+        "jsonld_extra": '<script type="application/ld+json">%s</script>' % json.dumps(blog_ld, ensure_ascii=False),
         "title": "The Provenance Pulse | Property News & Insight | GVN Estate Invest",
         "description": intro + "."}, body))
 
@@ -559,21 +572,13 @@ def build_blog():
         tags = ('<p class="meta" style="margin-top:28px">Tags</p><ul class="tags">%s</ul>' %
                 "".join("<li>%s</li>" % esc(t) for t in p["tags"])) if p["tags"] else ""
         others = [q for q in POSTS if q is not p][:3]
-        ld = {
-            "@context": "https://schema.org", "@type": "BlogPosting",
-            "headline": p["title"], "description": p["description"],
-            "datePublished": p["date"], "dateModified": p.get("modified") or p["date"],
-            "image": SITE + p["cover"], "mainEntityOfPage": SITE + "/post/" + p["slug"],
-            # A company-written post points at the one Organization node, so
-            # Google sees a single entity with its legal name, not a second one.
-            "author": {"@id": SITE + "/#organization"} if p["author"] == BIZ["name"] else {"@type": "Person", "name": p["author"]},
-            "publisher": {"@id": SITE + "/#organization"},
-        }
+        ld = post_ld(p)
+        updated = post_updated(p)
         body = """<article>
 <header class="hero hero--page"><div class="wrap post-head">
   <p class="eyebrow post-cats">%(cats)s</p>
   <h1>%(title)s</h1>
-  <p class="meta"><span>By %(author)s</span><time datetime="%(iso)s">%(date)s</time><span>%(rt)s</span></p>
+  <p class="meta"><span>By %(author)s</span><time datetime="%(iso)s">%(date)s</time>%(updated)s<span>%(rt)s</span></p>
 </div></header>
 <div class="section section--ivory"><div class="wrap"><div class="prose" style="margin:0 auto">
 %(body)s
@@ -592,7 +597,8 @@ def build_blog():
 </div></section>""" % dict(arrow=icon("arrow-right"),cats=cats or "The Provenance Pulse", title=esc(p["title"]), author=esc(p["author"]),
                            iso=p["dt"].date().isoformat(), date=nice_date(p["dt"]), rt=esc(p["readtime"]),
                            cover=p["cover"], w=p["cover_w"], h=p["cover_h"], body=tidy_post(p["body"]),
-                           tags=tags, others="".join(post_card(q, "h3") for q in others))
+                           tags=tags, others="".join(post_card(q, "h3") for q in others),
+                           updated=('<span>Updated <time datetime="%s">%s</time></span>' % (updated.date().isoformat(), nice_date(updated))) if updated else "")
         path = "/post/" + p["slug"]
         write(path, page_html({
             "path": path, "nav": "pulse", "og_type": "article", "og_image": p["cover"].replace(".webp", ".webp"),
@@ -600,7 +606,77 @@ def build_blog():
             "title": p["title"] if len(p["title"]) > 42 else "%s | GVN Estate Invest" % p["title"],
             "description": short(p["description"], 158),
             "jsonld_extra": '<script type="application/ld+json">%s</script>' % json.dumps(ld, ensure_ascii=False),
+            "og_extra": post_og(p),
         }, body))
+
+
+def post_updated(p):
+    """The modified date, when it is a real later revision (a day or more after
+    publishing); shown on the page so the schema's dateModified is visible."""
+    if not p.get("modified"):
+        return None
+    m = datetime.datetime.fromisoformat(p["modified"].replace("Z", "+00:00"))
+    return m if (m - p["dt"]).days >= 1 else None
+
+
+def post_images(p):
+    """The cover plus every image in the body, as schema ImageObjects."""
+    imgs = [(p["cover"], p["cover_w"], p["cover_h"], "")]
+    for tag in re.findall(r"<img\b[^>]*>", p["body"]):
+        a = dict(re.findall(r'(\w+)="([^"]*)"', tag))
+        if a.get("src", "").startswith("/") and a["src"] != p["cover"]:
+            imgs.append((a["src"], a.get("width"), a.get("height"), html.unescape(a.get("alt", ""))))
+    out = []
+    for src, w, h, alt in imgs:
+        o = {"@type": "ImageObject", "url": SITE + src}
+        if w and h:
+            o.update(width=int(w), height=int(h))
+        if alt:
+            o["caption"] = alt
+        out.append(o)
+    return out
+
+
+def post_ld(p):
+    text = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", p["body"]))).strip()
+    # Sources the post links to (official data, guidance, reporting), so the
+    # schema says where the facts came from.
+    cites = []
+    for u in re.findall(r'<a\b[^>]*href="(https?://[^"]+)"', p["body"]):
+        u = html.unescape(u)
+        # Photo credits and licences are not sources for the facts.
+        if u not in cites and not re.search(r"gvnestateinvest\.com|creativecommons\.org|commons\.wikimedia\.org|unsplash\.com", u):
+            cites.append(u)
+    ld = {
+        "@context": "https://schema.org", "@type": "BlogPosting", "@id": SITE + "/post/" + p["slug"] + "#article",
+        "headline": p["title"], "description": p["description"],
+        "datePublished": p["date"], "dateModified": p.get("modified") or p["date"],
+        "image": post_images(p), "mainEntityOfPage": SITE + "/post/" + p["slug"],
+        # A company-written post points at the one Organization node, so
+        # Google sees a single entity with its legal name, not a second one.
+        "author": {"@id": SITE + "/#organization"} if p["author"] == BIZ["name"]
+        else (FOUNDER_LD if p["author"] == FOUNDER_LD["name"] else {"@type": "Person", "name": p["author"]}),
+        "publisher": {"@id": SITE + "/#organization"},
+        "isPartOf": {"@id": SITE + "/provenance-pulse#blog"},
+        "inLanguage": "en-GB",
+        "wordCount": len(text.split()),
+        "articleSection": [CAT_NAMES.get(c, n) for c, n in p["categories"]],
+        "keywords": p["tags"],
+    }
+    if p.get("places"):
+        ld["spatialCoverage"] = [{"@type": "Place", "name": n} for n in p["places"]]
+    if cites:
+        ld["citation"] = cites
+    return {k: v for k, v in ld.items() if v not in ([], "", None)}
+
+
+def post_og(p):
+    """Article tags for Facebook, LinkedIn and the like."""
+    rows = [("article:published_time", p["date"]), ("article:modified_time", p.get("modified") or p["date"]),
+            ("article:author", BIZ["founder_site"] if p["author"] == FOUNDER_LD["name"] else SITE + "/about-us")]
+    rows += [("article:section", CAT_NAMES.get(c, n)) for c, n in p["categories"][:1]]
+    rows += [("article:tag", t) for t in p["tags"]]
+    return "".join('<meta property="%s" content="%s">\n' % (k, esc(v)) for k, v in rows)
 
 
 def tidy_post(body):
