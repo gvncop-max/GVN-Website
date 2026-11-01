@@ -1,0 +1,9 @@
+@font-face{font-family:Bodoni;src:url('file:///C:/Users/golde/IONOS%20HiDrive/MR.GREY/My%20Claude/GVN%20Website/assets/fonts/bodoni-moda.woff2')}
+@font-face{font-family:Hanken;src:url('file:///C:/Users/golde/IONOS%20HiDrive/MR.GREY/My%20Claude/GVN%20Website/assets/fonts/hanken-grotesk.woff2')}
+html,body{margin:0;width:100%;height:100%;background:#f3eee5;color:#121a28;font-family:Hanken,sans-serif}
+.card{box-sizing:border-box;width:100%;height:100%;padding:46px 56px 40px;display:flex;flex-direction:column;border-top:6px solid #c6a15b}
+.kick{font-size:15px;letter-spacing:.2em;text-transform:uppercase;color:#7a5719;font-weight:700;margin:0 0 10px}
+h1{font-family:Bodoni,serif;font-weight:500;font-size:40px;line-height:1.1;margin:0 0 8px}
+.sub{font-size:18px;color:#535b69;margin:0 0 22px}
+.foot{display:flex;justify-content:space-between;align-items:flex-end;margin-top:auto;font-size:14px;color:#535b69;gap:24px}
+.brand{font-family:Bodoni,serif;font-size:19px;color:#121a28;white-space:nowrap}
