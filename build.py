@@ -22,6 +22,7 @@ Preview on your own computer:
 import datetime
 import html
 import json
+import os
 import pathlib
 import re
 import shutil
@@ -483,11 +484,19 @@ CATEGORIES = [
     ("renters-rights-bill", "Renters’ Rights Bill"),
 ]
 CAT_NAMES = dict(CATEGORIES)
+# A post with "draft": true in its header (the blog agent's posts, until
+# Valentine approves them) is left out unless GVN_SHOW_DRAFTS=1. The live site
+# serves the committed public/ as-is, so a normal build must never contain a
+# draft; only the preview site's Render build command sets the variable.
+SHOW_DRAFTS = os.environ.get("GVN_SHOW_DRAFTS") == "1"
 
 
 def load_posts():
     for f in sorted((SRC / "posts").glob("*.html")):
         meta, body = read_source(f)
+        if meta.get("draft") and not SHOW_DRAFTS:
+            print("draft left out of this build:", f.name)
+            continue
         meta["body"] = body
         meta["dt"] = datetime.datetime.fromisoformat(meta["date"].replace("Z", "+00:00"))
         POSTS.append(meta)
@@ -578,9 +587,9 @@ def build_blog():
 <header class="hero hero--page"><div class="wrap post-head">
   <p class="eyebrow post-cats">%(cats)s</p>
   <h1>%(title)s</h1>
-  <p class="meta"><span>By %(author)s</span><time datetime="%(iso)s">%(date)s</time>%(updated)s<span>%(rt)s</span></p>
+  <p class="meta"><span>By %(author)s</span><time datetime="%(iso)s">%(date)s</time>%(updated)s<span>%(rt)s</span>%(draft)s</p>
 </div></header>
-<div class="section section--ivory"><div class="wrap"><div class="prose" style="margin:0 auto">
+<div class="section section--ivory"><div class="wrap"><div class="prose post-body" style="margin:0 auto">
 %(body)s
 %(tags)s
 </div></div></div>
@@ -598,6 +607,7 @@ def build_blog():
                            iso=p["dt"].date().isoformat(), date=nice_date(p["dt"]), rt=esc(p["readtime"]),
                            cover=p["cover"], w=p["cover_w"], h=p["cover_h"], body=tidy_post(p["body"]),
                            tags=tags, others="".join(post_card(q, "h3") for q in others),
+                           draft='<span data-draft="1">Draft: preview only, not on the live site</span>' if p.get("draft") else "",
                            updated=('<span>Updated <time datetime="%s">%s</time></span>' % (updated.date().isoformat(), nice_date(updated))) if updated else "")
         path = "/post/" + p["slug"]
         write(path, page_html({
@@ -607,6 +617,7 @@ def build_blog():
             "description": short(p["description"], 158),
             "jsonld_extra": '<script type="application/ld+json">%s</script>' % json.dumps(ld, ensure_ascii=False),
             "og_extra": post_og(p),
+            "noindex": bool(p.get("draft")),
         }, body))
 
 
@@ -750,10 +761,11 @@ def main():
             sitemap.append((meta["path"], None))
 
     build_blog()
-    sitemap.append(("/provenance-pulse", POSTS[0]["dt"].date().isoformat()))
+    published = [p for p in POSTS if not p.get("draft")]
+    sitemap.append(("/provenance-pulse", published[0]["dt"].date().isoformat()))
     for slug, _ in CATEGORIES:
         sitemap.append(("/provenance-pulse/categories/" + slug, None))
-    for p in POSTS:
+    for p in published:
         sitemap.append(("/post/" + p["slug"], (p.get("modified") or p["date"])[:10]))
 
     # Old tag pages: forward to the blog. Generated from the tags on the posts.

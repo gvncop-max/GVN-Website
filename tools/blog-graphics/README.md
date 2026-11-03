@@ -14,5 +14,10 @@ own fonts). Each is an HTML page screenshotted by headless Chrome.
 - In the post, wrap the image so phones get the portrait one:
   `<picture><source media="(max-width: 640px)" srcset="...-2-m.webp" width="1200" height="1880"><img src="...-2.webp" ...></picture>`
 - Print the source on every chart, and only plot verified figures.
+- **One graphic per post at most** (the rest of the pictures are photos).
+  Record it in the image ledger:
+  `python tools/blog-images/images.py graphic assets/img/blog/<slug>-1.webp <slug>`
+  (and the same for the `-m` phone version).
 
-Needs Google Chrome at the default path and Pillow.
+Needs Pillow and Chrome or Chromium (found on Windows, macOS or Linux, or set
+`CHROME`). With no browser available, skip the graphic and use a table.

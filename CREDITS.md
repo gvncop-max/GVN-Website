@@ -21,12 +21,13 @@ cropped and re-encoded as WebP for the site.
 Photos already on the site before the redesign (Valentine Grey's portraits,
 the investor guide images, blog covers) are unchanged and not listed here.
 
-## Blog photographs (Creative Commons Attribution-ShareAlike 2.0)
+## Blog photographs
 
-Licence: https://creativecommons.org/licenses/by-sa/2.0/ (commercial use
+The Wikimedia Commons photos below are CC BY-SA 2.0,
+https://creativecommons.org/licenses/by-sa/2.0/ (commercial use
 allowed; credit the photographer, link the licence, and share the cropped
 version under the same licence). Each was downloaded from Wikimedia Commons,
-cropped to 3:2 and re-encoded as WebP. These ones ARE in Stoke-on-Trent, and
+cropped to 3:2 and re-encoded as WebP. These ones ARE in Stoke-on-Trent or Staffordshire, and
 are captioned with the real place. None shows a property GVN owns, manages or
 has sold, and no caption says otherwise. The credit sits in the post itself
 (caption or the closing note) as well as here.
@@ -37,9 +38,19 @@ has sold, and no caption says otherwise. The credit sits in the post itself
 | uk-unemployment-4-7-percent-staffordshire-property-investors-3.webp | Newlands Street, Stoke-on-Trent (2015) | Jonathan Hutchins (Geograph) | https://commons.wikimedia.org/wiki/File:Stoke-on-Trent,_Newlands_Street_-_geograph.org.uk_-_4761279.jpg | UK Unemployment Falls to 4.7% |
 | renters-rights-act-phase-2-west-midlands-landlords-cover.webp | Church Terrace, Fenton, Stoke-on-Trent (2014) | Rept0n1x | https://commons.wikimedia.org/wiki/File:Church_Terrace,_Fenton.jpg | Renters' Rights Act Phase 2 |
 | renters-rights-act-phase-2-west-midlands-landlords-3.webp | Frank Street from London Road, Stoke-on-Trent (2016) | Jonathan Hutchins (Geograph) | https://commons.wikimedia.org/wiki/File:Stoke-on-Trent,_Frank_Street_from_London_Road_-_geograph.org.uk_-_4985642.jpg | Renters' Rights Act Phase 2 |
+| uk-unemployment-4-7-percent-staffordshire-property-investors-4.webp | The Potteries Centre, Hanley, Stoke-on-Trent (2023) | Jonathan Hutchins (Geograph) | https://commons.wikimedia.org/wiki/File:The_Potteries_Centre,_Hanley_-_geograph.org.uk_-_7664675.jpg | UK Unemployment Falls to 4.7% |
+| renters-rights-act-phase-2-west-midlands-landlords-4.webp | Shobnall Road, Burton upon Trent (2025) | Roger D Kidd (Geograph) | https://commons.wikimedia.org/wiki/File:Shobnall_Road_in_Burton-upon-Trent,_Staffordshire_-_geograph.org.uk_-_8210698.jpg | Renters' Rights Act Phase 2 |
 
-Charts and graphics in the blog (`*-1.webp`, `*-2.webp` on the November 2026
-posts) are GVN's own, drawn from the official figures named on each one.
+From November 2026 every blog image is also recorded in
+`tools/blog-images/ledger.json` (source, author, licence, page, perceptual
+hash), which the blog tools use to stop any picture being used twice. Photos
+from Pixabay are under the Pixabay Content License
+(https://pixabay.com/service/license-summary/): free for commercial use, no
+attribution required, but we credit the photographer anyway.
+
+Charts and graphics in the blog (`*-1.webp` and their `*-1-m.webp` phone
+versions on the November 2026 posts) are GVN's own, drawn from the official
+figures named on each one.
 
 ## Fonts (SIL Open Font License 1.1)
 

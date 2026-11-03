@@ -1,0 +1,740 @@
+{
+ "images": [
+  {
+   "file": "/assets/img/blog/approvals-are-rising-purchase-lending-isn-t-what-the-uk-s-la-1.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/approvals-are-rising-purchase-lending-isn-t-what-the-uk-s-la-1.webp",
+   "dhash": "cb4e4f1a1e1e1b3b",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/approvals-are-rising-purchase-lending-isn-t-what-the-uk-s-la-2.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/approvals-are-rising-purchase-lending-isn-t-what-the-uk-s-la-2.webp",
+   "dhash": "31a49cb7435374b4",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/approvals-are-rising-purchase-lending-isn-t-what-the-uk-s-la-3.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/approvals-are-rising-purchase-lending-isn-t-what-the-uk-s-la-3.webp",
+   "dhash": "2761686c6c66ed7d",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/approvals-are-rising-purchase-lending-isn-t-what-the-uk-s-la-4.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/approvals-are-rising-purchase-lending-isn-t-what-the-uk-s-la-4.webp",
+   "dhash": "fdfcfcfcecfce009",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/approvals-are-rising-purchase-lending-isn-t-what-the-uk-s-la-cover.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/approvals-are-rising-purchase-lending-isn-t-what-the-uk-s-la-cover.webp",
+   "dhash": "2761686c6c66ed7d",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/buy-refurbish-refinance-repeat-how-hands-free-investors-recy-1.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/buy-refurbish-refinance-repeat-how-hands-free-investors-recy-1.webp",
+   "dhash": "3201212424241695",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/buy-refurbish-refinance-repeat-how-hands-free-investors-recy-2.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/buy-refurbish-refinance-repeat-how-hands-free-investors-recy-2.webp",
+   "dhash": "d6d91909690888a1",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/buy-refurbish-refinance-repeat-how-hands-free-investors-recy-3.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/buy-refurbish-refinance-repeat-how-hands-free-investors-recy-3.webp",
+   "dhash": "31a1a5878f1b3303",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/buy-refurbish-refinance-repeat-how-hands-free-investors-recy-cover.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/buy-refurbish-refinance-repeat-how-hands-free-investors-recy-cover.webp",
+   "dhash": "3201212424241695",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/companies-house-2027-revolution-as-paper-filings-become-ille-1.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/companies-house-2027-revolution-as-paper-filings-become-ille-1.webp",
+   "dhash": "3b393b333d2f3b5b",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/companies-house-2027-revolution-as-paper-filings-become-ille-2.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/companies-house-2027-revolution-as-paper-filings-become-ille-2.webp",
+   "dhash": "c4e451d5d1554429",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/companies-house-2027-revolution-as-paper-filings-become-ille-3.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/companies-house-2027-revolution-as-paper-filings-become-ille-3.webp",
+   "dhash": "238d1617178ecd63",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/companies-house-2027-revolution-as-paper-filings-become-ille-cover.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/companies-house-2027-revolution-as-paper-filings-become-ille-cover.webp",
+   "dhash": "700c7c438fdf97cf",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/epc-c-by-2030-what-the-warm-homes-plan-means-for-your-rental-1.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/epc-c-by-2030-what-the-warm-homes-plan-means-for-your-rental-1.webp",
+   "dhash": "094bc2a3a3a3b389",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/epc-c-by-2030-what-the-warm-homes-plan-means-for-your-rental-2.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/epc-c-by-2030-what-the-warm-homes-plan-means-for-your-rental-2.webp",
+   "dhash": "639c1f6323836619",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/epc-c-by-2030-what-the-warm-homes-plan-means-for-your-rental-3.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/epc-c-by-2030-what-the-warm-homes-plan-means-for-your-rental-3.webp",
+   "dhash": "fbf5f93234333333",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/epc-c-by-2030-what-the-warm-homes-plan-means-for-your-rental-4.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/epc-c-by-2030-what-the-warm-homes-plan-means-for-your-rental-4.webp",
+   "dhash": "0030c0426cec6c0c",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/epc-c-by-2030-what-the-warm-homes-plan-means-for-your-rental-cover.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/epc-c-by-2030-what-the-warm-homes-plan-means-for-your-rental-cover.webp",
+   "dhash": "094bc2a3a3a3b389",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/hands-free-property-investment-in-2026-why-more-uk-investors-1.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/hands-free-property-investment-in-2026-why-more-uk-investors-1.webp",
+   "dhash": "0f07306c090b6e64",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/hands-free-property-investment-in-2026-why-more-uk-investors-2.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/hands-free-property-investment-in-2026-why-more-uk-investors-2.webp",
+   "dhash": "04963331cc6c1a0e",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/hands-free-property-investment-in-2026-why-more-uk-investors-3.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/hands-free-property-investment-in-2026-why-more-uk-investors-3.webp",
+   "dhash": "6b293434312d2707",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/hands-free-property-investment-in-2026-why-more-uk-investors-4.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/hands-free-property-investment-in-2026-why-more-uk-investors-4.webp",
+   "dhash": "004081a9d1f161c9",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/hands-free-property-investment-in-2026-why-more-uk-investors-cover.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/hands-free-property-investment-in-2026-why-more-uk-investors-cover.webp",
+   "dhash": "0f07306c090b6e64",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/making-tax-digital-why-landlords-below-the-threshold-should--1.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/making-tax-digital-why-landlords-below-the-threshold-should--1.webp",
+   "dhash": "0030c0426cec6c0c",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/making-tax-digital-why-landlords-below-the-threshold-should--2.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/making-tax-digital-why-landlords-below-the-threshold-should--2.webp",
+   "dhash": "0e0c1e92603656c4",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/making-tax-digital-why-landlords-below-the-threshold-should--3.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/making-tax-digital-why-landlords-below-the-threshold-should--3.webp",
+   "dhash": "fa5e36319a4e3399",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/making-tax-digital-why-landlords-below-the-threshold-should--cover.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/making-tax-digital-why-landlords-below-the-threshold-should--cover.webp",
+   "dhash": "136dcc83e5c2c2c7",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/own-it-personally-or-through-a-company-what-uk-property-inve-1.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/own-it-personally-or-through-a-company-what-uk-property-inve-1.webp",
+   "dhash": "cb4e4f1a1e1e1b1b",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/own-it-personally-or-through-a-company-what-uk-property-inve-2.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/own-it-personally-or-through-a-company-what-uk-property-inve-2.webp",
+   "dhash": "89c1a31343876101",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/own-it-personally-or-through-a-company-what-uk-property-inve-3.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/own-it-personally-or-through-a-company-what-uk-property-inve-3.webp",
+   "dhash": "94040d1a38739f4d",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/own-it-personally-or-through-a-company-what-uk-property-inve-4.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/own-it-personally-or-through-a-company-what-uk-property-inve-4.webp",
+   "dhash": "0201549494cdc4b4",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/own-it-personally-or-through-a-company-what-uk-property-inve-cover.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/own-it-personally-or-through-a-company-what-uk-property-inve-cover.webp",
+   "dhash": "cb4e4f1a1e1e1b1b",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/renters-rights-act-phase-2-west-midlands-landlords-1-m.webp",
+   "kind": "graphic",
+   "source": "gvn",
+   "source_id": "/assets/img/blog/renters-rights-act-phase-2-west-midlands-landlords-1-m.webp",
+   "dhash": "948490a2aa918482",
+   "added": "2026-11-01",
+   "post": "renters-rights-act-phase-2-west-midlands-landlords"
+  },
+  {
+   "file": "/assets/img/blog/renters-rights-act-phase-2-west-midlands-landlords-1.webp",
+   "kind": "graphic",
+   "source": "gvn",
+   "source_id": "/assets/img/blog/renters-rights-act-phase-2-west-midlands-landlords-1.webp",
+   "dhash": "829029968ea02160",
+   "added": "2026-11-01",
+   "post": "renters-rights-act-phase-2-west-midlands-landlords"
+  },
+  {
+   "file": "/assets/img/blog/renters-rights-act-phase-2-west-midlands-landlords-3.webp",
+   "kind": "photo",
+   "source": "commons",
+   "source_id": "File:Stoke-on-Trent, Frank Street from London Road - geograph.org.uk - 4985642.jpg",
+   "dhash": "9393160c5c5c6e7f",
+   "added": "2026-11-01",
+   "post": "renters-rights-act-phase-2-west-midlands-landlords",
+   "page": "https://commons.wikimedia.org/wiki/File:Stoke-on-Trent,_Frank_Street_from_London_Road_-_geograph.org.uk_-_4985642.jpg",
+   "author": "Jonathan Hutchins",
+   "licence": "CC BY-SA 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+   "about": "Frank Street from London Road, Stoke-on-Trent (2016)"
+  },
+  {
+   "file": "/assets/img/blog/renters-rights-act-phase-2-west-midlands-landlords-cover.webp",
+   "kind": "photo",
+   "source": "commons",
+   "source_id": "File:Church Terrace, Fenton.jpg",
+   "dhash": "90c041b40453160f",
+   "added": "2026-11-01",
+   "post": "renters-rights-act-phase-2-west-midlands-landlords",
+   "page": "https://commons.wikimedia.org/wiki/File:Church_Terrace,_Fenton.jpg",
+   "author": "Rept0n1x",
+   "licence": "CC BY-SA 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+   "about": "Church Terrace, Fenton, Stoke-on-Trent (2014)"
+  },
+  {
+   "file": "/assets/img/blog/renters-rights-bill-2025-2.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/renters-rights-bill-2025-2.webp",
+   "dhash": "92968ecccc969696",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/renters-rights-bill-2025-3.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/renters-rights-bill-2025-3.webp",
+   "dhash": "1d3d3b6f4966763c",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/renters-rights-bill-2025-4.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/renters-rights-bill-2025-4.webp",
+   "dhash": "689091909090f033",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/renters-rights-bill-2025-cover.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/renters-rights-bill-2025-cover.webp",
+   "dhash": "1d3d3b6f4966763c",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/section-21-is-gone-mtd-is-live-what-august-2026-s-rule-chang-1.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/section-21-is-gone-mtd-is-live-what-august-2026-s-rule-chang-1.webp",
+   "dhash": "1b1bf2c6daceebf8",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/section-21-is-gone-mtd-is-live-what-august-2026-s-rule-chang-2.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/section-21-is-gone-mtd-is-live-what-august-2026-s-rule-chang-2.webp",
+   "dhash": "1b1bdb48cc451327",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/section-21-is-gone-mtd-is-live-what-august-2026-s-rule-chang-3.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/section-21-is-gone-mtd-is-live-what-august-2026-s-rule-chang-3.webp",
+   "dhash": "0e1e84d8b96ccccc",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/section-21-is-gone-mtd-is-live-what-august-2026-s-rule-chang-4.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/section-21-is-gone-mtd-is-live-what-august-2026-s-rule-chang-4.webp",
+   "dhash": "31a49cb7435374b4",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/section-21-is-gone-mtd-is-live-what-august-2026-s-rule-chang-cover.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/section-21-is-gone-mtd-is-live-what-august-2026-s-rule-chang-cover.webp",
+   "dhash": "1b1bf2c6daceebf8",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/selling-a-rental-property-in-2026-the-60-day-capital-gains-t-1.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/selling-a-rental-property-in-2026-the-60-day-capital-gains-t-1.webp",
+   "dhash": "4d0f1f1303353796",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/selling-a-rental-property-in-2026-the-60-day-capital-gains-t-2.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/selling-a-rental-property-in-2026-the-60-day-capital-gains-t-2.webp",
+   "dhash": "0e1e84d8b96ccccc",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/selling-a-rental-property-in-2026-the-60-day-capital-gains-t-3.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/selling-a-rental-property-in-2026-the-60-day-capital-gains-t-3.webp",
+   "dhash": "7fff4f4f6f6d64e6",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/selling-a-rental-property-in-2026-the-60-day-capital-gains-t-4.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/selling-a-rental-property-in-2026-the-60-day-capital-gains-t-4.webp",
+   "dhash": "2f5c9f3b89cd3b8f",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/selling-a-rental-property-in-2026-the-60-day-capital-gains-t-cover.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/selling-a-rental-property-in-2026-the-60-day-capital-gains-t-cover.webp",
+   "dhash": "4d0f1f1303353796",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/the-60-day-capital-gains-tax-clock-what-landlords-must-do-th-1.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/the-60-day-capital-gains-tax-clock-what-landlords-must-do-th-1.webp",
+   "dhash": "4d0f1f1303353796",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/the-60-day-capital-gains-tax-clock-what-landlords-must-do-th-2.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/the-60-day-capital-gains-tax-clock-what-landlords-must-do-th-2.webp",
+   "dhash": "7fff4f4f6f6d64e6",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/the-60-day-capital-gains-tax-clock-what-landlords-must-do-th-3.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/the-60-day-capital-gains-tax-clock-what-landlords-must-do-th-3.webp",
+   "dhash": "2f5c9f3b89cd3b8f",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/the-60-day-capital-gains-tax-clock-what-landlords-must-do-th-4.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/the-60-day-capital-gains-tax-clock-what-landlords-must-do-th-4.webp",
+   "dhash": "0e1e84d8b96ccccc",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/the-60-day-capital-gains-tax-clock-what-landlords-must-do-th-cover.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/the-60-day-capital-gains-tax-clock-what-landlords-must-do-th-cover.webp",
+   "dhash": "4d0f1f1303353796",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/three-rental-indices-three-different-numbers-reading-the-uk--1.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/three-rental-indices-three-different-numbers-reading-the-uk--1.webp",
+   "dhash": "1b1bf2c6daceebf8",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/three-rental-indices-three-different-numbers-reading-the-uk--2.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/three-rental-indices-three-different-numbers-reading-the-uk--2.webp",
+   "dhash": "1f2dc9c3471b0f27",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/three-rental-indices-three-different-numbers-reading-the-uk--3.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/three-rental-indices-three-different-numbers-reading-the-uk--3.webp",
+   "dhash": "3e99190e8566160f",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/three-rental-indices-three-different-numbers-reading-the-uk--4.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/three-rental-indices-three-different-numbers-reading-the-uk--4.webp",
+   "dhash": "93b12d4f0f2f1edf",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/three-rental-indices-three-different-numbers-reading-the-uk--cover.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/blog/three-rental-indices-three-different-numbers-reading-the-uk--cover.webp",
+   "dhash": "3e99190e8566160f",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/uk-unemployment-4-7-percent-staffordshire-property-investors-1-m.webp",
+   "kind": "graphic",
+   "source": "gvn",
+   "source_id": "/assets/img/blog/uk-unemployment-4-7-percent-staffordshire-property-investors-1-m.webp",
+   "dhash": "86f0f0f0f9f1d090",
+   "added": "2026-11-01",
+   "post": "uk-unemployment-4-7-percent-staffordshire-property-investors"
+  },
+  {
+   "file": "/assets/img/blog/uk-unemployment-4-7-percent-staffordshire-property-investors-1.webp",
+   "kind": "graphic",
+   "source": "gvn",
+   "source_id": "/assets/img/blog/uk-unemployment-4-7-percent-staffordshire-property-investors-1.webp",
+   "dhash": "86e8e8e2e1f0e282",
+   "added": "2026-11-01",
+   "post": "uk-unemployment-4-7-percent-staffordshire-property-investors"
+  },
+  {
+   "file": "/assets/img/blog/uk-unemployment-4-7-percent-staffordshire-property-investors-3.webp",
+   "kind": "photo",
+   "source": "commons",
+   "source_id": "File:Stoke-on-Trent, Newlands Street - geograph.org.uk - 4761279.jpg",
+   "dhash": "279b870e0cae2f45",
+   "added": "2026-11-01",
+   "post": "uk-unemployment-4-7-percent-staffordshire-property-investors",
+   "page": "https://commons.wikimedia.org/wiki/File:Stoke-on-Trent,_Newlands_Street_-_geograph.org.uk_-_4761279.jpg",
+   "author": "Jonathan Hutchins",
+   "licence": "CC BY-SA 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+   "about": "Newlands Street, Stoke-on-Trent (2015)"
+  },
+  {
+   "file": "/assets/img/blog/uk-unemployment-4-7-percent-staffordshire-property-investors-cover.webp",
+   "kind": "photo",
+   "source": "commons",
+   "source_id": "File:Bottle Kilns at the Albion Works, Longton - geograph.org.uk - 5110794.jpg",
+   "dhash": "31f33535347d7317",
+   "added": "2026-11-01",
+   "post": "uk-unemployment-4-7-percent-staffordshire-property-investors",
+   "page": "https://commons.wikimedia.org/wiki/File:Bottle_Kilns_at_the_Albion_Works,_Longton_-_geograph.org.uk_-_5110794.jpg",
+   "author": "Brian Deegan",
+   "licence": "CC BY-SA 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+   "about": "Bottle kilns at the Albion Works, Longton (2008)"
+  },
+  {
+   "file": "/assets/img/gvn-reality-trading-logo.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/gvn-reality-trading-logo.webp",
+   "dhash": "0d9e9e0c4c65470c",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/hero-terraces-900.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/hero-terraces-900.webp",
+   "dhash": "edfeb7bbc29ef6cf",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/hero-terraces.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/hero-terraces.webp",
+   "dhash": "5dfc1d76e14f3cb9",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/hero-texture.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/hero-texture.webp",
+   "dhash": "7afdbc7ce35fac6c",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/house-red-brick.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/house-red-brick.webp",
+   "dhash": "69f0e8abab2fb397",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/investor-guide-cover.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/investor-guide-cover.webp",
+   "dhash": "2829310111314c4d",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/investor-guide-spread.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/investor-guide-spread.webp",
+   "dhash": "c323a55113d34d85",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/logo-gold.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/logo-gold.webp",
+   "dhash": "575717914b89898c",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/logo-golden.png",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/logo-golden.png",
+   "dhash": "5757979e49898dce",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/logo-golden.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/logo-golden.webp",
+   "dhash": "57579699494b898c",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/logo-main.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/logo-main.webp",
+   "dhash": "d4d69a99c9c9cdcc",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/logo-white.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/logo-white.webp",
+   "dhash": "5451929169a9898c",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/og-card.jpg",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/og-card.jpg",
+   "dhash": "0058270f0a6c1200",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/step-consultation.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/step-consultation.webp",
+   "dhash": "83cfddccebf3f8d8",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/step-ownership.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/step-ownership.webp",
+   "dhash": "1f3d3d3c3d3d20cf",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/step-sourcing.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/step-sourcing.webp",
+   "dhash": "93b12d4f0d2f1edf",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/street-chimneys.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/street-chimneys.webp",
+   "dhash": "4d8faf2f976e1094",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/street-hillside.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/street-hillside.webp",
+   "dhash": "090b1c147a46cbbb",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/symbol-golden.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/symbol-golden.webp",
+   "dhash": "5292928329a9c86a",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/valentine-grey-headshot.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/valentine-grey-headshot.webp",
+   "dhash": "3773737b38f4d5f6",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/valentine-grey-suit.webp",
+   "kind": "site",
+   "source": "site",
+   "source_id": "/assets/img/valentine-grey-suit.webp",
+   "dhash": "747893acdc5b9998",
+   "added": "seed"
+  },
+  {
+   "file": "/assets/img/blog/uk-unemployment-4-7-percent-staffordshire-property-investors-4.webp",
+   "kind": "photo",
+   "post": "uk-unemployment-4-7-percent-staffordshire-property-investors",
+   "added": "2026-11-03",
+   "dhash": "3f331f696c9ede1c",
+   "source": "commons",
+   "source_id": "File:The Potteries Centre, Hanley - geograph.org.uk - 7664675.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:The_Potteries_Centre,_Hanley_-_geograph.org.uk_-_7664675.jpg",
+   "author": "Jonathan Hutchins",
+   "licence": "CC BY-SA 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/2.0",
+   "about": "The Potteries Centre, Hanley"
+  },
+  {
+   "file": "/assets/img/blog/renters-rights-act-phase-2-west-midlands-landlords-4.webp",
+   "kind": "photo",
+   "post": "renters-rights-act-phase-2-west-midlands-landlords",
+   "added": "2026-11-03",
+   "dhash": "3dc780501a30034f",
+   "source": "commons",
+   "source_id": "File:Shobnall Road in Burton-upon-Trent, Staffordshire - geograph.org.uk - 8210698.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Shobnall_Road_in_Burton-upon-Trent,_Staffordshire_-_geograph.org.uk_-_8210698.jpg",
+   "author": "Roger  D Kidd",
+   "licence": "CC BY-SA 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/2.0",
+   "about": "Shobnall Road in Burton-upon-Trent, Staffordshire"
+  }
+ ]
+}

@@ -16,6 +16,7 @@ For every HTML file in public/:
 Plus: every old Wix URL still answers, and sitemap.xml only lists real pages.
 """
 
+import os
 import pathlib
 import re
 import sys
@@ -224,6 +225,12 @@ def main():
     for f in PUBLIC.rglob("*"):
         if f.is_file() and f.suffix.lower() in (".jpg", ".jpeg", ".png", ".webp") and f.stat().st_size > 400 * 1024:
             fail("assets", "image over 400 KB: %s (%d KB)" % (f.relative_to(PUBLIC), f.stat().st_size // 1024))
+    # public/ is committed and served as-is by the live site, so it must never
+    # hold an unapproved draft (only the preview site's own build shows drafts)
+    if os.environ.get("GVN_SHOW_DRAFTS") != "1":
+        for f in pages:
+            if 'data-draft="1"' in f.read_text(encoding="utf-8"):
+                fail("draft", "%s is a draft; rebuild with plain `python build.py` before committing" % f.relative_to(PUBLIC))
 
     if problems:
         print("%d problem(s):" % len(problems))
