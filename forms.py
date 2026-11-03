@@ -299,8 +299,9 @@ def write_forms_md(path):
            "```",
            "",
            "- `turnstile` (29 Oct 2026): a Cloudflare Turnstile token, made fresh for each send with the same widget (site key) as "
-           "the GVN apps' sign-in, `interaction-only`, and removed from the page once it answers. `site-form` verifies it when its "
-           "`TURNSTILE_SECRET` secret is set. Refusals carry a `code`: `captcha` (403/503) and `sender_limit` (429: more than 5 "
+           "the GVN apps' sign-in, `interaction-only`, and removed from the page once it answers. `site-form` verifies it with its "
+           "`TURNSTILE_SECRET` secret (the version prepared on 1 Nov 2026 refuses with 503 when that secret is missing; the "
+           "older one skipped the check). A sell-form submit with photos may send an upload `ticket` instead (below). Refusals carry a `code`: `captcha` (403/503) and `sender_limit` (429: more than 5 "
            "forms in 24 hours from one email or one IP); the form shows a message for each.",
            "- The field names in `fields` are the exact question wording from the old Wix forms (column **Sent as**). "
            "Where the visitor sees tidier wording, that is in **Shown as**.",
@@ -328,6 +329,16 @@ def write_forms_md(path):
            "`site-upload/`, then submits the form with `Attachments Files` = `[{path,name,type}]`. `site-form` keeps only paths "
            "it issues that really exist, and `intake` puts them on the property's photos. The file names still go in `File upload`. "
            "A failed photo upload never stops the enquiry. Images only, up to 10, 15MB each.",
+           "- Upload tickets (3 Nov 2026, with `site-form`'s 1 Nov deep-check fixes): the upload request now carries a Turnstile "
+           "token too (`{form, upload:[...], turnstile}`). The new `site-form` verifies it and answers `{uploads, ticket, "
+           "ticket_expires}`; the final submit then sends `\"ticket\": \"<ticket>\"` beside `fields` INSTEAD of a second token "
+           "(a token works once and lives five minutes; a ticket lives 30 minutes, is bound to that upload batch and the "
+           "visitor's IP, and is accepted once). If the submit with a ticket is refused (403 `captcha`: expired, IP changed, "
+           "used), the browser sends once more with a fresh token. If the answer has no ticket (the older `site-form`, or a "
+           "token it did not accept), the submit gets a fresh token as before, so this works against both. An upload refused "
+           "with `captcha` is tried once more with a fresh token, then the enquiry goes without photos and says so. Until "
+           "`site-form`'s REQUIRE_UPLOAD_CAPTCHA is switched on, an upload without a token still works (capped at 2 batches "
+           "an hour per visitor and 40 for the site).",
            "- The two strategy-call forms and the booking form redirect to `/optinform/gv2mkhfkhkkhdkhjcd10ku`, which (copied "
            "from the old site) says the investor guide has been emailed. That is only true if the endpoint emails it. "
            "The vendor form's success message also says \"check your email for confirmation\". Either send those emails "
