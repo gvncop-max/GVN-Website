@@ -175,16 +175,29 @@ var LETTER_ENDPOINT = "https://bkgjoztepcdranhbaurx.supabase.co/functions/v1/lea
 
       uploadPhotos(form, payload.form, status).then(function (photos) {
         if (photos.length) { payload.fields["Attachments Files"] = JSON.stringify(photos); }
-        // The security token is asked for last: it lives five minutes, and
-        // photos on a slow phone can take longer than that. It goes beside
-        // "fields", never in it, so it is not filed with the answers.
+        // The photo upload may have earned a ticket (site-form, Nov 2026): it
+        // stands in for a second security token, which would mean a second
+        // check. Without one, the token is asked for last: it lives five
+        // minutes, and photos on a slow phone can take longer than that.
+        // Either goes beside "fields", never in it, so it is not filed with
+        // the answers.
+        if (form.uploadTicket) {
+          payload.ticket = form.uploadTicket;
+          form.uploadTicket = "";
+          return "";
+        }
         return captchaToken(form);
       }).then(function (token) {
         if (token) { payload.turnstile = token; }
-        return fetch(FORM_ENDPOINT, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
+        return send(payload);
+      }).then(function (res) {
+        // A ticket refused (it ran out, the phone changed network on the
+        // way, or it was already used): once more, with a fresh token.
+        if (res.status !== 403 || !payload.ticket) { return res; }
+        delete payload.ticket;
+        return captchaToken(form).then(function (token) {
+          if (token) { payload.turnstile = token; }
+          return send(payload);
         });
       }).then(function (res) {
         if (res.ok) { finish(form, status); return; }
@@ -199,6 +212,14 @@ var LETTER_ENDPOINT = "https://bkgjoztepcdranhbaurx.supabase.co/functions/v1/lea
       }).then(function () {
         if (button) { button.disabled = false; button.textContent = buttonText; }
       });
+    });
+  }
+
+  function send(body) {
+    return fetch(FORM_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body)
     });
   }
 
@@ -288,12 +309,17 @@ var LETTER_ENDPOINT = "https://bkgjoztepcdranhbaurx.supabase.co/functions/v1/lea
   /* Photos (sell form): each file goes straight to the private photo store
      through a one-time signed URL from the form endpoint, then the form says
      which files it sent. A photo that fails is skipped, never the enquiry:
-     the file names still travel in "File upload" as before. */
+     the file names still travel in "File upload" as before.
+     Since Nov 2026 the request for the upload links carries a security token,
+     and site-form answers with a ticket the final send uses instead of a
+     second one (see forms.md). An older site-form ignores the token and sends
+     no ticket, and the final send then asks for a fresh token as before. */
   var PHOTO_TYPES = /^image\/(jpeg|png|webp|gif|heic|heif|avif)$/;
   var PHOTO_MAX = 15 * 1024 * 1024;
 
   function uploadPhotos(form, key, status) {
     form.photoNote = "";
+    form.uploadTicket = "";
     var input = form.querySelector("input[type=file]");
     if (!input || !input.files || !input.files.length || !window.fetch) { return Promise.resolve([]); }
     var files = Array.prototype.filter.call(input.files, function (f) {
@@ -304,24 +330,35 @@ var LETTER_ENDPOINT = "https://bkgjoztepcdranhbaurx.supabase.co/functions/v1/lea
     return Promise.all(files.map(shrink)).then(function (blobs) {
       blobs = blobs.filter(function (b) { return b.size <= PHOTO_MAX; });
       if (!blobs.length) { return []; }
-      return fetch(FORM_ENDPOINT, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ form: key, upload: blobs.map(function (b) { return { type: b.type, size: b.size }; }) })
-      }).then(function (res) {
-        if (res.ok) { return res.json(); }
-        // Too many photo uploads from this connection in the last hour
-        // (site-form, 3 a hour): the enquiry still goes, without them, and
-        // the thank-you says so, so the seller knows to send them another way.
-        return res.json().catch(function () { return {}; }).then(function (j) {
-          if (res.status === 429 && j && j.code === "upload_limit") {
-            var link = form.querySelector(".form-inbox a");
-            form.photoNote = "Your photos could not be added this time (too many uploads from here in the last hour). Please email them to " +
-              (link ? link.textContent : "info@gvnestateinvest.com") + ".";
-          }
-          throw new Error("HTTP " + res.status);
+      var inbox = function () {
+        var link = form.querySelector(".form-inbox a");
+        return link ? link.textContent : "info@gvnestateinvest.com";
+      };
+      // The links, asked for with a security token; a token refused is tried
+      // once more with a fresh one.
+      var ask = function (again) {
+        return captchaToken(form).then(function (token) {
+          var body = { form: key, upload: blobs.map(function (b) { return { type: b.type, size: b.size }; }) };
+          if (token) { body.turnstile = token; }
+          return send(body);
+        }).then(function (res) {
+          if (res.ok) { return res.json(); }
+          return res.json().catch(function () { return {}; }).then(function (j) {
+            if (!again && j && j.code === "captcha") { return ask(true); }
+            // Too many photo uploads from this connection in the last hour
+            // (site-form, 2 an hour): the enquiry still goes, without them, and
+            // the thank-you says so, so the seller knows to send them another way.
+            if (res.status === 429 && j && j.code === "upload_limit") {
+              form.photoNote = "Your photos could not be added this time (too many uploads from here in the last hour). Please email them to " + inbox() + ".";
+            } else if (j && j.code === "captcha") {
+              form.photoNote = "Your photos could not be added this time (the security check did not finish). Please email them to " + inbox() + ".";
+            }
+            throw new Error("HTTP " + res.status);
+          });
         });
-      }).then(function (data) {
+      };
+      return ask(false).then(function (data) {
+        form.uploadTicket = data && typeof data.ticket === "string" ? data.ticket : "";
         var done = [];
         var n = 0;
         // One at a time: a phone on a weak signal does better with one
