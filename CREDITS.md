@@ -40,6 +40,9 @@ has sold, and no caption says otherwise. The credit sits in the post itself
 | renters-rights-act-phase-2-west-midlands-landlords-3.webp | Frank Street from London Road, Stoke-on-Trent (2016) | Jonathan Hutchins (Geograph) | https://commons.wikimedia.org/wiki/File:Stoke-on-Trent,_Frank_Street_from_London_Road_-_geograph.org.uk_-_4985642.jpg | Renters' Rights Act Phase 2 |
 | uk-unemployment-4-7-percent-staffordshire-property-investors-4.webp | The Potteries Centre, Hanley, Stoke-on-Trent (2023) | Jonathan Hutchins (Geograph) | https://commons.wikimedia.org/wiki/File:The_Potteries_Centre,_Hanley_-_geograph.org.uk_-_7664675.jpg | UK Unemployment Falls to 4.7% |
 | renters-rights-act-phase-2-west-midlands-landlords-4.webp | Shobnall Road, Burton upon Trent (2025) | Roger D Kidd (Geograph) | https://commons.wikimedia.org/wiki/File:Shobnall_Road_in_Burton-upon-Trent,_Staffordshire_-_geograph.org.uk_-_8210698.jpg | Renters' Rights Act Phase 2 |
+| bank-of-england-rate-rise-4-percent-staffordshire-landlords-cover.webp | Wellesley Street in Shelton, Stoke-on-Trent | Roger Kidd (Geograph) | https://commons.wikimedia.org/wiki/File:Wellesley_Street_in_Shelton,_Stoke-on-Trent_-_geograph.org.uk_-_6110851.jpg | Bank Rate Rises to 4% (draft) |
+| bank-of-england-rate-rise-4-percent-staffordshire-landlords-1.webp | Hobson Street, Burslem, Stoke-on-Trent | David Weston (Geograph) | https://commons.wikimedia.org/wiki/File:Hobson_Street,_Burslem_-_geograph.org.uk_-_3629123.jpg | Bank Rate Rises to 4% (draft) |
+| bank-of-england-rate-rise-4-percent-staffordshire-landlords-2.webp | Houses on Priory Road, Newcastle-under-Lyme | Jonathan Hutchins (Geograph) | https://commons.wikimedia.org/wiki/File:Newcastle-under-Lyme,_houses_on_Priory_Road_-_geograph.org.uk_-_4462177.jpg | Bank Rate Rises to 4% (draft) |
 
 From November 2026 every blog image is also recorded in
 `tools/blog-images/ledger.json` (source, author, licence, page, perceptual

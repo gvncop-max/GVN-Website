@@ -11,8 +11,6 @@ investors since its last post.
 
 <!-- Example: - Stoke-on-Trent HMO licensing consultation result (when published) -->
 
-- Bank of England raises Bank Rate to 4% (decision published 5 Nov 2026): what it means for Staffordshire landlords and buy-to-let mortgages. Slug `bank-of-england-rate-rise-4-percent-staffordshire-landlords`. (Redo of the 5 Nov test run, stopped while stuck on Wikimedia downloads.)
-
 ## Due updates to live posts
 
 The agent never edits a live post (an edit can't be held back as a draft). It
@@ -28,6 +26,7 @@ Valentine in a normal session.
 
 | Date | Status | Post | Topic in one line |
 |---|---|---|---|
+| 2026-11-05 | draft | bank-of-england-rate-rise-4-percent-staffordshire-landlords | Bank Rate 4% (5 Nov 2026), BTL stress test worked on a Stoke terrace, remortgage steps |
 | 2026-11-01 | live | renters-rights-act-phase-2-west-midlands-landlords | Landlord database, West Midlands first, Stoke/East Staffs local rules |
 | 2026-11-01 | live | uk-unemployment-4-7-percent-staffordshire-property-investors | ONS 4.7% vs West Midlands rise, Stoke claimants, rents vs pay |
 | 2026-08-30 | live | the-60-day-capital-gains-tax-clock-what-landlords-must-do-the-moment-a-sale-completes | CGT 60-day reporting (duplicates the next one; merge pending) |
