@@ -110,7 +110,9 @@ anything already used, even the same picture from a different site.
   Staffordshire streets. Licences allowed: CC BY, CC BY-SA, CC0, public domain
   (the tool filters the rest). Check the place really is in Staffordshire / the
   West Midlands: "Hanley Terrace" is in Malvern, not Stoke. If Wikimedia keeps
-  answering 429, don't loop for long: use stock. If stock runs below 9, say so
+  answering 429, don't retry: use stock at once. Never wrap the tool in your
+  own retry or sleep loop; the 5 Nov 2026 test run lost over an hour that way
+  and the repeated tries kept the block going. If stock runs below 9, say so
   in the run summary so Valentine can have it refilled.
 - **Concepts** (keys, paperwork, a calculator): Pixabay
   (`search pixabay "..."`, needs `PIXABAY_API_KEY`), only when a real local

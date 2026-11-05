@@ -50,23 +50,53 @@ def die(msg):
     sys.exit(1)
 
 
+BLOCKED = pathlib.Path(tempfile.gettempdir()) / "gvn-blog-images-429"  # per machine, not committed
+COOL_OFF = 30 * 60
+
+
+def blocked_for(host):
+    try:
+        mark = json.loads(BLOCKED.read_text())
+    except Exception:
+        return 0
+    return max(0, int(mark.get(host, 0) + COOL_OFF - time.time()))
+
+
+def mark_blocked(host):
+    try:
+        mark = json.loads(BLOCKED.read_text())
+    except Exception:
+        mark = {}
+    mark[host] = time.time()
+    BLOCKED.write_text(json.dumps(mark))
+
+
 def get(url, binary=False):
     u = urllib.parse.urlparse(url)
     if u.scheme != "https" or u.hostname not in HOSTS:
         die("refusing to fetch from %s" % u.hostname)
+    # one refusal stops every later try for a while: retry loops only keep a rate limit going
+    group = "wikimedia" if u.hostname.endswith("wikimedia.org") else u.hostname
+    left = blocked_for(group)
+    if left:
+        die("%s refused this machine (HTTP 429); not asking again for %d min. Use `stock list` / `add stock`"
+            % (group, left // 60 + 1))
     req = urllib.request.Request(url, headers={"User-Agent": UA})
-    for attempt in range(3):
+    for attempt in range(2):
         try:
             with urllib.request.urlopen(req, timeout=40) as r:
                 data = r.read(MAX_BYTES + 1)
             break
         except urllib.error.HTTPError as e:  # never echo the URL: it may hold an API key
-            if e.code == 429 and attempt < 2:
+            if e.code == 429 and attempt < 1:
                 wait = e.headers.get("Retry-After", "")
                 time.sleep(min(int(wait) if wait.isdigit() else 20, 60))
                 continue
-            die("download failed from %s (HTTP %d%s)" % (u.hostname, e.code,
-                "; rate-limited, use `add stock`" if e.code == 429 else ""))
+            if e.code == 429:
+                mark_blocked(group)
+                die("%s refused this machine (HTTP 429, rate limit). Use `stock list` / `add stock`; "
+                    "this tool won't ask %s again for 30 min" % (u.hostname, group))
+            die("download failed from %s (HTTP %d)" % (u.hostname, e.code))
         except Exception as e:
             die("download failed from %s (%s)" % (u.hostname, type(e).__name__))
     if len(data) > MAX_BYTES:

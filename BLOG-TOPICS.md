@@ -11,6 +11,8 @@ investors since its last post.
 
 <!-- Example: - Stoke-on-Trent HMO licensing consultation result (when published) -->
 
+- Bank of England raises Bank Rate to 4% (decision published 5 Nov 2026): what it means for Staffordshire landlords and buy-to-let mortgages. Slug `bank-of-england-rate-rise-4-percent-staffordshire-landlords`. (Redo of the 5 Nov test run, stopped while stuck on Wikimedia downloads.)
+
 ## Due updates to live posts
 
 The agent never edits a live post (an edit can't be held back as a draft). It
