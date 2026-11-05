@@ -166,7 +166,8 @@ var LETTER_ENDPOINT = "https://bkgjoztepcdranhbaurx.supabase.co/functions/v1/lea
       };
       // The campaign a flyer, letter or advert link carries (?c=FLY24), so the
       // lead arrives in the CRM with it (GVN App migration 046). Only the
-      // code is sent, never the rest of the address, and nothing is stored.
+      // code is sent, never the rest of the address, and nothing is stored;
+      // it reaches a form page on the site's own links (carryCampaign).
       var code = campaignCode();
       if (code) { payload.fields["Campaign code"] = code; }
 
@@ -492,6 +493,27 @@ var LETTER_ENDPOINT = "https://bkgjoztepcdranhbaurx.supabase.co/functions/v1/lea
     var v = (q.get("c") || q.get("utm_campaign") || "").trim();
     return /^[A-Za-z0-9][A-Za-z0-9_-]{1,23}$/.test(v) ? v : "";
   }
+
+  /* A campaign link that lands on a page with no form (the home page, say)
+     lost its code at the first click (found 5 Nov 2026). The code now rides
+     along on the visitor's own clicks: every link to another page of this
+     site gets ?c=CODE, so the form page reads it from its own address as
+     before. Nothing is stored on the device, so the privacy policy's line
+     about campaign codes stays true. Never on /letter, where ?c= is one
+     household's letter code, not a campaign. */
+  (function carryCampaign() {
+    if (document.querySelector("[data-letter]")) { return; }
+    var code = campaignCode();
+    if (!code) { return; }
+    Array.prototype.forEach.call(document.querySelectorAll("a[href]"), function (a) {
+      var u;
+      try { u = new URL(a.getAttribute("href"), location.href); } catch (err) { return; }
+      if (u.origin !== location.origin || u.pathname === "/letter" || u.searchParams.has("c")) { return; }
+      if (u.pathname === location.pathname && u.hash) { return; }
+      u.searchParams.set("c", code);
+      a.setAttribute("href", u.pathname + u.search + u.hash);
+    });
+  })();
 
   function collect(form) {
     var out = {};
