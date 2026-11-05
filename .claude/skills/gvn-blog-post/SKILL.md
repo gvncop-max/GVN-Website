@@ -99,9 +99,19 @@ anything already used, even the same picture from a different site.
   post, not the first generic hit. Vary subjects (streets, landmarks, town
   centres, workplaces, details) and photographers from post to post; don't
   use the same photographer twice in one post.
-- **Real places: Wikimedia Commons first** (`search commons "<place> <thing>"`).
-  Many are Geograph photos of Staffordshire streets. Licences allowed: CC BY,
-  CC BY-SA, CC0, public domain (the tool filters the rest).
+- **Real places: the stock pool first** (`images.py stock list`, then
+  `add stock <id> <slug> <name>`). These are Wikimedia Commons photos of
+  Staffordshire streets and towns, already fetched and licence-checked on
+  Valentine's machine, because Wikimedia often refuses the cloud agent
+  (HTTP 429). Each leaves the pool once used. Pick ones that fit the post's
+  places; the credit fields come from Commons as normal.
+- **Then Wikimedia Commons directly** (`search commons "<place> <thing>"`) if
+  nothing in stock fits and Wikimedia answers. Many are Geograph photos of
+  Staffordshire streets. Licences allowed: CC BY, CC BY-SA, CC0, public domain
+  (the tool filters the rest). Check the place really is in Staffordshire / the
+  West Midlands: "Hanley Terrace" is in Malvern, not Stoke. If Wikimedia keeps
+  answering 429, don't loop for long: use stock. If stock runs below 9, say so
+  in the run summary so Valentine can have it refilled.
 - **Concepts** (keys, paperwork, a calculator): Pixabay
   (`search pixabay "..."`, needs `PIXABAY_API_KEY`), only when a real local
   photo can't do the job. At most one Pixabay photo per post.

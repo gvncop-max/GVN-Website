@@ -4,6 +4,9 @@
   python tools/blog-images/images.py search pixabay "rental keys"      (needs PIXABAY_API_KEY)
   python tools/blog-images/images.py add commons "File:Some photo.jpg" <post-slug> <name>
   python tools/blog-images/images.py add pixabay 123456 <post-slug> <name>
+  python tools/blog-images/images.py add stock <stock-id> <post-slug> <name>
+  python tools/blog-images/images.py stock list
+  python tools/blog-images/images.py stock commons "File:Some photo.jpg"   (fill the pool, run locally)
   python tools/blog-images/images.py graphic assets/img/blog/<file>.webp <post-slug>
   python tools/blog-images/images.py check
   python tools/blog-images/images.py seed          (one-off: record every image already on the site)
@@ -13,11 +16,17 @@ that is already in it (same source id, or a near-identical picture by
 perceptual hash, even if it came from somewhere else). `check` fails if any
 post repeats an image, or a new post breaks the picture rules.
 
+The stock pool (stock/) holds photos already fetched and licence-checked from
+a machine Wikimedia lets through; the cloud blog agent is often refused there
+(HTTP 429 on shared addresses). `add stock` moves one into the post and the
+ledger and deletes it from the pool, so each is used once. stock/ is outside
+assets/, so the site never serves it.
+
 Security: downloads only over https from the hosts below, never SVG, opened
 with Pillow and re-encoded (which drops EXIF/GPS and anything hidden in the
 file). API keys are read from the environment and never printed or saved.
 """
-import hashlib, html, io, json, os, pathlib, re, sys, tempfile, urllib.parse, urllib.request
+import hashlib, html, io, json, os, pathlib, re, sys, tempfile, time, urllib.error, urllib.parse, urllib.request
 from datetime import date
 from PIL import Image
 
@@ -25,6 +34,8 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 LEDGER = pathlib.Path(__file__).with_name("ledger.json")
 BLOG_IMG = ROOT / "assets" / "img" / "blog"
 POSTS = ROOT / "src" / "posts"
+STOCK = pathlib.Path(__file__).with_name("stock")
+STOCK_LIST = STOCK / "stock.json"
 UA = "GVNEstateInvestBlog/1.0 (https://www.gvnestateinvest.com; blog image sourcing)"
 HOSTS = {"commons.wikimedia.org", "upload.wikimedia.org", "thumb.wikimedia.org", "pixabay.com", "cdn.pixabay.com"}
 OPEN_LICENCES = re.compile(r"^(CC BY(-SA)? [0-9.]+|CC0|Public domain|PD)", re.I)
@@ -44,11 +55,20 @@ def get(url, binary=False):
     if u.scheme != "https" or u.hostname not in HOSTS:
         die("refusing to fetch from %s" % u.hostname)
     req = urllib.request.Request(url, headers={"User-Agent": UA})
-    try:
-        with urllib.request.urlopen(req, timeout=40) as r:
-            data = r.read(MAX_BYTES + 1)
-    except Exception as e:  # never echo the URL: it may hold an API key
-        die("download failed from %s (%s)" % (u.hostname, type(e).__name__))
+    for attempt in range(3):
+        try:
+            with urllib.request.urlopen(req, timeout=40) as r:
+                data = r.read(MAX_BYTES + 1)
+            break
+        except urllib.error.HTTPError as e:  # never echo the URL: it may hold an API key
+            if e.code == 429 and attempt < 2:
+                wait = e.headers.get("Retry-After", "")
+                time.sleep(min(int(wait) if wait.isdigit() else 20, 60))
+                continue
+            die("download failed from %s (HTTP %d%s)" % (u.hostname, e.code,
+                "; rate-limited, use `add stock`" if e.code == 429 else ""))
+        except Exception as e:
+            die("download failed from %s (%s)" % (u.hostname, type(e).__name__))
     if len(data) > MAX_BYTES:
         die("file too large")
     return data if binary else json.loads(data.decode("utf-8"))
@@ -180,20 +200,51 @@ def crop_3x2(im, w=1200, h=800):
     return im.resize((w, h), Image.LANCZOS)
 
 
-def cmd_add(source, sid, slug, name):
-    if not re.fullmatch(r"[a-z0-9-]+", slug) or not re.fullmatch(r"[a-z0-9-]+", name):
-        die("slug and name must be lower-case letters, digits and hyphens")
-    data, meta = fetch_commons(sid) if source == "commons" else fetch_pixabay(sid) if source == "pixabay" else die("source must be commons or pixabay")
+def prepare(data, min_size=(1200, 800)):
     try:
         im = Image.open(io.BytesIO(data))
         if im.format not in ("JPEG", "PNG", "WEBP"):
             die("unexpected file type " + str(im.format))
         im.load()
+    except SystemExit:
+        raise
     except Exception as e:
         die("not a valid image (%s)" % type(e).__name__)
-    if im.width < 1200 or im.height < 800:
-        die("too small (%dx%d); need at least 1200x800" % im.size)
-    im = crop_3x2(im.convert("RGB"))
+    if im.width < min_size[0] or im.height < min_size[1]:
+        die("too small (%dx%d); need at least %dx%d" % (im.size + min_size))
+    return crop_3x2(im.convert("RGB"))
+
+
+def load_stock():
+    return json.loads(STOCK_LIST.read_text(encoding="utf-8")) if STOCK_LIST.exists() else {"photos": []}
+
+
+def save_stock(st):
+    STOCK.mkdir(exist_ok=True)
+    STOCK_LIST.write_text(json.dumps(st, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+
+
+def take_stock(sid):
+    st = load_stock()
+    e = next((p for p in st["photos"] if p["id"] == sid), None) or die("no stock photo " + sid)
+    if not re.fullmatch(r"s[0-9a-f]{8}\.webp", e["file"]):
+        die("bad stock file name")
+    data = (STOCK / e["file"]).read_bytes()
+    meta = {k: e[k] for k in ("source", "source_id", "page", "author", "licence", "licence_url", "about")}
+    return data, meta, (st, e)
+
+
+def cmd_add(source, sid, slug, name):
+    if not re.fullmatch(r"[a-z0-9-]+", slug) or not re.fullmatch(r"[a-z0-9-]+", name):
+        die("slug and name must be lower-case letters, digits and hyphens")
+    used = None
+    if source == "stock":
+        data, meta, used = take_stock(sid)
+    elif source in ("commons", "pixabay"):
+        data, meta = fetch_commons(sid) if source == "commons" else fetch_pixabay(sid)
+    else:
+        die("source must be commons, pixabay or stock")
+    im = prepare(data)  # stock photos are already 1200x800; re-encoded again here all the same
     h = dhash(im)
     led = load()
     why = clash(led, meta["source"], meta["source_id"], h)
@@ -207,8 +258,42 @@ def cmd_add(source, sid, slug, name):
     led["images"].append(dict(file=rel, kind="photo", post=slug, added=date.today().isoformat(),
                               dhash=h, **meta))
     save(led)
+    if used:  # out of the pool for good
+        st, e = used
+        st["photos"].remove(e)
+        save_stock(st)
+        (STOCK / e["file"]).unlink()
     print("saved %s (%d KB)" % (rel, out.stat().st_size // 1024))
     print("credit: %s | %s | %s | %s" % (meta["author"], meta["licence"], meta["page"], meta["about"][:120]))
+
+
+def cmd_stock(args):
+    st = load_stock()
+    if args == ["list"]:
+        for p in st["photos"]:
+            print("- %s  %s\n    %s | %s | %s" % (p["id"], p["place"], p["licence"], p["author"][:60], p["about"][:160]))
+        print("%d photos in stock" % len(st["photos"]))
+        return
+    if len(args) != 2 or args[0] != "commons":
+        die('usage: stock list | stock commons "File:..."')
+    data, meta = fetch_commons(args[1])
+    im = prepare(data)
+    h = dhash(im)
+    why = clash(load(), meta["source"], meta["source_id"], h)
+    for p in st["photos"]:
+        if p["source_id"] == meta["source_id"] or dist(p["dhash"], h) <= NEAR:
+            why = why or "already in stock as " + p["id"]
+    if why:
+        die(why)
+    sid = "s" + h[:8]
+    STOCK.mkdir(exist_ok=True)
+    im.save(STOCK / (sid + ".webp"), "WEBP", quality=88, method=6)
+    place = re.sub(r"\s+-\s+geograph\.org\.uk.*$|\.(jpe?g|png|webp)$", "", meta["source_id"][5:], flags=re.I)
+    place = re.sub(r"\s*\((geograph )?\d+\)$|-geograph-\d+-by-.*$", "", place).strip()
+    st["photos"].append(dict(id=sid, file=sid + ".webp", place=place, dhash=h,
+                             stocked=date.today().isoformat(), **meta))
+    save_stock(st)
+    print("stocked", sid, place)
 
 
 def cmd_graphic(path, slug):
@@ -307,6 +392,8 @@ if __name__ == "__main__":
             cmd_search(a[1], a[2])
         elif a[:1] == ["add"] and len(a) == 5:
             cmd_add(*a[1:])
+        elif a[:1] == ["stock"]:
+            cmd_stock(a[1:])
         elif a[:1] == ["graphic"] and len(a) == 3:
             cmd_graphic(a[1], a[2])
         elif a[:1] == ["check"]:
