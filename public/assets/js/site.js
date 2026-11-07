@@ -281,6 +281,15 @@ var LETTER_ENDPOINT = "https://bkgjoztepcdranhbaurx.supabase.co/functions/v1/lea
         var actions = form.querySelector(".form-actions");
         if (actions) { actions.parentNode.insertBefore(box, actions.nextSibling); } else { form.appendChild(box); }
       }
+      // The last check's box may still be here: its clean-up waits a second.
+      // A new check drawn beside it was wiped by that clean-up and never
+      // answered, so a retry hung for the whole minute below (7 Nov 2026:
+      // the sell form sat on "Sending…"). Clear it first.
+      if (box.tsId !== undefined && box.tsId !== null) {
+        try { window.turnstile.remove(box.tsId); } catch (e) { /* already gone */ }
+        box.tsId = null;
+      }
+      box.innerHTML = "";
       return new Promise(function (ok) {
         var id = null;
         var done = false;
@@ -288,9 +297,12 @@ var LETTER_ENDPOINT = "https://bkgjoztepcdranhbaurx.supabase.co/functions/v1/lea
           if (done) { return; }
           done = true;
           ok(t || "");
-          // A moment first, so a tick the visitor clicked is seen; then gone.
+          // A moment first, so a tick the visitor clicked is seen; then gone,
+          // unless a newer check has taken the box over.
           setTimeout(function () {
-            if (id !== null) { try { window.turnstile.remove(id); } catch (e) { /* already gone */ } }
+            if (id === null || box.tsId !== id) { return; }
+            try { window.turnstile.remove(id); } catch (e) { /* already gone */ }
+            box.tsId = null;
             box.innerHTML = "";
           }, 1000);
         };
@@ -302,6 +314,7 @@ var LETTER_ENDPOINT = "https://bkgjoztepcdranhbaurx.supabase.co/functions/v1/lea
             "error-callback": function () { answer(""); },
             "expired-callback": function () { answer(""); }
           });
+          box.tsId = id;
         } catch (e) { answer(""); }
       });
     });
