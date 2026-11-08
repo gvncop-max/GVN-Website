@@ -245,15 +245,18 @@ var LETTER_ENDPOINT = "https://bkgjoztepcdranhbaurx.supabase.co/functions/v1/lea
     return "";
   }
 
-  /* Security check: Cloudflare Turnstile, the same widget as the GVN apps'
-     sign-in. A token works once, so a fresh one is made for each send.
+  /* Security check: Cloudflare Turnstile, the website's own widget (since
+     8 Nov 2026; it lists the live and preview hostnames, and site-form's
+     TURNSTILE_SECRET is its secret). It used the GVN apps' sign-in widget
+     before, which did not list the website and whose secret is not the one
+     site-form holds, so no form got through. A token works once, so a fresh one is made for each send.
      "interaction-only": most visitors never see it; a tick box appears under
      the buttons only when Cloudflare wants a person to click. Once it has
      answered the box is removed (Valentine's rule: a Turnstile box never stays
      on screen after it answers). If it cannot load (blocked, offline), the form
      still goes without a token: the endpoint decides, and says so if it needs
      one. Never hangs the form: no answer in a minute and it goes without. */
-  var TURNSTILE_SITEKEY = "0x4AAAAAAFZiBvt5CIdrN0Em";
+  var TURNSTILE_SITEKEY = "0x4AAAAAAFs7_-3lbBBGLTd1";
   var tsLoading = null;
 
   function tsReady() {
