@@ -17,10 +17,11 @@ The agent never edits a live post (an edit can't be held back as a draft). It
 lists any update that has fallen due in its summary, and Claude makes it with
 Valentine in a normal session.
 
-- UK Unemployment Falls to 4.7%: new ONS labour market figures out 17 Nov 2026;
-  Bank of England decision 5 Nov 2026.
+- UK Unemployment Falls to 4.7%: new ONS labour market figures out 17 Nov 2026
+  (Bank Rate 4% from 5 Nov already added, 10 Nov).
 - Renters' Rights Act Phase 2: update when the PRS Database Regulations and
   Commencement No. 4 are made, and when the database opens (15 Dec 2026).
+  Checked 10 Nov 2026: regulations still a draft, no Commencement No. 4 yet.
 
 ## Covered (newest first; the agent adds a line for each draft)
 
