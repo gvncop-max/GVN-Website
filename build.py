@@ -101,7 +101,7 @@ def trust_ribbon():
     if TRUST_SWITCHES["redress"]:
         no = TRUST_SWITCHES["redress_no"]
         items.append((logo("property-redress", 289, "Member of the Property Redress Scheme"
-                           + (", no. " + esc(no) if no else "")), "https://www.propertyredress.co.uk/"))
+                           + (", no. " + esc(no) if no else "")), "https://www.propertyredress.co.uk/agent-finder"))  # their member search
     if TRUST_SWITCHES["insurance"]:
         items.append((logo("jove", 302, "Insured with Jove: professional indemnity and public liability"), None))
     items.append((mark("shield-check", "ICO registered", "Ref. %s" % BIZ["ico"]), BIZ["ico_url"]))
@@ -262,6 +262,7 @@ def footer():
         <ul>
           <li><a href="/privacyandcookiepolicy">Privacy and Cookie Policy</a></li>
           <li><a href="/mediadisclaimerandattributions">Media Attribution</a></li>
+          <li><a href="/complaints">Complaints Procedure</a></li>
           <li><a href="%(ico_url)s" rel="noopener" target="_blank">ICO &ndash; Data Protection Reg.<span class="sr-only"> (opens in a new tab)</span></a></li>
           <li>Anti-Money Laundering</li>
           <li><a href="%(console)s" rel="noopener" target="_blank">C.P.V.C<span class="sr-only"> investor console (opens in a new tab)</span></a></li>
