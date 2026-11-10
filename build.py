@@ -170,6 +170,9 @@ REDIRECTS = {
     "/blank-ncx68": "/",
     "/error404": "/",
     "/post": "/provenance-pulse",
+    # Two posts on the same 60-day CGT rule were merged into one (10 Nov 2026)
+    "/post/the-60-day-capital-gains-tax-clock-what-landlords-must-do-the-moment-a-sale-completes":
+        "/post/selling-a-rental-property-in-2026-the-60-day-capital-gains-tax-clock-most-landlords-miss",
 }
 
 DOC_HEAD = """<!doctype html>

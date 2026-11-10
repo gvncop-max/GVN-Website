@@ -375,86 +375,6 @@
    "added": "seed"
   },
   {
-   "file": "/assets/img/blog/selling-a-rental-property-in-2026-the-60-day-capital-gains-t-1.webp",
-   "kind": "site",
-   "source": "site",
-   "source_id": "/assets/img/blog/selling-a-rental-property-in-2026-the-60-day-capital-gains-t-1.webp",
-   "dhash": "4d0f1f1303353796",
-   "added": "seed"
-  },
-  {
-   "file": "/assets/img/blog/selling-a-rental-property-in-2026-the-60-day-capital-gains-t-2.webp",
-   "kind": "site",
-   "source": "site",
-   "source_id": "/assets/img/blog/selling-a-rental-property-in-2026-the-60-day-capital-gains-t-2.webp",
-   "dhash": "0e1e84d8b96ccccc",
-   "added": "seed"
-  },
-  {
-   "file": "/assets/img/blog/selling-a-rental-property-in-2026-the-60-day-capital-gains-t-3.webp",
-   "kind": "site",
-   "source": "site",
-   "source_id": "/assets/img/blog/selling-a-rental-property-in-2026-the-60-day-capital-gains-t-3.webp",
-   "dhash": "7fff4f4f6f6d64e6",
-   "added": "seed"
-  },
-  {
-   "file": "/assets/img/blog/selling-a-rental-property-in-2026-the-60-day-capital-gains-t-4.webp",
-   "kind": "site",
-   "source": "site",
-   "source_id": "/assets/img/blog/selling-a-rental-property-in-2026-the-60-day-capital-gains-t-4.webp",
-   "dhash": "2f5c9f3b89cd3b8f",
-   "added": "seed"
-  },
-  {
-   "file": "/assets/img/blog/selling-a-rental-property-in-2026-the-60-day-capital-gains-t-cover.webp",
-   "kind": "site",
-   "source": "site",
-   "source_id": "/assets/img/blog/selling-a-rental-property-in-2026-the-60-day-capital-gains-t-cover.webp",
-   "dhash": "4d0f1f1303353796",
-   "added": "seed"
-  },
-  {
-   "file": "/assets/img/blog/the-60-day-capital-gains-tax-clock-what-landlords-must-do-th-1.webp",
-   "kind": "site",
-   "source": "site",
-   "source_id": "/assets/img/blog/the-60-day-capital-gains-tax-clock-what-landlords-must-do-th-1.webp",
-   "dhash": "4d0f1f1303353796",
-   "added": "seed"
-  },
-  {
-   "file": "/assets/img/blog/the-60-day-capital-gains-tax-clock-what-landlords-must-do-th-2.webp",
-   "kind": "site",
-   "source": "site",
-   "source_id": "/assets/img/blog/the-60-day-capital-gains-tax-clock-what-landlords-must-do-th-2.webp",
-   "dhash": "7fff4f4f6f6d64e6",
-   "added": "seed"
-  },
-  {
-   "file": "/assets/img/blog/the-60-day-capital-gains-tax-clock-what-landlords-must-do-th-3.webp",
-   "kind": "site",
-   "source": "site",
-   "source_id": "/assets/img/blog/the-60-day-capital-gains-tax-clock-what-landlords-must-do-th-3.webp",
-   "dhash": "2f5c9f3b89cd3b8f",
-   "added": "seed"
-  },
-  {
-   "file": "/assets/img/blog/the-60-day-capital-gains-tax-clock-what-landlords-must-do-th-4.webp",
-   "kind": "site",
-   "source": "site",
-   "source_id": "/assets/img/blog/the-60-day-capital-gains-tax-clock-what-landlords-must-do-th-4.webp",
-   "dhash": "0e1e84d8b96ccccc",
-   "added": "seed"
-  },
-  {
-   "file": "/assets/img/blog/the-60-day-capital-gains-tax-clock-what-landlords-must-do-th-cover.webp",
-   "kind": "site",
-   "source": "site",
-   "source_id": "/assets/img/blog/the-60-day-capital-gains-tax-clock-what-landlords-must-do-th-cover.webp",
-   "dhash": "4d0f1f1303353796",
-   "added": "seed"
-  },
-  {
    "file": "/assets/img/blog/three-rental-indices-three-different-numbers-reading-the-uk--1.webp",
    "kind": "site",
    "source": "site",
@@ -777,6 +697,48 @@
    "licence": "CC BY-SA 2.0",
    "licence_url": "https://creativecommons.org/licenses/by-sa/2.0",
    "about": "Newcastle-under-Lyme: houses on Priory Road"
+  },
+  {
+   "file": "/assets/img/blog/selling-a-rental-property-in-2026-the-60-day-capital-gains-tax-clock-most-landlords-miss-hanley.webp",
+   "kind": "photo",
+   "post": "selling-a-rental-property-in-2026-the-60-day-capital-gains-tax-clock-most-landlords-miss",
+   "added": "2026-11-10",
+   "dhash": "0a041d39e5335b43",
+   "source": "commons",
+   "source_id": "File:Hanley, houses on Waterloo Road - geograph.org.uk - 5143633.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Hanley,_houses_on_Waterloo_Road_-_geograph.org.uk_-_5143633.jpg",
+   "author": "Jonathan Hutchins",
+   "licence": "CC BY-SA 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/2.0",
+   "about": "Hanley: houses on Waterloo Road"
+  },
+  {
+   "file": "/assets/img/blog/selling-a-rental-property-in-2026-the-60-day-capital-gains-tax-clock-most-landlords-miss-leek.webp",
+   "kind": "photo",
+   "post": "selling-a-rental-property-in-2026-the-60-day-capital-gains-tax-clock-most-landlords-miss",
+   "added": "2026-11-10",
+   "dhash": "43070c0d352f361d",
+   "source": "commons",
+   "source_id": "File:Chorley Street, Leek - geograph.org.uk - 2541423.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Chorley_Street,_Leek_-_geograph.org.uk_-_2541423.jpg",
+   "author": "Alan Murray-Rust",
+   "licence": "CC BY-SA 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/2.0",
+   "about": "Chorley Street, Leek"
+  },
+  {
+   "file": "/assets/img/blog/selling-a-rental-property-in-2026-the-60-day-capital-gains-tax-clock-most-landlords-miss-stafford.webp",
+   "kind": "photo",
+   "post": "selling-a-rental-property-in-2026-the-60-day-capital-gains-tax-clock-most-landlords-miss",
+   "added": "2026-11-10",
+   "dhash": "c7d6f2cf5e5efed3",
+   "source": "commons",
+   "source_id": "File:Terrace of houses on Lichfield Road, Stafford - geograph.org.uk - 7207466.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Terrace_of_houses_on_Lichfield_Road,_Stafford_-_geograph.org.uk_-_7207466.jpg",
+   "author": "David Howard",
+   "licence": "CC BY-SA 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/2.0",
+   "about": "Terrace of houses on Lichfield Road, Stafford"
   }
  ]
 }
