@@ -78,7 +78,7 @@ BIZ["trading_as"] = "%s is a trading name of %s, a company registered in England
 # real TrustScore (4.0 from 3 reviews on 10 Nov 2026), which a fixed image won't.
 TRUST_SWITCHES = {
     "redress": True,             # Property Redress Scheme member (he joined, Nov 2026)
-    "redress_no": "",            # PRS membership number, once he gives it
+    "redress_no": "PRS061826",   # PRS membership number (he gave it 10 Nov 2026)
     "insurance": True,           # Jove: professional indemnity + public liability (Nov 2026)
 }
 TRUSTPILOT_URL = "https://uk.trustpilot.com/review/gvnestateinvest.com"
@@ -93,7 +93,7 @@ BOOKING_URL = "https://cal.com/" + CAL_LINK
 def trust_ribbon():
     def logo(name, w, alt):
         return ('<img src="/assets/img/trust/%s.webp" width="%d" height="96" alt="%s" '
-                'loading="lazy" decoding="async">' % (name, w, alt))
+                'decoding="async">' % (name, w, alt))  # not lazy: copies must be ready before they scroll in
 
     def mark(ic, top, sub):
         return '<span class="trust-mark">%s<span><b>%s</b><small>%s</small></span></span>' % (icon(ic), top, sub)

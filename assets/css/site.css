@@ -774,10 +774,15 @@ legend { font-family: var(--serif); font-size: clamp(1.25rem, 2vw, 1.45rem); lin
 }
 
 /* ---- credibility strip: logos scrolling sideways, on a light band so each
-   logo keeps its own colours (four copies of the list make the loop seamless) */
-.trust { background: var(--ivory); padding: 30px 0; overflow: hidden; border-top: 1px solid var(--gold-line); border-bottom: 1px solid var(--gold-line);
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
-.trust-track { display: flex; width: max-content; }
+   logo keeps its own colours (four copies of the list make the loop seamless).
+   The edge fades are overlays, not a mask: a mask on the parent stops the
+   browser handing the movement to the graphics chip, so it stalled while the
+   page scrolled and then jumped to catch up (his report, 10 Nov 2026). */
+.trust { position: relative; background: var(--ivory); padding: 30px 0; overflow: hidden; border-top: 1px solid var(--gold-line); border-bottom: 1px solid var(--gold-line); }
+.trust::before, .trust::after { content: ""; position: absolute; top: 0; bottom: 0; width: 8%; z-index: 1; pointer-events: none; }
+.trust::before { left: 0; background: linear-gradient(90deg, var(--ivory), rgba(251, 249, 245, 0)); }
+.trust::after { right: 0; background: linear-gradient(270deg, var(--ivory), rgba(251, 249, 245, 0)); }
+.trust-track { display: flex; width: max-content; will-change: transform; backface-visibility: hidden; }
 .trust-list { list-style: none; margin: 0; padding: 0 0 0 72px; display: flex; align-items: center; gap: 72px; flex: none; }
 .trust-list li { flex: none; }
 .trust-list a { display: flex; align-items: center; min-height: 44px; color: var(--ink); text-decoration: none; border-radius: 6px; opacity: .92; transition: opacity .2s; }
@@ -795,12 +800,16 @@ legend { font-family: var(--serif); font-size: clamp(1.25rem, 2vw, 1.45rem); lin
 }
 @media (prefers-reduced-motion: no-preference) {
   .trust-track { animation: trust-scroll 32s linear infinite; }
-  .trust:hover .trust-track, .trust:focus-within .trust-track { animation-play-state: paused; }
+  .trust:focus-within .trust-track { animation-play-state: paused; }
 }
-@keyframes trust-scroll { to { transform: translateX(-25%); } }
+/* Pause under a real mouse only: on a phone a tap leaves :hover stuck on */
+@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+  .trust:hover .trust-track { animation-play-state: paused; }
+}
+@keyframes trust-scroll { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-25%, 0, 0); } }
 /* No motion wanted: one still, centred row that wraps */
 @media (prefers-reduced-motion: reduce) {
-  .trust { -webkit-mask-image: none; mask-image: none; }
+  .trust::before, .trust::after { display: none; }
   .trust-track { display: block; width: auto; }
   .trust-list { flex-wrap: wrap; justify-content: center; padding: 0 16px; gap: 28px 48px; }
   .trust-list[aria-hidden="true"] { display: none; }
