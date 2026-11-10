@@ -1,27 +1,11 @@
 {
  "images": [
   {
-   "file": "/assets/img/blog/approvals-are-rising-purchase-lending-isn-t-what-the-uk-s-la-1.webp",
-   "kind": "site",
-   "source": "site",
-   "source_id": "/assets/img/blog/approvals-are-rising-purchase-lending-isn-t-what-the-uk-s-la-1.webp",
-   "dhash": "cb4e4f1a1e1e1b3b",
-   "added": "seed"
-  },
-  {
    "file": "/assets/img/blog/approvals-are-rising-purchase-lending-isn-t-what-the-uk-s-la-2.webp",
    "kind": "site",
    "source": "site",
    "source_id": "/assets/img/blog/approvals-are-rising-purchase-lending-isn-t-what-the-uk-s-la-2.webp",
    "dhash": "31a49cb7435374b4",
-   "added": "seed"
-  },
-  {
-   "file": "/assets/img/blog/approvals-are-rising-purchase-lending-isn-t-what-the-uk-s-la-3.webp",
-   "kind": "site",
-   "source": "site",
-   "source_id": "/assets/img/blog/approvals-are-rising-purchase-lending-isn-t-what-the-uk-s-la-3.webp",
-   "dhash": "2761686c6c66ed7d",
    "added": "seed"
   },
   {
@@ -38,14 +22,6 @@
    "source": "site",
    "source_id": "/assets/img/blog/approvals-are-rising-purchase-lending-isn-t-what-the-uk-s-la-cover.webp",
    "dhash": "2761686c6c66ed7d",
-   "added": "seed"
-  },
-  {
-   "file": "/assets/img/blog/buy-refurbish-refinance-repeat-how-hands-free-investors-recy-1.webp",
-   "kind": "site",
-   "source": "site",
-   "source_id": "/assets/img/blog/buy-refurbish-refinance-repeat-how-hands-free-investors-recy-1.webp",
-   "dhash": "3201212424241695",
    "added": "seed"
   },
   {
@@ -105,14 +81,6 @@
    "added": "seed"
   },
   {
-   "file": "/assets/img/blog/epc-c-by-2030-what-the-warm-homes-plan-means-for-your-rental-1.webp",
-   "kind": "site",
-   "source": "site",
-   "source_id": "/assets/img/blog/epc-c-by-2030-what-the-warm-homes-plan-means-for-your-rental-1.webp",
-   "dhash": "094bc2a3a3a3b389",
-   "added": "seed"
-  },
-  {
    "file": "/assets/img/blog/epc-c-by-2030-what-the-warm-homes-plan-means-for-your-rental-2.webp",
    "kind": "site",
    "source": "site",
@@ -142,14 +110,6 @@
    "source": "site",
    "source_id": "/assets/img/blog/epc-c-by-2030-what-the-warm-homes-plan-means-for-your-rental-cover.webp",
    "dhash": "094bc2a3a3a3b389",
-   "added": "seed"
-  },
-  {
-   "file": "/assets/img/blog/hands-free-property-investment-in-2026-why-more-uk-investors-1.webp",
-   "kind": "site",
-   "source": "site",
-   "source_id": "/assets/img/blog/hands-free-property-investment-in-2026-why-more-uk-investors-1.webp",
-   "dhash": "0f07306c090b6e64",
    "added": "seed"
   },
   {
@@ -185,14 +145,6 @@
    "added": "seed"
   },
   {
-   "file": "/assets/img/blog/making-tax-digital-why-landlords-below-the-threshold-should--1.webp",
-   "kind": "site",
-   "source": "site",
-   "source_id": "/assets/img/blog/making-tax-digital-why-landlords-below-the-threshold-should--1.webp",
-   "dhash": "0030c0426cec6c0c",
-   "added": "seed"
-  },
-  {
    "file": "/assets/img/blog/making-tax-digital-why-landlords-below-the-threshold-should--2.webp",
    "kind": "site",
    "source": "site",
@@ -214,14 +166,6 @@
    "source": "site",
    "source_id": "/assets/img/blog/making-tax-digital-why-landlords-below-the-threshold-should--cover.webp",
    "dhash": "136dcc83e5c2c2c7",
-   "added": "seed"
-  },
-  {
-   "file": "/assets/img/blog/own-it-personally-or-through-a-company-what-uk-property-inve-1.webp",
-   "kind": "site",
-   "source": "site",
-   "source_id": "/assets/img/blog/own-it-personally-or-through-a-company-what-uk-property-inve-1.webp",
-   "dhash": "cb4e4f1a1e1e1b1b",
    "added": "seed"
   },
   {
@@ -311,14 +255,6 @@
    "added": "seed"
   },
   {
-   "file": "/assets/img/blog/renters-rights-bill-2025-3.webp",
-   "kind": "site",
-   "source": "site",
-   "source_id": "/assets/img/blog/renters-rights-bill-2025-3.webp",
-   "dhash": "1d3d3b6f4966763c",
-   "added": "seed"
-  },
-  {
    "file": "/assets/img/blog/renters-rights-bill-2025-4.webp",
    "kind": "site",
    "source": "site",
@@ -332,14 +268,6 @@
    "source": "site",
    "source_id": "/assets/img/blog/renters-rights-bill-2025-cover.webp",
    "dhash": "1d3d3b6f4966763c",
-   "added": "seed"
-  },
-  {
-   "file": "/assets/img/blog/section-21-is-gone-mtd-is-live-what-august-2026-s-rule-chang-1.webp",
-   "kind": "site",
-   "source": "site",
-   "source_id": "/assets/img/blog/section-21-is-gone-mtd-is-live-what-august-2026-s-rule-chang-1.webp",
-   "dhash": "1b1bf2c6daceebf8",
    "added": "seed"
   },
   {
@@ -359,26 +287,10 @@
    "added": "seed"
   },
   {
-   "file": "/assets/img/blog/section-21-is-gone-mtd-is-live-what-august-2026-s-rule-chang-4.webp",
-   "kind": "site",
-   "source": "site",
-   "source_id": "/assets/img/blog/section-21-is-gone-mtd-is-live-what-august-2026-s-rule-chang-4.webp",
-   "dhash": "31a49cb7435374b4",
-   "added": "seed"
-  },
-  {
    "file": "/assets/img/blog/section-21-is-gone-mtd-is-live-what-august-2026-s-rule-chang-cover.webp",
    "kind": "site",
    "source": "site",
    "source_id": "/assets/img/blog/section-21-is-gone-mtd-is-live-what-august-2026-s-rule-chang-cover.webp",
-   "dhash": "1b1bf2c6daceebf8",
-   "added": "seed"
-  },
-  {
-   "file": "/assets/img/blog/three-rental-indices-three-different-numbers-reading-the-uk--1.webp",
-   "kind": "site",
-   "source": "site",
-   "source_id": "/assets/img/blog/three-rental-indices-three-different-numbers-reading-the-uk--1.webp",
    "dhash": "1b1bf2c6daceebf8",
    "added": "seed"
   },
@@ -388,22 +300,6 @@
    "source": "site",
    "source_id": "/assets/img/blog/three-rental-indices-three-different-numbers-reading-the-uk--2.webp",
    "dhash": "1f2dc9c3471b0f27",
-   "added": "seed"
-  },
-  {
-   "file": "/assets/img/blog/three-rental-indices-three-different-numbers-reading-the-uk--3.webp",
-   "kind": "site",
-   "source": "site",
-   "source_id": "/assets/img/blog/three-rental-indices-three-different-numbers-reading-the-uk--3.webp",
-   "dhash": "3e99190e8566160f",
-   "added": "seed"
-  },
-  {
-   "file": "/assets/img/blog/three-rental-indices-three-different-numbers-reading-the-uk--4.webp",
-   "kind": "site",
-   "source": "site",
-   "source_id": "/assets/img/blog/three-rental-indices-three-different-numbers-reading-the-uk--4.webp",
-   "dhash": "93b12d4f0f2f1edf",
    "added": "seed"
   },
   {
@@ -739,6 +635,174 @@
    "licence": "CC BY-SA 2.0",
    "licence_url": "https://creativecommons.org/licenses/by-sa/2.0",
    "about": "Terrace of houses on Lichfield Road, Stafford"
+  },
+  {
+   "file": "/assets/img/blog/approvals-are-rising-purchase-lending-isn-t-what-the-uk-s-latest-mortgage-data-means-for-investors-burslem.webp",
+   "kind": "photo",
+   "post": "approvals-are-rising-purchase-lending-isn-t-what-the-uk-s-latest-mortgage-data-means-for-investors",
+   "added": "2026-11-10",
+   "dhash": "351e3e36d5343c3d",
+   "source": "commons",
+   "source_id": "File:Nicholas Street in Burslem - geograph.org.uk - 7452898.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Nicholas_Street_in_Burslem_-_geograph.org.uk_-_7452898.jpg",
+   "author": "Steve Daniels",
+   "licence": "CC BY-SA 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/2.0",
+   "about": "Nicholas Street in Burslem"
+  },
+  {
+   "file": "/assets/img/blog/own-it-personally-or-through-a-company-what-uk-property-investors-need-to-know-about-structure-and-stone.webp",
+   "kind": "photo",
+   "post": "own-it-personally-or-through-a-company-what-uk-property-investors-need-to-know-about-structure-and",
+   "added": "2026-11-10",
+   "dhash": "d9f76b5819343464",
+   "source": "commons",
+   "source_id": "File:Housing in Stone, Staffordshire - geograph.org.uk - 6275520.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Housing_in_Stone,_Staffordshire_-_geograph.org.uk_-_6275520.jpg",
+   "author": "Roger  D Kidd",
+   "licence": "CC BY-SA 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/2.0",
+   "about": "Housing in Stone, Staffordshire"
+  },
+  {
+   "file": "/assets/img/blog/section-21-is-gone-mtd-is-live-what-august-2026-s-rule-changes-mean-for-uk-landlords-fenton.webp",
+   "kind": "photo",
+   "post": "section-21-is-gone-mtd-is-live-what-august-2026-s-rule-changes-mean-for-uk-landlords",
+   "added": "2026-11-10",
+   "dhash": "90605c064b4b491f",
+   "source": "commons",
+   "source_id": "File:Fenton - houses on Hitchman Street - geograph.org.uk - 3193862.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Fenton_-_houses_on_Hitchman_Street_-_geograph.org.uk_-_3193862.jpg",
+   "author": "Dave Bevis",
+   "licence": "CC BY-SA 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/2.0",
+   "about": "Fenton - houses on Hitchman Street"
+  },
+  {
+   "file": "/assets/img/blog/approvals-are-rising-purchase-lending-isn-t-what-the-uk-s-latest-mortgage-data-means-for-investors-middleport.webp",
+   "kind": "photo",
+   "post": "approvals-are-rising-purchase-lending-isn-t-what-the-uk-s-latest-mortgage-data-means-for-investors",
+   "added": "2026-11-10",
+   "dhash": "46cc9b97d71b1d2c",
+   "source": "commons",
+   "source_id": "File:Port Street, Middleport - geograph.org.uk - 5953327.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Port_Street,_Middleport_-_geograph.org.uk_-_5953327.jpg",
+   "author": "Jonathan Hutchins",
+   "licence": "CC BY-SA 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/2.0",
+   "about": "Port Street, Middleport"
+  },
+  {
+   "file": "/assets/img/blog/buy-refurbish-refinance-repeat-how-hands-free-investors-recycle-their-capital-in-2026-longton.webp",
+   "kind": "photo",
+   "post": "buy-refurbish-refinance-repeat-how-hands-free-investors-recycle-their-capital-in-2026",
+   "added": "2026-11-10",
+   "dhash": "a723434b23736323",
+   "source": "commons",
+   "source_id": "File:Workers Houses, Short Street, Longton - geograph.org.uk - 6536834.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Workers_Houses,_Short_Street,_Longton_-_geograph.org.uk_-_6536834.jpg",
+   "author": "Brian Deegan",
+   "licence": "CC BY-SA 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/2.0",
+   "about": "Workers Houses, Short Street, Longton"
+  },
+  {
+   "file": "/assets/img/blog/epc-c-by-2030-what-the-warm-homes-plan-means-for-your-rental-portfolio-kidsgrove.webp",
+   "kind": "photo",
+   "post": "epc-c-by-2030-what-the-warm-homes-plan-means-for-your-rental-portfolio",
+   "added": "2026-11-10",
+   "dhash": "54b49c9496020464",
+   "source": "commons",
+   "source_id": "File:Clough Hall Road, Kidsgrove - geograph.org.uk - 7911810.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Clough_Hall_Road,_Kidsgrove_-_geograph.org.uk_-_7911810.jpg",
+   "author": "Stephen Craven",
+   "licence": "CC BY-SA 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/2.0",
+   "about": "Clough Hall Road, Kidsgrove"
+  },
+  {
+   "file": "/assets/img/blog/making-tax-digital-why-landlords-below-the-threshold-should-still-get-ready-now-uttoxeter.webp",
+   "kind": "photo",
+   "post": "making-tax-digital-why-landlords-below-the-threshold-should-still-get-ready-now",
+   "added": "2026-11-10",
+   "dhash": "69d9c98a11ee7979",
+   "source": "commons",
+   "source_id": "File:Houses on Dove Bank, Uttoxeter - geograph.org.uk - 6934083.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Houses_on_Dove_Bank,_Uttoxeter_-_geograph.org.uk_-_6934083.jpg",
+   "author": "David Howard",
+   "licence": "CC BY-SA 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/2.0",
+   "about": "Houses on Dove Bank, Uttoxeter"
+  },
+  {
+   "file": "/assets/img/blog/hands-free-property-investment-in-2026-why-more-uk-investors-are-choosing-managed-over-diy-kidsgrove.webp",
+   "kind": "photo",
+   "post": "hands-free-property-investment-in-2026-why-more-uk-investors-are-choosing-managed-over-diy",
+   "added": "2026-11-10",
+   "dhash": "620e01262b630794",
+   "source": "commons",
+   "source_id": "File:Windmill Avenue, Kidsgrove - geograph.org.uk - 5324095.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Windmill_Avenue,_Kidsgrove_-_geograph.org.uk_-_5324095.jpg",
+   "author": "Stephen McKay",
+   "licence": "CC BY-SA 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/2.0",
+   "about": "Windmill Avenue, Kidsgrove"
+  },
+  {
+   "file": "/assets/img/blog/section-21-is-gone-mtd-is-live-what-august-2026-s-rule-changes-mean-for-uk-landlords-burslem.webp",
+   "kind": "photo",
+   "post": "section-21-is-gone-mtd-is-live-what-august-2026-s-rule-changes-mean-for-uk-landlords",
+   "added": "2026-11-10",
+   "dhash": "ec3b272f110f273f",
+   "source": "commons",
+   "source_id": "File:Newport Street in Burslem - geograph.org.uk - 7452905.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Newport_Street_in_Burslem_-_geograph.org.uk_-_7452905.jpg",
+   "author": "Steve Daniels",
+   "licence": "CC BY-SA 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/2.0",
+   "about": "Newport Street in Burslem"
+  },
+  {
+   "file": "/assets/img/blog/three-rental-indices-three-different-numbers-reading-the-uk-rental-market-in-summer-2026-tamworth.webp",
+   "kind": "photo",
+   "post": "three-rental-indices-three-different-numbers-reading-the-uk-rental-market-in-summer-2026",
+   "added": "2026-11-10",
+   "dhash": "57260f9a1f2e1b0d",
+   "source": "commons",
+   "source_id": "File:West Street, Tamworth - geograph.org.uk - 7071410.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:West_Street,_Tamworth_-_geograph.org.uk_-_7071410.jpg",
+   "author": "Ian S",
+   "licence": "CC BY-SA 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/2.0",
+   "about": "West Street, Tamworth"
+  },
+  {
+   "file": "/assets/img/blog/three-rental-indices-three-different-numbers-reading-the-uk-rental-market-in-summer-2026-fenton.webp",
+   "kind": "photo",
+   "post": "three-rental-indices-three-different-numbers-reading-the-uk-rental-market-in-summer-2026",
+   "added": "2026-11-10",
+   "dhash": "2189817340061f97",
+   "source": "commons",
+   "source_id": "File:Fenton, Alfred Street - geograph.org.uk - 5195322.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Fenton,_Alfred_Street_-_geograph.org.uk_-_5195322.jpg",
+   "author": "Jonathan Hutchins",
+   "licence": "CC BY-SA 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/2.0",
+   "about": "Fenton: Alfred Street"
+  },
+  {
+   "file": "/assets/img/blog/three-rental-indices-three-different-numbers-reading-the-uk-rental-market-in-summer-2026-stone.webp",
+   "kind": "photo",
+   "post": "three-rental-indices-three-different-numbers-reading-the-uk-rental-market-in-summer-2026",
+   "added": "2026-11-10",
+   "dhash": "27c4c1bb9b71f9f1",
+   "source": "commons",
+   "source_id": "File:Canalside houses north-west of Stone, Staffordshire - geograph.org.uk - 6935013.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Canalside_houses_north-west_of_Stone,_Staffordshire_-_geograph.org.uk_-_6935013.jpg",
+   "author": "Roger  D Kidd",
+   "licence": "CC BY-SA 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/2.0",
+   "about": "Canalside houses north-west of Stone, Staffordshire"
   }
  ]
 }
