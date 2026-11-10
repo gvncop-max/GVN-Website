@@ -68,14 +68,18 @@ BIZ = {
 BIZ["companies_house"] = "https://find-and-update.company-information.service.gov.uk/company/%s" % BIZ["company_no"]
 BIZ["trading_as"] = "%s is a trading name of %s, a company registered in England and Wales, no. %s." % (
     BIZ["name"], BIZ["legal"], BIZ["company_no"])
-# The credibility ribbon. Each badge states something true and checkable, and
-# links to the proof. TRUST_SWITCHES turns one on only when it is true:
-# showing a scheme you have not joined is a false claim of membership (a
-# banned practice under UK consumer law, and against the scheme's own logo
-# rules), so the Ombudsman badge is built but OFF until Valentine registers.
+# The credibility strip: a row of logos scrolling sideways, no heading (his
+# call, 10 Nov 2026). Each one states something true and checkable, and links
+# to the proof where there is one. Showing a scheme or cover you don't have is
+# a false claim (banned under UK consumer law), so each logo has a switch.
+# The ICO and Companies House appear as our own text marks, not their logos:
+# the ICO grants no permission to use its logos, and the GOV.UK crown is
+# Crown copyright. Trustpilot is the wordmark only: its stars must match the
+# real TrustScore (4.0 from 3 reviews on 10 Nov 2026), which a fixed image won't.
 TRUST_SWITCHES = {
-    "ombudsman": False,          # set True once registered with The Property Ombudsman
-    "ombudsman_no": "",          # and put the TPO membership number here
+    "redress": True,             # Property Redress Scheme member (he joined, Nov 2026)
+    "redress_no": "",            # PRS membership number, once he gives it
+    "insurance": True,           # Jove: professional indemnity + public liability (Nov 2026)
 }
 TRUSTPILOT_URL = "https://uk.trustpilot.com/review/gvnestateinvest.com"
 # Strategy calls are booked on Valentine's Cal.com event (9 Oct 2026), which is
@@ -87,22 +91,35 @@ BOOKING_URL = "https://cal.com/" + CAL_LINK
 
 
 def trust_ribbon():
-    items = [
-        ("shield-check", "ICO registered", "Data protection, ref. %s" % BIZ["ico"], BIZ["ico_url"]),
-        ("buildings", "Registered company", "England &amp; Wales, no. %s" % BIZ["company_no"],
-         "https://find-and-update.company-information.service.gov.uk/company/%s" % BIZ["company_no"]),
-    ]
-    if TRUST_SWITCHES["ombudsman"]:
-        items.append(("scales", "The Property Ombudsman",
-                      "Member" + (", no. " + esc(TRUST_SWITCHES["ombudsman_no"]) if TRUST_SWITCHES["ombudsman_no"] else ""),
-                      "https://www.tpos.co.uk/"))
-    items.append(("star", "Trustpilot", "Read or leave a review", TRUSTPILOT_URL))
-    cells = "".join(
-        '<li><a href="%s" rel="noopener" target="_blank">%s<span><b>%s</b><small>%s</small></span>'
-        '<span class="sr-only"> (opens in a new tab)</span></a></li>' % (url, icon(ic), title, sub)
-        for ic, title, sub, url in items)
-    return ('<section class="trust" aria-labelledby="trust-h"><div class="wrap">'
-            '<h2 id="trust-h" class="trust-h">Credibility</h2><ul class="trust-list">%s</ul></div></section>' % cells)
+    def logo(name, w, alt):
+        return ('<img src="/assets/img/trust/%s.webp" width="%d" height="96" alt="%s" '
+                'loading="lazy" decoding="async">' % (name, w, alt))
+
+    def mark(ic, top, sub):
+        return '<span class="trust-mark">%s<span><b>%s</b><small>%s</small></span></span>' % (icon(ic), top, sub)
+    items = []  # (inner html, url or None)
+    if TRUST_SWITCHES["redress"]:
+        no = TRUST_SWITCHES["redress_no"]
+        items.append((logo("property-redress", 289, "Member of the Property Redress Scheme"
+                           + (", no. " + esc(no) if no else "")), "https://www.propertyredress.co.uk/"))
+    if TRUST_SWITCHES["insurance"]:
+        items.append((logo("jove", 302, "Insured with Jove: professional indemnity and public liability"), None))
+    items.append((mark("shield-check", "ICO registered", "Ref. %s" % BIZ["ico"]), BIZ["ico_url"]))
+    items.append((mark("buildings", "Companies House", "No. %s" % BIZ["company_no"]), BIZ["companies_house"]))
+    items.append((logo("trustpilot", 391, "Read our reviews on Trustpilot"), TRUSTPILOT_URL))
+
+    def cell(inner, url, copy):
+        if url is None:
+            return '<li>%s</li>' % inner
+        return ('<li><a href="%s" rel="noopener" target="_blank"%s>%s<span class="sr-only"> (opens in a new tab)</span></a></li>'
+                % (url, ' tabindex="-1"' if copy else "", inner))
+    real = "".join(cell(i, u, False) for i, u in items)
+    # Three more copies only make the loop seamless, even on a very wide
+    # screen: hidden from screen readers and skipped by the Tab key, so
+    # everything is announced once. The CSS moves the track by one copy (25%).
+    copy = '<ul class="trust-list" aria-hidden="true">%s</ul>' % "".join(cell(i, u, True) for i, u in items)
+    return ('<section class="trust" aria-label="Registrations, membership and insurance"><div class="trust-track">'
+            '<ul class="trust-list">%s</ul>%s</div></section>' % (real, copy * 3))
 
 
 SOCIAL = [

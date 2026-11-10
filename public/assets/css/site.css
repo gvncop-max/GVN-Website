@@ -773,16 +773,38 @@ legend { font-family: var(--serif); font-size: clamp(1.25rem, 2vw, 1.45rem); lin
   .reveal { opacity: 1; transform: none; }
 }
 
-/* ---- credibility ribbon ------------------------------------------------ */
-.trust { background: var(--navy-950, #0a111d); padding: 34px 0; border-top: 1px solid rgba(198, 161, 91, .18); border-bottom: 1px solid rgba(198, 161, 91, .18); }
-.trust-h { font: 700 .76rem/1 var(--sans); letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin: 0 0 18px; }
-.trust-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
-.trust-list a { display: flex; align-items: center; gap: 14px; padding: 16px 18px; border: 1px solid rgba(255, 255, 255, .1); border-radius: var(--r, 14px);
-  background: rgba(255, 255, 255, .03); color: #fff; text-decoration: none; transition: border-color .2s, background .2s; min-height: 44px; }
-.trust-list a:hover { border-color: rgba(198, 161, 91, .55); background: rgba(198, 161, 91, .06); }
-.trust-list .ic { width: 30px; height: 30px; flex: none; color: var(--gold); }
-.trust-list b { display: block; font: 600 1rem/1.25 var(--sans); color: #fff; }
-.trust-list small { display: block; font-size: .82rem; color: rgba(255, 255, 255, .7); margin-top: 2px; }
+/* ---- credibility strip: logos scrolling sideways, on a light band so each
+   logo keeps its own colours (four copies of the list make the loop seamless) */
+.trust { background: var(--ivory); padding: 30px 0; overflow: hidden; border-top: 1px solid var(--gold-line); border-bottom: 1px solid var(--gold-line);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.trust-track { display: flex; width: max-content; }
+.trust-list { list-style: none; margin: 0; padding: 0 0 0 72px; display: flex; align-items: center; gap: 72px; flex: none; }
+.trust-list li { flex: none; }
+.trust-list a { display: flex; align-items: center; min-height: 44px; color: var(--ink); text-decoration: none; border-radius: 6px; opacity: .92; transition: opacity .2s; }
+.trust-list a:hover, .trust-list a:focus-visible { opacity: 1; }
+.trust-list a:focus-visible { outline: 2px solid var(--gold-deep); outline-offset: 6px; }
+.trust-list img { display: block; height: 44px; width: auto; }
+.trust-mark { display: flex; align-items: center; gap: 10px; white-space: nowrap; }
+.trust-mark .ic { width: 34px; height: 34px; flex: none; color: var(--gold-deep); }
+.trust-mark b { display: block; font: 700 1rem/1.15 var(--sans); letter-spacing: .02em; color: var(--ink); }
+.trust-mark small { display: block; font: 500 .82rem/1.2 var(--sans); color: #4a5263; margin-top: 2px; }
+@media (max-width: 640px) {
+  .trust { padding: 22px 0; }
+  .trust-list { gap: 48px; padding-left: 48px; }
+  .trust-list img { height: 34px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .trust-track { animation: trust-scroll 32s linear infinite; }
+  .trust:hover .trust-track, .trust:focus-within .trust-track { animation-play-state: paused; }
+}
+@keyframes trust-scroll { to { transform: translateX(-25%); } }
+/* No motion wanted: one still, centred row that wraps */
+@media (prefers-reduced-motion: reduce) {
+  .trust { -webkit-mask-image: none; mask-image: none; }
+  .trust-track { display: block; width: auto; }
+  .trust-list { flex-wrap: wrap; justify-content: center; padding: 0 16px; gap: 28px 48px; }
+  .trust-list[aria-hidden="true"] { display: none; }
+}
 
 /* Strategy-call booking: Valentine's Cal.com event, embedded inline (it sizes itself).
    No box of our own: the calendar is its own white card, and wrapping it in a
