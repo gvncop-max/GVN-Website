@@ -121,7 +121,7 @@ The Wix form also had a hidden field `Quick Description` (textarea, "Give a Deta
 |---|---|---|---|---|
 | `Full name` | Full name | text | no | - |
 | `Email` | Email | email | yes | - |
-| `Question or Complaint` | Question or Complaint | textarea | yes | - |
+| `Question or Complaint` | Your question | textarea | yes | - |
 
 ## `contact` - Send us a message
 

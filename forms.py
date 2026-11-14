@@ -174,7 +174,9 @@ FORMS = {
             {"legend": None, "fields": [
                 {"label": "Full name", "type": "text", "required": False, "auto": "name", "placeholder": "Enter your full name"},
                 {"label": "Email", "type": "email", "required": True, "auto": "email", "placeholder": "Enter your email"},
-                {"label": "Question or Complaint", "type": "textarea", "required": True, "full": True, "placeholder": "Type Your Question or Complaint"},
+                # label stays "Question or Complaint": site-form maps that exact key to the CRM message.
+                # Only the shown text changed (14 Nov 2026: complaints now go to support@, not this form).
+                {"label": "Question or Complaint", "show": "Your question", "type": "textarea", "required": True, "full": True, "placeholder": "Type your question"},
             ]},
         ],
     },
