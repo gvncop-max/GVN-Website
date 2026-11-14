@@ -321,7 +321,10 @@ def org_jsonld():
                        "url": b["companies_house"]},
         "sameAs": [u for n, u in SOCIAL if n != "WhatsApp"] + [TRUSTPILOT_URL, b["companies_house"]],
         "contactPoint": [
-            {"@type": "ContactPoint", "contactType": "customer service", "email": b["email"], "telephone": b["phone_intl"], "areaServed": "GB", "availableLanguage": "en-GB"},
+            {"@type": "ContactPoint", "contactType": "general enquiries", "email": b["email"], "telephone": b["phone_intl"], "areaServed": "GB", "availableLanguage": "en-GB"},
+            # 14 Nov 2026: complaints and personal-data requests go to support@ (his rule).
+            {"@type": "ContactPoint", "contactType": "customer support", "description": "Complaints and personal data requests",
+             "email": b["email_support"], "url": SITE + "/complaints","areaServed": "GB", "availableLanguage": "en-GB"},
             {"@type": "ContactPoint", "contactType": "investor enquiries", "email": b["email_invest"], "areaServed": "GB", "availableLanguage": "en-GB"},
             {"@type": "ContactPoint", "contactType": "property sales", "email": b["email_sales"], "areaServed": "GB", "availableLanguage": "en-GB"},
         ],
