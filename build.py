@@ -47,6 +47,7 @@ BIZ = {
     "email": "info@gvnestateinvest.com",          # general enquiries
     "email_invest": "invest@gvnestateinvest.com",  # investor leads (Valentine, 6 Oct 2026)
     "email_sales": "propertysales@gvnestateinvest.com",  # vendor leads
+    "email_support": "support@gvnestateinvest.com",  # complaints (Valentine, 14 Nov 2026)
     "phone_display": "01782 938 111",
     "phone_intl": "+44 1782 938 111",
     "phone_href": "tel:+441782938111",
@@ -449,6 +450,7 @@ def expand_tokens(body, meta):
         "{{EMAIL}}": BIZ["email"],
         "{{EMAIL_INVEST}}": BIZ["email_invest"],
         "{{EMAIL_SALES}}": BIZ["email_sales"],
+        "{{EMAIL_SUPPORT}}": BIZ["email_support"],
         "{{PHONE}}": BIZ["phone_display"],
         "{{PHONE_INTL}}": BIZ["phone_intl"],
         "{{PHONE_HREF}}": BIZ["phone_href"],
