@@ -80,6 +80,12 @@ comes from the valentine-grey-content skill where it is available.
   `<details class="faq">` items, using People Also Ask / related searches.
   The build turns them into FAQPage schema automatically. Only include
   questions the post really answers.
+- After the FAQ section: always clear lines of space before the next
+  paragraph (Valentine, 15 Nov 2026). The site CSS does this with
+  `.prose details.faq + :not(details) { margin-top: 2.2em; }` in
+  `assets/css/site.css` (about 38px); keep that rule, never put text flush
+  against the last FAQ item, and check it on the preview at phone and desktop
+  width.
 - Link 2-3 related P-Pulse posts and the official sources. External links:
   `rel="noopener" target="_blank"` with
   `<span class="sr-only"> (opens in a new tab)</span>`.
@@ -183,6 +189,8 @@ it). `check.py` fails if a draft ever lands in `public/`.
    (gvn-website-preview.onrender.com/post/<slug>) shows the draft, marked
    "Draft: preview only" and noindex. The live site never does.
 5. **Live only when Valentine says so** ("push it live"): remove `"draft"`,
+   do the **Schema, SEO and GEO pass** below (always, without being asked;
+   Valentine's rule 15 Nov 2026),
    rebuild, run every check, commit, push `redesign`, then
    `git push origin origin/redesign:refs/heads/main`, and verify the live URL
    (don't fetch the www URL before the deploy finishes: its CDN caches a 404).
@@ -190,6 +198,58 @@ it). `check.py` fails if a draft ever lands in `public/`.
    nothing else goes out unseen.
 6. After it is live: Search Console > URL inspection > Request indexing for
    the post and /provenance-pulse; offer socials (valentine-grey-content skill).
+
+### Schema, SEO and GEO pass (every approval to push live or to main)
+Valentine's rule (15 Nov 2026): whenever a post is approved to go live, or
+anything carrying a post is pushed to `main`, fix the schema, the SEO and
+optimise for GEO (being found and quoted by AI answers: Google AI Overviews,
+ChatGPT, Perplexity, Claude, Copilot) before the push. Do it even if he only
+says "push it live". Fix what fails; don't just report it. Change wording
+only where it keeps every fact exactly as verified (no new claims without a
+primary source), and stay within 1,100-1,600 words.
+
+**Schema** (the build makes it; check the built `public/post/<slug>/index.html`):
+- Every JSON-LD block parses. Present: BlogPosting, FAQPage, BreadcrumbList
+  (Breadcrumb appears only once `"draft"` is gone) and the Organization.
+- BlogPosting: headline = title, description = meta description, all the
+  post's images, author = Valentine Grey's Person @id (or the Organization for
+  company posts), publisher = Organization @id, datePublished, dateModified
+  (set `"modified"` to today if the content changed since it was first
+  published), keywords from the tags, wordCount, places, and `citation` listing
+  the primary sources linked in the post.
+- FAQPage questions and answers match the visible FAQ text word for word.
+- No draft banner and no noindex on the built page.
+
+**SEO**:
+- Title 50-65 characters with the search phrase (and place where it fits);
+  meta description 140-158 characters; one H1; question-style H2s.
+- First paragraph answers the main question in 40-60 words.
+- 2-3 links to related P-Pulse posts, plus one to the most relevant GVN page
+  (/services, /investnow, /sellmyhome or /askaquestion) near the end only.
+- Links to the primary sources; `check.py` clean (no broken links).
+- Every image: descriptive alt text, width/height, under ~200 KB.
+- Tags include the phrases people search; the post is in `sitemap.xml` and on
+  /provenance-pulse after the plain build.
+
+**GEO** (written so an AI can lift a sentence and quote it correctly):
+- Answer first: the sentence under each H2 answers it on its own and names
+  the subject ("The property basic rate will be 24% from April 2027", not "It
+  will be 24%").
+- Facts carry their source and period in the sentence ("ONS figures for July
+  to September 2026 show..."), with the link.
+- Key points are complete, standalone statements with the numbers in them.
+- Spell names out in full on first mention (laws, agencies, Stoke-on-Trent,
+  Staffordshire, GVN Estate Invest) and keep them consistent.
+- One-sentence definitions for the key terms a reader might ask about.
+- Comparisons as a table (AI answers pull tables well).
+- FAQ answers 40-80 words, full sentences, each making sense alone.
+- The visible "Updated" date and dateModified agree.
+- `robots.txt` keeps allowing every crawler (now `Allow: /` for all). Never
+  block AI crawlers (GPTBot, OAI-SearchBot, Google-Extended, PerplexityBot,
+  ClaudeBot) without Valentine's say-so.
+
+Then rebuild, run every check again, and in the push report list what the
+pass changed (schema, SEO, GEO) so Valentine can see it.
 
 ## 9. Scheduled runs (the blog agent)
 The cloud routine "GVN blog agent" runs at 07:00 UTC on the 1st and 15th.
