@@ -248,6 +248,11 @@ primary source), and stay within 1,100-1,600 words.
   block AI crawlers (GPTBot, OAI-SearchBot, Google-Extended, PerplexityBot,
   ClaudeBot) without Valentine's say-so.
 
+Run `python tools/seo_audit.py <slug>` after the plain build: it checks most
+of the above mechanically. Every FAIL line must be fixed; WARN lines are for
+judgement (GEO wording still needs reading by eye). All 15 posts passed with 0
+FAIL on 15 Nov 2026.
+
 Then rebuild, run every check again, and in the push report list what the
 pass changed (schema, SEO, GEO) so Valentine can see it.
 
