@@ -71,6 +71,11 @@ comes from the valentine-grey-content skill where it is available.
   landlord database?"), each answered in the first sentence beneath it.
 - A short "Key points" list near the top.
 - Steps as a numbered list when the reader has to do something (how-to).
+- Tables: always leave a clear line of space under a table before the next
+  paragraph (Valentine, 15 Nov 2026). The site CSS does this with
+  `.prose .table-wrap { margin: ... }` in `assets/css/site.css`; keep that rule,
+  never put a table flush against the following text, and check it on the
+  preview.
 - A "Questions landlords/investors are asking" section with
   `<details class="faq">` items, using People Also Ask / related searches.
   The build turns them into FAQPage schema automatically. Only include

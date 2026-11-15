@@ -668,6 +668,7 @@ legend { font-family: var(--serif); font-size: clamp(1.25rem, 2vw, 1.45rem); lin
 .prose figcaption { font-size: .9rem; color: var(--muted); margin-top: 10px; }
 .prose blockquote { margin: 2em 0; padding: 4px 0 4px 24px; border-left: 1px solid var(--gold); font-family: var(--serif); font-size: 1.4rem; line-height: 1.45; color: var(--ink); }
 .prose table { margin: 1.4em 0; font-size: .97rem; background: var(--ivory); }
+.prose .table-wrap { margin: 1.4em 0 1.6em; }  /* a line of space above and below every table in a post */
 .prose .table-wrap table { margin: 0; }
 .prose th { background: var(--cream-2); color: var(--ink); }
 .legal h2 { font-size: 1.55rem; }
