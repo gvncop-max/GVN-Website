@@ -27,6 +27,7 @@ Valentine in a normal session.
 
 | Date | Status | Post | Topic in one line |
 |---|---|---|---|
+| 2026-11-15 | draft | budget-2026-property-income-tax-staffordshire-landlords | Budget 2026 property income tax 24/44/49% from April 2027, interest credit at 24%, Stoke worked example, frozen bands |
 | 2026-11-05 | live | bank-of-england-rate-rise-4-percent-staffordshire-landlords | Bank Rate 4% (5 Nov 2026), BTL stress test worked on a Stoke terrace, remortgage steps |
 | 2026-11-01 | live | renters-rights-act-phase-2-west-midlands-landlords | Landlord database, West Midlands first, Stoke/East Staffs local rules |
 | 2026-11-01 | live | uk-unemployment-4-7-percent-staffordshire-property-investors | ONS 4.7% vs West Midlands rise, Stoke claimants, rents vs pay |
