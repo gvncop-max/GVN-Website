@@ -148,6 +148,15 @@ NAV = [
     ("contact", "/contact", "Contact"),
 ]
 
+# Tags no post uses any more (the 15 Nov 2026 SEO pass replaced them). Their
+# old addresses keep forwarding to the blog, so nothing already indexed 404s.
+# When a tag is dropped from every post, add its slug here.
+RETIRED_TAGS = [
+    "accounts", "april-2028", "companies-house", "digital-filling-system", "epc", "landlord-ombudsman",
+    "limited-company", "property", "property-tax", "prs-database", "renters-reform", "section-21", "section-8",
+    "software-filing", "spv", "tax", "tenant-protections", "uk", "uk-businesses", "uk-property", "xero",
+]
+
 # Old addresses that no longer have their own page. Each becomes a tiny page
 # that forwards the visitor (and tells Google where the page went).
 REDIRECTS = {
@@ -795,7 +804,7 @@ def main():
         sitemap.append(("/post/" + p["slug"], (p.get("modified") or p["date"])[:10]))
 
     # Old tag pages: forward to the blog. Generated from the tags on the posts.
-    tag_redirects = {}
+    tag_redirects = {"/provenance-pulse/tags/" + s: "/provenance-pulse" for s in RETIRED_TAGS}
     for p in POSTS:
         for t in p["tags"]:
             slug = re.sub(r"[^a-z0-9]+", "-", t.lower().replace("'", "")).strip("-")
